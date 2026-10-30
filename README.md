@@ -2,7 +2,11 @@
 
 Repositório da disciplina de **Interação Humano-Computador (FGA0173)** da Universidade de Brasília (UnB - FGA).
 
-Este repositório armazena a documentação oficial do projeto, desenvolvida em Markdown e publicada via **GitHub Pages** utilizando o **MkDocs Material**.
+Toda a documentação oficial do projeto está disponível e publicada no GitHub Pages:
+
+🔗 **[Acessar Documentação no GitHub Pages](https://unb-ihc.github.io/IHC_2026.2_Grupo04/)**
+
+---
 
 ## Integrantes do Grupo
 
@@ -16,49 +20,3 @@ Este repositório armazena a documentação oficial do projeto, desenvolvida em 
 | Marcus Rogério Aguiar de Sousa | 211062203 | [@](https://github.com/) |
 | Paulo Lucca | 170020339 | [@](https://github.com/) |
 | Pedro Vieira Antunes | 232014155 | [@](https://github.com/) |
-
----
-
-## Como Executar Localmente
-
-### Pré-requisitos
-* Python 3.10 ou superior
-* Git
-
-### Passo a Passo
-
-1. **Clone o repositório:**
-```bash
-git clone https://github.com/UnB-IHC/IHC_2026.2_Grupo04.git
-cd IHC_2026.2_Grupo04
-```
-
-2. **Crie e ative um ambiente virtual (opcional, mas recomendado):**
-```bash
-python -m venv venv
-# No Windows:
-.\venv\Scripts\activate
-# No Linux/macOS:
-source venv/bin/activate
-```
-
-3. **Instale as dependências:**
-```bash
-pip install -r requirements.txt
-```
-
-4. **Inicie o servidor de documentação:**
-```bash
-mkdocs serve
-```
-
-5. Acesse no navegador em `http://127.0.0.1:8000`.
-
-Qualquer alteração feita nos arquivos `.md` dentro da pasta `docs/` será recarregada automaticamente no navegador (Live Reload).
-
----
-
-## Deploy Contínuo (GitHub Pages)
-
-O deploy é automatizado através do **GitHub Actions** configurado em `.github/workflows/deploy.yml`. 
-Toda vez que uma alteração é enviada via `git push` para a branch `main`, a documentação é reconstruída e atualizada no GitHub Pages.
