@@ -1,41 +1,78 @@
-repo_url: https://github.com/vitorfleonardo/VerificAAA
-repo_name: VerificAAA
-
-site_url: https://github.com/vitorfleonardo/VerificAAA
-site_name: VerificAAA
-
-use_directory_urls: False
-
-nav:
-  - Início - VerificAAA: 'index.md'
-
-  - Desenvolvimento Web:
-    - Desenvolvimento: 'devWeb/non_text_content.md'
-
-  - Design:
-    - Design: 'design/design.md'
-  
-  - Geração de Conteúdo:
-    - Conteúdo: 'geracaoConteudo/conteudo.md'
-
-  - Gestão de Projetos:
-    - Gestão de Projetos: 'gestaoProjeto/gestaoProjeto.md'
-
-  - Ferramentas:
-    - Ferramentas de Acessibilidade: 'tools/ferramentas.md'
+site_name: "IHC - Grupo 04 (2026.2)"
+site_description: "Guia de Acessibilidade & Avaliação de IHC - Universidade de Brasília (UnB / FGA)"
+site_author: "Grupo 04 - IHC"
+repo_url: "https://github.com/UnB-IHC/IHC_2026.2_Grupo04"
+repo_name: "UnB-IHC/IHC_2026.2_Grupo04"
 
 theme:
-  name: readthedocs
-  locale: pt_BR
-  titles_only: true
-  logo: imagens/logo-verificaaa.png
-  favicon: imagens/logo-verificaaa.png
+  name: material
+  language: pt-BR
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Mudar para modo escuro
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Mudar para modo claro
 
 markdown_extensions:
-  - def_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tasklist:
-      custom_checkbox: false
-      clickable_checkbox: true
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - tables
+  - attr_list
+  - md_in_html
 
-extra_css:
-  - stylesheets/extra.css
+nav:
+  - Início: index.md
+  - Guia de Acessibilidade & UX:
+      - Apresentação & Legislação: guia/introducao.md
+      - 4 Pilares da Acessibilidade: guia/pilares.md
+      - Norma ABNT NBR 17225:2025: guia/nbr-17225.md
+      - Checklist de Verificação: guia/checklist.md
+      - UX & Design Empático: guia/ux-design-empatico.md
+      - Personas e Jornadas: guia/personas-jornadas.md
+      - Service Blueprint & Canvas: guia/blueprint-canvas.md
+      - Heurísticas de Nielsen: guia/heuristicas-nielsen.md
+      - Pesquisa de Ferramentas: guia/ferramentas.md
+  - Avaliação do Site (Tg-02):
+      - Site Escolhido: avaliacao-site/site-escolhido.md
+      - Relatório de Inspeção: avaliacao-site/relatorio-inspecao.md
+      - Recomendações: avaliacao-site/recomendacoes.md
+  - Teste de Usabilidade (Tg-03):
+      - Planejamento & Roteiro: teste-usabilidade/roteiro.md
+      - Participante & Termo LGPD: teste-usabilidade/participante-termo.md
+      - Sessão & Gravação: teste-usabilidade/sessao-gravacao.md
+      - Resultados & Escore SUS: teste-usabilidade/resultados-sus.md
+      - Relação com o Pocket: teste-usabilidade/relacao-pocket.md
+      - Protótipo de Melhoria: teste-usabilidade/prototipo.md
+  - Gestão & Apresentação (Tg-04):
+      - Cronograma: gestao/cronograma.md
+      - Apresentação (Tg-04): gestao/apresentacao.md
+      - Atas de Reunião: gestao/atas.md
