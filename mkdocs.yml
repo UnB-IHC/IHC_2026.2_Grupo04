@@ -1,8 +1,8 @@
 site_name: "IHC - Grupo 04 (2026.2)"
 site_description: "Guia de Acessibilidade & Avaliação de IHC - Universidade de Brasília (UnB / FGA)"
 site_author: "Grupo 04 - IHC"
-repo_url: "https://github.com/joaoPedro-201/IHC-26.2-GP-04"
-repo_name: "joaoPedro-201/IHC-26.2-GP-04"
+repo_url: "https://github.com/UnB-IHC/IHC_2026.2_Grupo04"
+repo_name: "UnB-IHC/IHC_2026.2_Grupo04"
 
 theme:
   name: material

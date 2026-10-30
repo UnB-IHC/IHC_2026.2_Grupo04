@@ -29,8 +29,8 @@ Este repositório armazena a documentação oficial do projeto, desenvolvida em 
 
 1. **Clone o repositório:**
 ```bash
-git clone https://github.com/joaoPedro-201/IHC-26.2-GP-04.git
-cd IHC-26.2-GP-04
+git clone https://github.com/UnB-IHC/IHC_2026.2_Grupo04.git
+cd IHC_2026.2_Grupo04
 ```
 
 2. **Crie e ative um ambiente virtual (opcional, mas recomendado):**
