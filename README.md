@@ -10,16 +10,16 @@ Toda a documentação oficial do projeto está disponível e publicada no GitHub
 
 ## Integrantes do Grupo
 
-| Nome | Matrícula | GitHub |
-| :--- | :---: | :---: |
-| Bruna Vitória De Lima Liberal | 222021942 | [@limonadaquente](https://github.com/limonadaquente) |
-| Daniel Ribeiro de Andrade | 241025612 | [@Dandot1](https://github.com/Dandot1) |
-| João Pedro de Sousa Silva | 232003723 | [@joaoPedro-201](https://github.com/joaoPedro-201) |
-| Luiz Henrique Pessato Da Mota | 232028428 | [@luussato1](https://github.com/luussato1) |
-| Marcella Sousa Anderle | 221035040 | [@marcellaanderle](https://github.com/marcellaanderle) |
-| Marcus Rogério Aguiar de Sousa | 211062203 | [@osakareaper](https://github.com/osakareaper) |
-| Paulo Lucca | 170020339 | [@](https://github.com/) |
-| Pedro Vieira Antunes | 232014155 | [@PedroVieira226](https://github.com/PedroVieira226) |
+| Nome | Matrícula |
+| :--- | :---: |
+| Bruna Vitória De Lima Liberal | 222021942 |
+| Daniel Ribeiro de Andrade | 241025612 |
+| João Pedro de Sousa Silva | 232003723 |
+| Luiz Henrique Pessato Da Mota | 232028428 |
+| Marcella Sousa Anderle | 221035040 | 
+| Marcus Rogério Aguiar de Sousa | 211062203 | 
+| Paulo Lucca | 170020339 |
+| Pedro Vieira Antunes | 232014155 | 
 
 
 <table>
