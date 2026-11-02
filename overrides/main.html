@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if page.meta.portal_home %}
+  <div class="portal-home">
+    <section class="portal-hero" aria-labelledby="portal-title">
+      <div class="portal-hero__text">
+        <h1 id="portal-title">Acessibilidade<br><span>na prática.</span></h1>
+        <p>Guia, avaliação e testes de usabilidade do Grupo 04 na disciplina de Interação Humano-Computador da UnB.</p>
+        <div class="portal-actions">
+          <a class="portal-button" href="{{ 'guia/' | url }}">Acessar o guia <span aria-hidden="true">→</span></a>
+          <a class="portal-text-link" href="{{ 'referencia/checklist-unificado/' | url }}">Consultar checklist <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="portal-affiliation">Universidade de Brasília <span aria-hidden="true">·</span> 2026.2</p>
+      </div>
+      <div class="guide-preview">
+        <div class="guide-preview__heading"><span>IHC</span><span class="guide-preview__group">04</span></div>
+        <h2>Projetar para<br>todas as pessoas.</h2>
+        <div class="guide-preview__principles">
+          <a href="{{ 'referencia/principios-pour/' | url }}">Perceptível <span aria-hidden="true">↗</span></a>
+          <a href="{{ 'referencia/principios-pour/' | url }}">Operável <span aria-hidden="true">↗</span></a>
+          <a href="{{ 'referencia/principios-pour/' | url }}">Compreensível <span aria-hidden="true">↗</span></a>
+          <a href="{{ 'referencia/principios-pour/' | url }}">Robusto <span aria-hidden="true">↗</span></a>
+        </div>
+        <p>ABNT NBR 17225:2025 <span aria-hidden="true">/</span> WCAG 2.2</p>
+      </div>
+    </section>
+    <section class="project-paths" aria-labelledby="paths-title">
+      <div class="section-intro"><h2 id="paths-title">Explore o projeto</h2><p>Da fundamentação às avaliações.</p></div>
+      <div class="project-paths__list">
+        <a href="{{ 'guia/' | url }}"><span class="project-paths__label">Guia de acessibilidade</span><span>Conceitos, normas, UX e ferramentas</span><span aria-hidden="true">↗</span></a>
+        <a href="{{ 'avaliacao-site/' | url }}"><span class="project-paths__label">Avaliação do site</span><span>Roteiro, checklist e inspeção</span><span aria-hidden="true">↗</span></a>
+        <a href="{{ 'teste-usabilidade/' | url }}"><span class="project-paths__label">Teste de usabilidade</span><span>Planejamento, sessões e resultados</span><span aria-hidden="true">↗</span></a>
+        <a href="{{ 'gestao/' | url }}"><span class="project-paths__label">Gestão do projeto</span><span>Organização, atas e apresentação</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="project-document" aria-label="Apresentação e equipe do projeto">
+      {{ page.content }}
+    </section>
+  </div>
+{% else %}
+  <nav class="page-trail" aria-label="Localização">
+    <a href="{{ '' | url }}">Início</a><span aria-hidden="true">/</span><span>{{ page.title | striptags | e }}</span>
+  </nav>
+  {{ super() }}
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+  <div class="portal-footer"><div class="md-grid"><a href="{{ '' | url }}">IHC <strong>04</strong></a><p>Interação Humano-Computador <span aria-hidden="true">·</span> Universidade de Brasília <span aria-hidden="true">·</span> 2026.2</p><a href="{{ config.repo_url }}">Repositório <span aria-hidden="true">↗</span></a></div></div>
+{% endblock %}
