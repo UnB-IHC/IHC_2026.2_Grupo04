@@ -76,3 +76,76 @@ nav:
       - Cronograma: gestao/cronograma.md
       - Apresentação (Tg-04): gestao/apresentacao.md
       - Atas de Reunião: gestao/atas.md
+
+  - Guia do Notion:
+      - "Sobre esta cópia": referencia/sobre.md
+      - "Guia de Acessibilidade": referencia/index.md
+      - Normas:
+          - "NBR/ABNT": referencia/nbr-abnt.md
+          - "WCAG": referencia/wcag.md
+      - Conceitos:
+          - "ARIA": referencia/aria.md
+          - "CAPTCHA": referencia/captcha.md
+          - "Contraste de Cores": referencia/contraste-de-cores.md
+          - "Foco do Teclado": referencia/foco-do-teclado.md
+          - "Human-in-the-Loop": referencia/human-in-the-loop.md
+          - "Landmarks": referencia/landmarks.md
+          - "Leitor de Tela": referencia/leitor-de-tela.md
+          - "Linguagem Simples": referencia/linguagem-simples.md
+          - "Necessidades de Acessibilidade": referencia/necessidades-de-acessibilidade.md
+          - "Nome Acessível": referencia/nome-acessivel.md
+          - "Níveis de Conformidade": referencia/niveis-de-conformidade.md
+          - "Princípios POUR": referencia/principios-pour.md
+          - "Refluxo e Zoom": referencia/refluxo-e-zoom.md
+          - "Semântica HTML": referencia/semantica-html.md
+          - "Tecnologia Assistiva": referencia/tecnologia-assistiva.md
+          - "Texto Alternativo": referencia/texto-alternativo.md
+          - "Árvore de Acessibilidade": referencia/arvore-de-acessibilidade.md
+      - Prática e referência:
+          - "Auditoria Assistida por IA (Human-in-the-Loop)": referencia/auditoria-assistida.md
+          - "Auditoria: Site dos Correios": referencia/auditoria-site-dos-correios.md
+          - "Glossário A–Z": referencia/glossario-az.md
+          - "Kit de Ferramentas": referencia/kit-de-ferramentas.md
+          - "Skill: Auditar acessibilidade com agente + humano (NBR 17225 / WCAG 2.2)": referencia/procedimento-de-auditoria.md
+      - Checklist:
+          - "Checklist unificado": referencia/checklist-unificado.md
+          - "Visualização 1": referencia/visoes/visualizacao-01.md
+          - "Visualização 2": referencia/visoes/visualizacao-02.md
+          - "Visualização 3": referencia/visoes/visualizacao-03.md
+          - Fichas dos critérios:
+              - "Anúncio automático de mensagens de status": referencia/criterios/anuncio-automatico-de-mensagens-de-status.md
+              - "Ausência de imagens de texto": referencia/criterios/ausencia-de-imagens-de-texto.md
+              - "Autenticação acessível (Sem teste cognitivo)": referencia/criterios/autenticacao-acessivel-sem-teste-cognitivo.md
+              - "CAPTCHA Acessível (Item Crítico NBR)": referencia/criterios/captcha-acessivel-item-critico-nbr.md
+              - "Características sensoriais nas instruções": referencia/criterios/caracteristicas-sensoriais-nas-instrucoes.md
+              - "Conteúdo adicional em hover ou foco": referencia/criterios/conteudo-adicional-em-hover-ou-foco.md
+              - "Contraste mínimo para texto (4,5:1 / 3:1)": referencia/criterios/contraste-minimo-para-texto-4-5-1-3-1.md
+              - "Contraste não textual (3:1 em bordas e ícones)": referencia/criterios/contraste-nao-textual-3-1-em-bordas-e-icones.md
+              - "Controle de carrosséis/animações e Limite de tempo": referencia/criterios/controle-de-carrosseis-animacoes-e-limite-de-tempo.md
+              - "Demarcação semântica de regiões (Landmarks)": referencia/criterios/demarcacao-semantica-de-regioes-landmarks.md
+              - "Elemento em foco não obscurecido": referencia/criterios/elemento-em-foco-nao-obscurecido.md
+              - "Espaçamento de texto adaptável": referencia/criterios/espacamento-de-texto-adaptavel.md
+              - "Identificação e sugestão em erros de formulário": referencia/criterios/identificacao-e-sugestao-em-erros-de-formulario.md
+              - "Imagens decorativas ocultas": referencia/criterios/imagens-decorativas-ocultas.md
+              - "Independência de cor para transmitir informação": referencia/criterios/independencia-de-cor-para-transmitir-informacao.md
+              - "Indicador de foco visível": referencia/criterios/indicador-de-foco-visivel.md
+              - "Legendas e Audiodescrição em vídeos": referencia/criterios/legendas-e-audiodescricao-em-videos.md
+              - "Linguagem simples e clareza textual": referencia/criterios/linguagem-simples-e-clareza-textual.md
+              - "Link de salto (\"Pular para o conteúdo principal\")": referencia/criterios/link-de-salto-pular-para-o-conteudo-principal.md
+              - "Operação plena por teclado e sem armadilhas": referencia/criterios/operacao-plena-por-teclado-e-sem-armadilhas.md
+              - "Ordem lógica de foco": referencia/criterios/ordem-logica-de-foco.md
+              - "Propósito claro de links": referencia/criterios/proposito-claro-de-links.md
+              - "Refluxo e Zoom de até 400% sem perda de conteúdo": referencia/criterios/refluxo-e-zoom-de-ate-400-sem-perda-de-conteudo.md
+              - "Rótulos (labels) visíveis e associados aos campos": referencia/criterios/rotulos-labels-visiveis-e-associados-aos-campos.md
+              - "Semântica de tabelas de dados": referencia/criterios/semantica-de-tabelas-de-dados.md
+              - "Semântica e Nome Acessível em botões": referencia/criterios/semantica-e-nome-acessivel-em-botoes.md
+              - "Semântica e hierarquia de cabeçalhos (H1-H6)": referencia/criterios/semantica-e-hierarquia-de-cabecalhos-h1-h6.md
+              - "Tamanho mínimo da área de clique/toque (24x24px)": referencia/criterios/tamanho-minimo-da-area-de-clique-toque-24x24px.md
+              - "Texto alternativo em imagens de conteúdo": referencia/criterios/texto-alternativo-em-imagens-de-conteudo.md
+              - "Texto alternativo em imagens funcionais": referencia/criterios/texto-alternativo-em-imagens-funcionais.md
+              - "Título descritivo da página (&lt;title&gt;) e Idioma (&lt;html lang&gt;)": referencia/criterios/titulo-descritivo-da-pagina-title-e-idioma-html-lang.md
+              - "Uso semântico de listas": referencia/criterios/uso-semantico-de-listas.md
+      - Páginas auxiliares:
+          - "Atas de reuniões": referencia/auxiliares/atas-de-reunioes.md
+          - "Bem-vindo ao Notion!": referencia/auxiliares/bem-vindo-ao-notion.md
+          - "Bloco de notas": referencia/auxiliares/bloco-de-notas.md
