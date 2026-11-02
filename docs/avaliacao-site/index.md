@@ -1,25 +1,38 @@
-# Avaliação do site
+---
+title: Avaliação dos Correios
+hide: [toc]
+portal_landing: true
+---
+# Avaliação dos Correios
 
-Roteiro, critérios e documentos de inspeção. O checklist preserva os resultados da exportação: os critérios ainda estão pendentes de avaliação.
+Aplicação do guia de acessibilidade ao site dos Correios. O roteiro contempla a página inicial, rastreamento, busca de CEP e preços/login.
 
-<div class="chapter-index" markdown="1">
+<div class="section-feature" markdown="1">
 
-## Preparação e critérios
+## Checklist de avaliação
 
-- [Roteiro de auditoria dos Correios](../referencia/auditoria-site-dos-correios.md)
-- [Checklist unificado: 32 critérios](../referencia/checklist-unificado.md)
-- [Checklist da documentação do projeto](../guia/checklist.md)
-- [Registro do site escolhido](site-escolhido.md)
+Consulte os **32 critérios** com referências NBR/WCAG. Abra o nome de um critério para ver como testar, quais fluxos observar e quais informações registrar.
 
-## Relatório e recomendações
+[Abrir o checklist](../referencia/checklist-unificado.md){ .portal-button }
 
-- [Relatório de inspeção](relatorio-inspecao.md)
-- [Recomendações de melhoria](recomendacoes.md)
+</div>
 
-## Métodos complementares
+## Situação dos registros
 
-- [Participação humana na auditoria](../referencia/human-in-the-loop.md)
-- [Auditoria assistida: proposta e procedimento](../referencia/auditoria-assistida.md)
-- [Procedimento de auditoria do guia](../referencia/procedimento-de-auditoria.md)
+O roteiro e os critérios estão disponíveis. Na cópia atual, os 32 critérios permanecem **pendentes**; ainda não há resultados de inspeção registrados. As páginas de relatório e recomendações são estruturas de trabalho.
+
+<div class="reading-directory" markdown="1">
+
+## [Escopo e roteiro de auditoria](../referencia/auditoria-site-dos-correios.md)
+
+Fluxos, sequência de testes e orientações para registrar evidências.
+
+## [Relatório e recomendações](resultados.md)
+
+Documentos em preparação para reunir os achados e priorizar melhorias.
+
+## [Métodos complementares](metodos.md)
+
+Participação humana, proposta de auditoria assistida e procedimento de apoio.
 
 </div>

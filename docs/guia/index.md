@@ -1,52 +1,36 @@
+---
+title: Guia de acessibilidade
+hide: [toc]
+portal_landing: true
+---
 # Guia de acessibilidade
 
-Fundamentação, normas e recursos de consulta para o projeto de IHC. Escolha um assunto para começar ou avance para o checklist de avaliação.
+Conceitos e orientações para criar interfaces acessíveis. Escolha um assunto ou consulte o [checklist dos Correios](../referencia/checklist-unificado.md).
 
-<div class="chapter-index" markdown="1">
+<div class="topic-directory" markdown="1">
 
-## Comece pelos fundamentos
+## [Fundamentos](fundamentos/index.md)
 
-- [Necessidades de acessibilidade](../referencia/necessidades-de-acessibilidade.md)
-- [Os quatro princípios POUR](../referencia/principios-pour.md)
-- [Níveis de conformidade](../referencia/niveis-de-conformidade.md)
-- [Tecnologia assistiva](../referencia/tecnologia-assistiva.md)
-- [Leitores de tela](../referencia/leitor-de-tela.md)
+Necessidades de acessibilidade, princípios POUR, conformidade e tecnologias assistivas.
 
-## Normas e orientação
+## [Normas e contexto](normas/index.md)
 
-- [ABNT NBR 17225 — guia de referência](../referencia/nbr-abnt.md)
-- [WCAG 2.2 — guia de referência](../referencia/wcag.md)
-- [Introdução, contexto e legislação](introducao.md)
-- [Pilares da acessibilidade — documentação do projeto](pilares.md)
-- [NBR 17225 — documentação do projeto](nbr-17225.md)
+ABNT NBR 17225, WCAG 2.2 e a introdução ao contexto da acessibilidade digital.
 
-## Interface e implementação
+## [Interface e implementação](interface/index.md)
 
-- [Semântica HTML](../referencia/semantica-html.md)
-- [Nome acessível](../referencia/nome-acessivel.md)
-- [Árvore de acessibilidade](../referencia/arvore-de-acessibilidade.md)
-- [ARIA](../referencia/aria.md)
-- [Landmarks](../referencia/landmarks.md)
-- [Foco do teclado](../referencia/foco-do-teclado.md)
-- [Contraste de cores](../referencia/contraste-de-cores.md)
-- [Texto alternativo](../referencia/texto-alternativo.md)
-- [Refluxo e zoom](../referencia/refluxo-e-zoom.md)
-- [Linguagem simples](../referencia/linguagem-simples.md)
-- [CAPTCHA](../referencia/captcha.md)
+Estrutura HTML, teclado, contraste, imagens, formulários e adaptação da interface.
 
-## Experiência do usuário
+## [Experiência do usuário](experiencia/index.md)
 
-- [UX e design empático](ux-design-empatico.md)
-- [Personas e jornadas](personas-jornadas.md)
-- [Service Blueprint e Canvas](blueprint-canvas.md)
-- [Heurísticas de Nielsen](heuristicas-nielsen.md)
+Design empático, personas, jornadas, Service Blueprint e heurísticas de Nielsen.
 
-## Ferramentas e consulta
+## [Ferramentas e consulta](consulta/index.md)
 
-- [Kit de ferramentas](../referencia/kit-de-ferramentas.md)
-- [Pesquisa de ferramentas do projeto](ferramentas.md)
-- [Glossário de acessibilidade](../referencia/glossario-az.md)
-- [Checklist unificado: 32 critérios](../referencia/checklist-unificado.md)
-- [Mapa completo do guia de referência](../referencia/index.md)
+Recursos para testar, inspecionar e consultar os termos usados no guia.
 
 </div>
+
+## Usar o guia na prática
+
+Comece pelos fundamentos se precisar de contexto. Para uma dúvida de implementação, vá diretamente ao assunto. Na avaliação, use o [roteiro dos Correios](../referencia/auditoria-site-dos-correios.md) e abra cada critério do checklist para consultar o método de teste.

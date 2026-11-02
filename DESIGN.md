@@ -26,9 +26,9 @@ colors:
 typography:
   display:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "3.65rem"
+    fontSize: "3.35rem"
     fontWeight: 700
-    lineHeight: 1.08
+    lineHeight: 1.12
     letterSpacing: "-.04em"
   headline:
     fontFamily: "Manrope, sans-serif"
@@ -102,15 +102,15 @@ O tema claro usa os nomes sem prefixo. O tema escuro (`slate`) substitui esses p
 
 Manrope é servida localmente por `docs/assets/fonts/manrope-regular.ttf` e `manrope-bold.ttf`, com licença em `docs/assets/fonts/OFL.txt`. O carregamento usa `font-display: swap` e fallback `sans-serif`. A configuração desativa a fonte remota do tema. O primeiro arquivo atende os pesos declarados 400–500; o segundo, 600–800. Código usa `Consolas, monospace`.
 
-A escala não segue uma razão única. O frontmatter registra título da home, H1 de conteúdo, H2, corpo e rótulos. H3 usa 1.05rem, peso 700 e entrelinha 1.4. A navegação usa .7rem e entrelinha 1.55; tabelas, .72rem e 1.65. O texto introdutório da home limita-se a 41ch; a apresentação original, a 74ch. Mantenha os valores em rem, sem presumir uma conversão fixa para pixels, pois a base vem do tema.
+A escala não segue uma razão única. O frontmatter registra título da home, H1 de conteúdo, H2, corpo e rótulos. H3 usa 1.05rem, peso 700 e entrelinha 1.4. A navegação usa .74rem e entrelinha 1.55, com .7rem nas barras laterais para acomodar os rótulos completos; tabelas usam .76rem e 1.65. Rótulos longos do menu quebram entre palavras, sem reticências. O texto introdutório da home limita-se a 41ch; os parágrafos de leitura, a 72ch; a apresentação original, a 74ch. Mantenha os valores em rem, sem presumir uma conversão fixa para pixels, pois a base vem do tema.
 
 ## Layout
 
-Há cinco entradas principais: **Início, Guia, Avaliação, Usabilidade e Projeto**. `mkdocs.yml` define seus rótulos, agrupamentos e arquivos. As páginas internas têm navegação lateral com grupos recolhíveis, conteúdo central e índice de títulos quando aplicável. O menu vira uma gaveta nas larguras menores. A home tem uma composição própria em `overrides/main.html`, sem índice lateral: introdução e painel POUR, caminhos do projeto e apresentação/equipe.
+Há cinco entradas principais: **Início, Guia, Correios, Usabilidade e Projeto**. `mkdocs.yml` define seus rótulos, agrupamentos e arquivos. O guia começa com cinco assuntos; cada assunto abre seu próprio índice. Textos complementares são acessados dentro do assunto e pelo acervo. As páginas internas têm navegação lateral com grupos recolhíveis, conteúdo central e índice de títulos quando aplicável. O menu vira uma gaveta nas larguras menores. A home tem uma composição própria em `overrides/main.html`, sem índice lateral: introdução, escopo dos Correios e caminhos do projeto. A apresentação original, os objetivos e a equipe são renderizados integralmente em `gestao/equipe.md`, a partir do arquivo de origem `docs/index.md`.
 
-A grade geral limita-se a 72rem; a home, a 63rem; a apresentação original, a 50rem. A abertura usa duas colunas (1.15fr / 1fr) com intervalo de 4rem. Chamadas e fichas de critérios usam duas colunas. Equipe usa quatro colunas.
+A grade geral limita-se a 72rem; a home, a 63rem; a apresentação original, a 50rem. A abertura usa duas colunas (1.15fr / 1fr) com intervalo de 4rem. O índice principal do guia usa linhas inteiramente clicáveis, com assunto, descrição e seta SVG; no celular, a descrição fica abaixo do título. Os blocos de leitura seguem a ordem do texto, com um resumo inicial em fundo suave e notas subsequentes com marca lateral. Fichas de critérios usam duas colunas. Equipe usa quatro colunas e também aparece na página inicial, reutilizando a tabela do documento original, sem duplicar os dados na fonte. Os retratos usam 4.4rem em telas maiores e 3.8rem no celular.
 
-Os ajustes responsivos estão em 76.25em (home ampla), 76.234375em (gaveta e margens menores), 60em (compactação) e 40em (celular). Até 40em, abertura, caminhos, chamadas, fichas e campos ficam em uma coluna; a equipe passa a duas. O título da home usa `clamp(1.9rem, 10.6vw, 2.4rem)`; H1 interno passa a 1.65rem e corpo a .8rem. Tabelas extensas rolam em sua própria região. A impressão remove navegação, ações, filtros e painel de apresentação.
+Os ajustes responsivos estão em 76.25em (home ampla), 76.234375em (gaveta e margens menores), 60em (compactação) e 40em (celular). Até 40em, abertura, caminhos, fichas e campos ficam em uma coluna; a equipe passa a duas. O título da home usa `clamp(1.8rem, 9.8vw, 2.25rem)`; H1 interno passa a 1.65rem e corpo a .8rem. Tabelas extensas rolam em sua própria região. A impressão remove navegação, ações, filtros e painel de apresentação.
 
 ## Elevation & Depth
 
@@ -122,14 +122,15 @@ Os cantos seguem os quatro raios do frontmatter: código pequeno, controles, tab
 
 ## Components
 
-- **Navegação:** seção ativa com linha ciano nas abas; página ativa com fundo suave e peso 700 no menu. Caminho de localização nas páginas internas e links anterior/próximo no rodapé. A busca global e a troca de tema são do tema base.
-- **Ações:** botão ciano para entrar no guia e link textual para o checklist. O hover altera o fundo em 160ms, com `ease-out`. O foco visível global tem contorno de 3px e afastamento de 4px. Preserve rótulos textuais e não dependa só da cor.
-- **Painel da home:** fundo azul profundo, identificação IHC 04 e quatro links para os princípios POUR. O painel mantém sua combinação própria nos dois temas.
-- **Chamadas e fichas:** blocos `aside` consecutivos são agrupados em grade; fichas de critérios exibem pares de termo/descrição, com “Como Testar” em destaque. A autoria de origem continua visível quando presente.
-- **Tabelas:** cabeçalho em fundo neutro, linhas divisórias e região de rolagem com nome e foco de teclado. O JavaScript envolve tabelas ainda não tratadas; o checklist já recebe a região no processamento da página.
+- **Navegação:** seção ativa com linha ciano nas abas; página ativa com fundo suave e peso 700 no menu. Caminho de localização nas páginas internas com seção e assunto. As 32 fichas são acessadas pelo checklist, mantendo o contexto Correios sem repetir a lista no menu. Modelos e páginas da exportação são acessados pelo acervo. A busca global e a troca de tema são do tema base.
+- **Ações:** botão ciano para entrar no guia e links textuais para os demais percursos. Setas SVG compartilham traço e proporção. As transições usam 180ms e `cubic-bezier(.16, 1, .3, 1)`; a seta avança discretamente no hover e no foco. O foco visível global tem contorno de 3px e afastamento de 4px. Preserve rótulos textuais e não dependa só da cor.
+- **Painel da home:** fundo azul profundo, identificação IHC 04, fluxos do site dos Correios e um link para o roteiro. O painel mantém sua combinação própria nos dois temas.
+- **Leitura e fichas:** blocos `aside` de origem são renderizados como seções de leitura, mantendo texto e sequência. O caminho de navegação herdado da exportação fica preservado no HTML, oculto na apresentação, pois o portal fornece um caminho próprio. Fichas de critérios exibem pares de termo/descrição, com “Como Testar” em destaque. A autoria de origem continua visível quando presente.
+- **Conteúdo em preparação:** índices e avisos distinguem roteiro disponível, critérios pendentes e modelos ainda sem resultados. Relatórios, recomendações e documentos do teste mantêm seus textos originais. A apresentação não deve sugerir que a existência de uma estrutura representa trabalho executado.
+- **Tabelas:** cabeçalho em fundo neutro, linhas divisórias e região de rolagem com nome e foco de teclado. O checklist tem cabeçalho azul profundo, números tabulares e primeira coluna fixa durante a rolagem horizontal. A região externa concentra a rolagem; o envoltório do tema usa overflow visível para não criar uma segunda região interna. O JavaScript envolve tabelas ainda não tratadas; o checklist já recebe a região no processamento da página.
 - **Checklist:** busca local por texto, código ou palavra, filtro por princípio WCAG, contagem anunciada e botão “Limpar filtros”. A busca ignora maiúsculas e acentos, combina todas as palavras e atua apenas sobre as linhas da página. São 32 critérios registrados como pendentes, não resultados de uma avaliação concluída. Sem JavaScript, os filtros permanecem ocultos e a tabela completa continua disponível. Ao atualizar, mantenha o Markdown e `docs/referencia/dados/checklist-unificado.csv` correspondentes, na mesma ordem; o processamento verifica a quantidade de linhas.
 - **Teclado e navegação instantânea:** os controles de menu e busca recebem rótulos, estado expandido e ativação por Enter/Espaço. Escape fecha a gaveta ou busca e devolve o foco ao controle. A preparação se repete após a troca instantânea de página, sem duplicar eventos. O link de salto da home aponta para seu título.
-- **Movimento reduzido:** `prefers-reduced-motion: reduce` zera a duração das animações e transições e usa rolagem automática. Novos efeitos devem respeitar essa regra.
+- **Movimento reduzido:** a abertura do painel da home tem um deslocamento de 10px em 540ms, sem ocultar conteúdo. `prefers-reduced-motion: reduce` remove a animação, zera as transições e usa rolagem automática. Novos efeitos devem respeitar essa regra.
 
 ## Do's and Don'ts
 
