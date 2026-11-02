@@ -1,0 +1,2 @@
+docs/referencia/dados/*.csv -text
+docs/assets/fonts/*.ttf binary

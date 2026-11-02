@@ -1,4 +1,5 @@
-site_name: "IHC - Grupo 04 (2026.2)"
+site_name: "IHC · Grupo 04"
+site_url: "https://unb-ihc.github.io/IHC_2026.2_Grupo04/"
 site_description: "Guia de Acessibilidade & Avaliação de IHC - Universidade de Brasília (UnB / FGA)"
 site_author: "Grupo 04 - IHC"
 repo_url: "https://github.com/UnB-IHC/IHC_2026.2_Grupo04"
@@ -6,13 +7,18 @@ repo_name: "UnB-IHC/IHC_2026.2_Grupo04"
 
 theme:
   name: material
+  custom_dir: overrides
+  logo: assets/grupo-04.svg
+  favicon: assets/grupo-04.svg
+  font: false
   language: pt-BR
   features:
     - navigation.instant
     - navigation.tracking
     - navigation.tabs
-    - navigation.sections
-    - navigation.expand
+    - navigation.indexes
+    - navigation.footer
+    - navigation.path
     - navigation.top
     - search.suggest
     - search.highlight
@@ -49,30 +55,79 @@ markdown_extensions:
   - attr_list
   - md_in_html
 
+hooks:
+  - hooks/apresentacao.py
+
+extra_css:
+  - stylesheets/portal.css
+
+extra_javascript:
+  - javascripts/portal.js
+
+extra:
+  generator: false
+
 nav:
-  - Início: index.md
-  - Guia de Acessibilidade & UX:
-      - Apresentação & Legislação: guia/introducao.md
-      - 4 Pilares da Acessibilidade: guia/pilares.md
-      - Norma ABNT NBR 17225:2025: guia/nbr-17225.md
-      - Checklist de Verificação: guia/checklist.md
-      - UX & Design Empático: guia/ux-design-empatico.md
-      - Personas e Jornadas: guia/personas-jornadas.md
-      - Service Blueprint & Canvas: guia/blueprint-canvas.md
-      - Heurísticas de Nielsen: guia/heuristicas-nielsen.md
-      - Pesquisa de Ferramentas: guia/ferramentas.md
-  - Avaliação do Site (Tg-02):
-      - Site Escolhido: avaliacao-site/site-escolhido.md
-      - Relatório de Inspeção: avaliacao-site/relatorio-inspecao.md
-      - Recomendações: avaliacao-site/recomendacoes.md
-  - Teste de Usabilidade (Tg-03):
-      - Planejamento & Roteiro: teste-usabilidade/roteiro.md
-      - Participante & Termo LGPD: teste-usabilidade/participante-termo.md
-      - Sessão & Gravação: teste-usabilidade/sessao-gravacao.md
-      - Resultados & Escore SUS: teste-usabilidade/resultados-sus.md
-      - Relação com o Pocket: teste-usabilidade/relacao-pocket.md
-      - Protótipo de Melhoria: teste-usabilidade/prototipo.md
-  - Gestão & Apresentação (Tg-04):
-      - Cronograma: gestao/cronograma.md
-      - Apresentação (Tg-04): gestao/apresentacao.md
-      - Atas de Reunião: gestao/atas.md
+  - "Início": index.md
+  - "Guia":
+      - "Guia de acessibilidade": guia/index.md
+      - "Fundamentos":
+          - "Fundamentos": guia/fundamentos/index.md
+          - "Necessidades de acessibilidade": referencia/necessidades-de-acessibilidade.md
+          - "Princípios POUR": referencia/principios-pour.md
+          - "Níveis de conformidade": referencia/niveis-de-conformidade.md
+          - "Tecnologia assistiva": referencia/tecnologia-assistiva.md
+          - "Leitor de tela": referencia/leitor-de-tela.md
+      - "Normas e contexto":
+          - "Normas e contexto": guia/normas/index.md
+          - "Introdução e legislação": guia/introducao.md
+          - "ABNT NBR 17225": referencia/nbr-abnt.md
+          - "WCAG 2.2": referencia/wcag.md
+      - "Interface e implementação":
+          - "Interface e implementação": guia/interface/index.md
+          - "Semântica HTML": referencia/semantica-html.md
+          - "Nome acessível": referencia/nome-acessivel.md
+          - "Árvore de acessibilidade": referencia/arvore-de-acessibilidade.md
+          - "ARIA": referencia/aria.md
+          - "Landmarks": referencia/landmarks.md
+          - "Foco do teclado": referencia/foco-do-teclado.md
+          - "Contraste de cores": referencia/contraste-de-cores.md
+          - "Texto alternativo": referencia/texto-alternativo.md
+          - "Refluxo e zoom": referencia/refluxo-e-zoom.md
+          - "Linguagem simples": referencia/linguagem-simples.md
+          - "CAPTCHA": referencia/captcha.md
+      - "Experiência do usuário":
+          - "Experiência do usuário": guia/experiencia/index.md
+          - "UX e design empático": guia/ux-design-empatico.md
+          - "Personas e jornadas": guia/personas-jornadas.md
+          - "Service Blueprint e Canvas": guia/blueprint-canvas.md
+          - "Heurísticas de Nielsen": guia/heuristicas-nielsen.md
+      - "Ferramentas e consulta":
+          - "Ferramentas e consulta": guia/consulta/index.md
+          - "Kit de ferramentas": referencia/kit-de-ferramentas.md
+          - "Glossário A–Z": referencia/glossario-az.md
+  - "Correios":
+      - "Avaliação dos Correios": avaliacao-site/index.md
+      - "Escopo e roteiro": referencia/auditoria-site-dos-correios.md
+      - "Checklist unificado": referencia/checklist-unificado.md
+      - "Relatório e recomendações": avaliacao-site/resultados.md
+      - "Métodos complementares":
+          - "Métodos complementares": avaliacao-site/metodos.md
+          - "Participação humana": referencia/human-in-the-loop.md
+          - "Auditoria assistida": referencia/auditoria-assistida.md
+          - "Procedimento de auditoria": referencia/procedimento-de-auditoria.md
+  - "Usabilidade":
+      - "Teste de usabilidade": teste-usabilidade/index.md
+      - "Planejamento e roteiro": teste-usabilidade/roteiro.md
+      - "Participante e LGPD": teste-usabilidade/participante-termo.md
+      - "Sessão e gravação": teste-usabilidade/sessao-gravacao.md
+      - "Resultados e SUS": teste-usabilidade/resultados-sus.md
+      - "Relação com o guia": teste-usabilidade/relacao-pocket.md
+      - "Protótipo de melhoria": teste-usabilidade/prototipo.md
+  - "Projeto":
+      - "Sobre o projeto": gestao/index.md
+      - "Apresentação e equipe": gestao/equipe.md
+      - "Cronograma": gestao/cronograma.md
+      - "Atas de reunião": gestao/atas.md
+      - "Material de apresentação": gestao/apresentacao.md
+      - "Acervo e modelos": materiais/index.md

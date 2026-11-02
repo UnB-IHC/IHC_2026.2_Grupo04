@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% macro arrow(diagonal=false) -%}
+<svg class="portal-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="{% if diagonal %}M7 17 17 7M7 7h10v10{% else %}M5 12h14m-6-6 6 6-6 6{% endif %}"/></svg>
+{%- endmacro %}
+
+{% block content %}
+{% if page.meta.portal_home %}
+  <div class="portal-home">
+    <section class="portal-hero" aria-labelledby="portal-title">
+      <div class="portal-hero__text">
+        <h1 id="portal-title" tabindex="-1">Guia de<br> acessibilidade.</h1>
+        <p>Conceitos e orientações para projetar interfaces mais acessíveis. Um projeto do Grupo 04 de Interação Humano-Computador da UnB.</p>
+        <div class="portal-actions">
+          <a class="portal-button" href="{{ 'guia/' | url }}">Acessar o guia {{ arrow() }}</a>
+          <a class="portal-text-link" href="{{ 'avaliacao-site/' | url }}">Avaliar os Correios {{ arrow() }}</a>
+        </div>
+        <p class="portal-affiliation">Universidade de Brasília <span aria-hidden="true">·</span> 2026.2</p>
+      </div>
+      <div class="guide-preview">
+        <div class="guide-preview__heading"><span>IHC</span><span class="guide-preview__group">04</span></div>
+        <h2>Site dos Correios</h2>
+        <p class="guide-preview__intro">O guia aplicado a serviços do cotidiano.</p>
+        <ul class="guide-preview__flows"><li>Página inicial</li><li>Rastreamento</li><li>Busca de CEP</li><li>Preços e login</li></ul>
+        <a class="guide-preview__route" href="{{ 'referencia/auditoria-site-dos-correios/' | url }}">Conhecer o roteiro {{ arrow() }}</a>
+        <p>32 critérios no checklist <span aria-hidden="true">·</span> avaliação pendente</p>
+      </div>
+    </section>
+    <section class="project-paths" aria-labelledby="paths-title">
+      <div class="section-intro"><h2 id="paths-title">Encontre seu caminho</h2><p>Consulte um conceito, prepare uma avaliação ou conheça o trabalho.</p></div>
+      <div class="project-paths__list">
+        <a href="{{ 'guia/' | url }}"><span class="project-paths__label">Guia de acessibilidade</span><span>Conceitos, normas, UX e ferramentas</span>{{ arrow() }}</a>
+        <a href="{{ 'avaliacao-site/' | url }}"><span class="project-paths__label">Avaliação dos Correios</span><span>Escopo, roteiro e checklist de inspeção</span>{{ arrow() }}</a>
+        <a href="{{ 'teste-usabilidade/' | url }}"><span class="project-paths__label">Teste de usabilidade</span><span>Documentos para preparar e registrar o teste</span>{{ arrow() }}</a>
+        <a href="{{ 'gestao/' | url }}"><span class="project-paths__label">Sobre o projeto</span><span>Equipe, acompanhamento e acervo</span>{{ arrow() }}</a>
+      </div>
+    </section>
+    {% if page.meta.portal_team %}
+    <section class="project-document home-team" id="membros-da-equipe" aria-labelledby="home-team-title">
+      <h2 id="home-team-title">Equipe do projeto</h2>
+      {{ page.meta.portal_team }}
+    </section>
+    {% endif %}
+    <p class="home-project-link">Projeto acadêmico de IHC, semestre 2026.2. <a href="{{ 'gestao/equipe/' | url }}">Conheça a equipe e os objetivos {{ arrow() }}</a></p>
+  </div>
+{% else %}
+  <nav class="page-trail" aria-label="Localização">
+    <a href="{{ '' | url }}">Início</a>
+    {% for item in page.meta.portal_trail %}<span aria-hidden="true">/</span><a href="{{ item.url | url }}">{{ item.title }}</a>{% endfor %}
+    <span aria-hidden="true">/</span><span aria-current="page">{{ page.title | striptags | e }}</span>
+  </nav>
+  <div class="{% if page.meta.portal_landing %}portal-hub{% elif page.file.src_uri == 'gestao/equipe.md' %}project-document{% else %}portal-reading{% endif %}">
+    {% if page.meta.portal_notice %}<div class="work-notice"><p>{{ page.meta.portal_notice }}</p></div>{% endif %}
+    {{ super() }}
+    {% if page.meta.portal_complement %}
+    <section class="complement-reading" aria-label="Leitura complementar">
+      <h2>Leitura complementar</h2><p><a href="{{ page.meta.portal_complement.url | url }}">{{ page.meta.portal_complement.title }}</a> — contribuição complementar preservada na documentação do projeto.</p>
+    </section>
+    {% endif %}
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+  <div class="portal-footer"><div class="md-grid"><a href="{{ '' | url }}">IHC <strong>04</strong></a><p>Interação Humano-Computador <span aria-hidden="true">·</span> Universidade de Brasília <span aria-hidden="true">·</span> 2026.2</p><a href="{{ config.repo_url }}">Repositório {{ arrow(true) }}</a></div></div>
+{% endblock %}

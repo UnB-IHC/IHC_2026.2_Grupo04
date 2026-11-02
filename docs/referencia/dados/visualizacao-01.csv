@@ -1,0 +1,7 @@
+﻿Critério,Cód. NBR,Camada de Teste,Resultado,Severidade da Falha,Verificado por,Observações / Evidências
+Indicador de foco visível,5.1.1,🧠 IA + Visão,⏳ Pendente,,,
+Demarcação semântica de regiões (Landmarks),5.4.1,🤖 Automática,⏳ Pendente,,,
+Semântica e Nome Acessível em botões,5.8.3,🤖 Automática,⏳ Pendente,,,
+"Contraste mínimo para texto (4,5:1 / 3:1)",5.11.3,🤖 Automática,⏳ Pendente,,,
+Título descritivo da página (<title>) e Idioma (<html lang>),5.13.1 / 5.13.2,🤖 Automática,⏳ Pendente,,,
+CAPTCHA Acessível (Item Crítico NBR),Anexo Crítico / 5.2.1,🙋 Humano no Loop,⏳ Pendente,,,
