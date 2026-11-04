@@ -13,7 +13,6 @@ title: Inspeção inicial da busca de CEP
 
 | Item | Registro |
 | --- | --- |
-| Responsável pelo registro | Luiz Henrique |
 | Página | [Busca por Endereço ou CEP](https://buscacepinter.correios.com.br/app/endereco/index.php) |
 | Tarefa | Examinar preenchimento, validação, consulta sem dados e retorno ao formulário. |
 | Ambiente | Brave em Windows; área da página de 1920 × 903 pixels. |
