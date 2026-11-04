@@ -19,13 +19,25 @@ Consulte os **32 critérios** com referências NBR/WCAG. Abra o nome de um crit�
 
 ## Situação dos registros
 
-O roteiro e os critérios estão disponíveis. Na cópia atual, os 32 critérios permanecem **pendentes**; ainda não há resultados de inspeção registrados. As páginas de relatório e recomendações são estruturas de trabalho.
+O roteiro e os critérios estão disponíveis. Os 32 critérios NBR/WCAG permanecem **pendentes**. Há uma [inspeção heurística inicial da busca de CEP](inspecao-busca-cep.md), com dois achados individuais e revisão do grupo pendente. O relatório consolidado e as recomendações gerais continuam em preparação.
 
 <div class="reading-directory" markdown="1">
 
 ## [Escopo e roteiro de auditoria](../referencia/auditoria-site-dos-correios.md)
 
 Fluxos, sequência de testes e orientações para registrar evidências.
+
+## [Checklist de Nielsen](checklist-nielsen.md)
+
+Perguntas de inspeção para as dez heurísticas, complementando a avaliação de acessibilidade.
+
+## [Inspeção inicial da busca de CEP](inspecao-busca-cep.md)
+
+Percurso observado, capturas, limitações e severidades propostas.
+
+## [Modelo de registro de achados](modelo-achado.md)
+
+Campos e modelo para documentar problemas reproduzíveis nas próximas rodadas.
 
 ## [Relatório e recomendações](resultados.md)
 

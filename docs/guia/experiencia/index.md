@@ -25,4 +25,6 @@ Representação do serviço e organização da proposta.
 
 Princípios de usabilidade para a inspeção da interface.
 
+[Aplicar as heurísticas nos Correios](../../avaliacao-site/checklist-nielsen.md) · [Ver a inspeção inicial da busca de CEP](../../avaliacao-site/inspecao-busca-cep.md)
+
 </div>
