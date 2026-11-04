@@ -110,6 +110,10 @@ nav:
       - "Avaliação dos Correios": avaliacao-site/index.md
       - "Escopo e roteiro": referencia/auditoria-site-dos-correios.md
       - "Checklist unificado": referencia/checklist-unificado.md
+      - "Inspeção heurística":
+          - "Checklist de Nielsen": avaliacao-site/checklist-nielsen.md
+          - "Registro de achados": avaliacao-site/modelo-achado.md
+          - "Inspeção da busca de CEP": avaliacao-site/inspecao-busca-cep.md
       - "Relatório e recomendações": avaliacao-site/resultados.md
       - "Métodos complementares":
           - "Métodos complementares": avaliacao-site/metodos.md

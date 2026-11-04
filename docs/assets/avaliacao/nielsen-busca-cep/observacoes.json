@@ -1,0 +1,40 @@
+{
+  "campoDescritoPor": null,
+  "campoPreenchido": "70040900",
+  "controles": [
+    {
+      "iconeOculto": "true",
+      "rotulo": null,
+      "tabindex": "-1",
+      "texto": "",
+      "titulo": null
+    },
+    {
+      "iconeOculto": "true",
+      "rotulo": null,
+      "tabindex": "-1",
+      "texto": "",
+      "titulo": "Refresh Image"
+    }
+  ],
+  "focoAposTab": "captcha",
+  "instrucaoCampo": "Não utilize nº de casa/apto/lote/prédio ou abreviação.",
+  "url": "https://buscacepinter.correios.com.br/app/endereco/index.php",
+  "viewport": {
+    "altura": 903,
+    "largura": 1920
+  },
+  "focoAposShiftTab": "tipoCEP",
+  "dataRegistro": "2026-11-04",
+  "consulta": {
+    "entradaConfirmada": "70040900",
+    "filtro": "Todos",
+    "retorno": [
+      "Não há dados a serem exibidos",
+      "Dados não encontrado"
+    ],
+    "acaoSeguinte": "Nova Busca",
+    "campoAposRetorno": "",
+    "focoAposRetorno": "endereco"
+  }
+}
