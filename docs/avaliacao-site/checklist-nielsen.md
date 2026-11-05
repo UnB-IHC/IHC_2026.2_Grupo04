@@ -3,7 +3,7 @@ title: Checklist de Nielsen
 ---
 # Checklist de Nielsen
 
-Perguntas para aplicar as [dez heurísticas do guia](../guia/heuristicas-nielsen.md) aos fluxos dos Correios. Este roteiro complementa o [checklist de acessibilidade NBR/WCAG](../referencia/checklist-unificado.md).
+Perguntas para aplicar as [dez heurísticas do guia](../guia/heuristicas-nielsen.md) aos fluxos dos Correios. Este roteiro complementa o [checklist de acessibilidade NBR/WCAG](checklist-correios.md).
 
 ## Como registrar
 

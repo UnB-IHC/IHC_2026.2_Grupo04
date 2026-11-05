@@ -19,4 +19,4 @@ portal_landing: true
 
 ## Antes de registrar resultados
 
-Use o [roteiro de auditoria](../referencia/auditoria-site-dos-correios.md), o [checklist unificado NBR/WCAG](../referencia/checklist-unificado.md) e o [checklist de Nielsen](checklist-nielsen.md). Os 32 resultados NBR/WCAG continuam pendentes; as observações heurísticas não encerram esses testes.
+Use o [roteiro de auditoria](../referencia/auditoria-site-dos-correios.md), o [checklist unificado NBR/WCAG](checklist-correios.md) e o [checklist de Nielsen](checklist-nielsen.md). Os 32 resultados NBR/WCAG continuam pendentes; as observações heurísticas não encerram esses testes.

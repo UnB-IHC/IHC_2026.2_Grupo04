@@ -106,10 +106,11 @@ nav:
           - "Ferramentas e consulta": guia/consulta/index.md
           - "Kit de ferramentas": referencia/kit-de-ferramentas.md
           - "Glossário A–Z": referencia/glossario-az.md
+          - "Checklist para avaliar um site": guia/checklist-modelo.md
   - "Correios":
       - "Avaliação dos Correios": avaliacao-site/index.md
       - "Escopo e roteiro": referencia/auditoria-site-dos-correios.md
-      - "Checklist unificado": referencia/checklist-unificado.md
+      - "Checklist preenchido": avaliacao-site/checklist-correios.md
       - "Inspeção heurística":
           - "Checklist de Nielsen": avaliacao-site/checklist-nielsen.md
           - "Registro de achados": avaliacao-site/modelo-achado.md

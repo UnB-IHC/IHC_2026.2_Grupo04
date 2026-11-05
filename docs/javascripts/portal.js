@@ -62,10 +62,12 @@
       region.append(table);
     });
 
+    prepareAnswers();
+
     const tools = document.querySelector("[data-checklist-tools]");
     if (!tools || tools.dataset.ready) return;
     const query = tools.querySelector("input[type=search]");
-    const principle = tools.querySelector("select");
+    const filters = [...tools.querySelectorAll("select[data-filter]")];
     const reset = tools.querySelector("[data-filter-reset]");
     const count = tools.querySelector("[data-checklist-count]");
     const empty = document.querySelector("[data-checklist-empty]");
@@ -76,27 +78,88 @@
       const terms = normalize(query.value.trim()).split(/\s+/).filter(Boolean);
       let visible = 0;
       rows.forEach((row, index) => {
-        const matches = (!principle.value || row.dataset.principle === principle.value)
+        const matches = filters.every((select) => !select.value || row.dataset[select.dataset.filter] === select.value)
           && terms.every((term) => searchable[index].includes(term));
         row.hidden = !matches;
         if (matches) visible += 1;
       });
       count.textContent = visible === rows.length ? `${visible} critérios` : `${visible} de ${rows.length} critérios`;
       empty.hidden = visible !== 0;
-      reset.disabled = !query.value && !principle.value;
+      reset.disabled = !query.value && filters.every((select) => !select.value);
     }
 
     query.addEventListener("input", filter);
-    principle.addEventListener("change", filter);
+    filters.forEach((select) => select.addEventListener("change", filter));
     reset.addEventListener("click", () => {
       query.value = "";
-      principle.value = "";
+      filters.forEach((select) => { select.value = ""; });
       filter();
       query.focus();
     });
     tools.dataset.ready = "true";
     tools.hidden = false;
     filter();
+  }
+
+  // Checklist em branco: respostas salvas só no navegador (localStorage) e exportáveis em CSV.
+  function prepareAnswers() {
+    const panel = document.querySelector("[data-checklist-answers]");
+    if (!panel || panel.dataset.ready) return;
+    const storageKey = "ihc-g04:checklist-modelo";
+    const fields = [...document.querySelectorAll("[data-answer]")];
+    const rows = [...document.querySelectorAll("[data-criterion-row][data-criterion]")];
+    const progress = panel.querySelector("[data-checklist-progress]");
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch { saved = {}; }
+
+    const answer = (key) => document.querySelector(`[data-answer="${key}"]`)?.value || "";
+    function update() {
+      const done = rows.filter((row) => answer(`${row.dataset.criterion}:resultado`)).length;
+      progress.textContent = `${done} de ${rows.length} critérios avaliados`;
+    }
+    function store() {
+      saved = Object.fromEntries(fields.filter((field) => field.value).map((field) => [field.dataset.answer, field.value]));
+      try { localStorage.setItem(storageKey, JSON.stringify(saved)); } catch { /* armazenamento indisponível */ }
+    }
+
+    fields.forEach((field) => {
+      if (saved[field.dataset.answer]) field.value = saved[field.dataset.answer];
+      field.addEventListener(field.tagName === "SELECT" ? "change" : "input", () => {
+        store();
+        update();
+      });
+    });
+
+    panel.querySelector("[data-checklist-export]").addEventListener("click", () => {
+      const cell = (value) => `"${String(value).replace(/"/g, '""')}"`;
+      const site = answer("site");
+      const lines = [["Critério", "Cód. NBR", "Cód. WCAG", "Resultado", "Observações / Evidências", "URL Testada"]];
+      rows.forEach((row) => lines.push([
+        row.dataset.name, row.dataset.nbr, row.dataset.wcag,
+        answer(`${row.dataset.criterion}:resultado`) || "Não avaliado",
+        answer(`${row.dataset.criterion}:observacoes`), site,
+      ]));
+      const blob = new Blob(["\ufeff" + lines.map((line) => line.map(cell).join(",")).join("\r\n")], { type: "text/csv;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "checklist-acessibilidade.csv";
+      document.body.append(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 0);
+    });
+
+    panel.querySelector("[data-checklist-clear]").addEventListener("click", () => {
+      if (!window.confirm("Apagar todas as respostas salvas neste navegador?")) return;
+      fields.forEach((field) => { field.value = ""; });
+      store();
+      update();
+      panel.querySelector("#checklist-site")?.focus();
+    });
+
+    panel.dataset.ready = "true";
+    panel.hidden = false;
+    update();
   }
 
   if (typeof document$ !== "undefined") document$.subscribe(preparePage);

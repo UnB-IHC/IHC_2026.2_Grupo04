@@ -5,7 +5,7 @@ portal_landing: true
 ---
 # Guia de acessibilidade
 
-Conceitos e orientações para criar interfaces acessíveis. Escolha um assunto ou consulte o [checklist dos Correios](../referencia/checklist-unificado.md).
+Conceitos e orientações para criar interfaces acessíveis. Escolha um assunto ou consulte o [checklist para avaliar um site](checklist-modelo.md).
 
 <div class="topic-directory" markdown="1">
 

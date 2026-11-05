@@ -17,9 +17,9 @@ Recursos organizados por tipo de teste, com orientações de uso.
 
 Definições dos termos usados ao longo do material.
 
-## [Checklist dos Correios](../../referencia/checklist-unificado.md)
+## [Checklist para avaliar um site](../checklist-modelo.md)
 
-Os 32 critérios e suas fichas de orientação para testar.
+Os 32 critérios NBR/WCAG em branco, para preencher no navegador ou baixar em CSV.
 
 </div>
 

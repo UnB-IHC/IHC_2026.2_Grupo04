@@ -98,4 +98,4 @@ Quer que um agente de IA execute este checklist no navegador e grave os resultad
 
 ## ✅ Checklist Unificado
 
-[✅ Checklist Unificado: NBR 17225 + WCAG 2.2 (Auditoria Correios)](checklist-unificado.md)
+[✅ Checklist Unificado: NBR 17225 + WCAG 2.2 (Auditoria Correios)](../avaliacao-site/checklist-correios.md)
