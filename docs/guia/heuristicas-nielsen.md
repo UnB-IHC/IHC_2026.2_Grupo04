@@ -12,10 +12,14 @@ As heurísticas são princípios gerais para o design de interface de usuário q
 
 ### Feedback e Compreensão do Sistema
 
+<div id="h1-visibilidade-status"></div>
+
 ???+ note "1. Visibilidade do Status do Sistema"
     **Conceito:** O sistema deve sempre informar o usuário sobre o que está acontecendo no momento, fornecendo um feedback claro, compreensível e em tempo hábil.
     
     * **Aplicação e Exemplos:** Barras de progresso e carregamento, indicadores de etapas concluídas em formulários multipasso (steppers) ou mensagens de confirmação ("Salvo com sucesso", "Processando solicitação").
+
+<div id="h2-mundo-real"></div>
 
 ???+ note "2. Correspondência com o Mundo Real"
     **Conceito:** O sistema deve falar a linguagem do usuário, empregando palavras, frases e conceitos do seu dia a dia, evitando termos técnicos, siglas herméticas ou jargões de desenvolvimento. As informações devem seguir uma ordem lógica e natural.
@@ -26,15 +30,21 @@ As heurísticas são princípios gerais para o design de interface de usuário q
 
 ### Liberdade, Consistência e Prevenção
 
+<div id="h3-controle-liberdade"></div>
+
 ???+ note "3. Controle e Liberdade do Usuário"
     **Conceito:** Os usuários frequentemente realizam ações por engano ou mudam de ideia; portanto, o sistema deve fornecer "saídas de emergência" claras e visíveis para cancelar ou desfazer ações sem passar por fluxos prolongados.
     
     * **Aplicação e Exemplos:** Botões explícitos de "Cancelar", "Voltar", "Desfazer" e suporte a atalhos padrão como <kbd>Ctrl</kbd> + <kbd>Z</kbd>.
 
+<div id="h4-consistencia-padroes"></div>
+
 ???+ note "4. Consistência e Padrões"
     **Conceito:** Os usuários não devem ter que se perguntar se palavras, situações ou ações diferentes significam a mesma coisa. O design deve manter consistência interna (no próprio sistema) e externa (seguindo convenções consolidadas da plataforma e da web).
     
     * **Aplicação e Exemplos:** Botões primários sempre com a mesma cor e posicionamento, links sublinhados ou destacados consistentemente e padrões universais de formulários e navegação.
+
+<div id="h5-prevencao-erros"></div>
 
 ???+ note "5. Prevenção de Erros"
     **Conceito:** Muito mais eficiente do que apresentar boas mensagens de erro é projetar uma interface que impeça o erro de acontecer em primeiro lugar. O design deve eliminar condições propensas a falhas ou solicitar confirmação antes de ações irreversíveis.
@@ -45,15 +55,21 @@ As heurísticas são princípios gerais para o design de interface de usuário q
 
 ### Carga Cognitiva e Eficiência
 
+<div id="h6-reconhecimento"></div>
+
 ???+ note "6. Reconhecimento em vez de Memorização"
     **Conceito:** Minimizar a carga de memória de trabalho do usuário. Elementos, ações e opções de navegação devem estar visíveis. O usuário não deve precisar lembrar de informações de uma página ao avançar para outra.
     
     * **Aplicação e Exemplos:** Menus e migalhas de pão (*breadcrumbs*) sempre visíveis, histórico de buscas recentes, listas de opções selecionáveis em vez de campos de digitação livre quando aplicável.
 
+<div id="h7-flexibilidade"></div>
+
 ???+ note "7. Eficiência e Flexibilidade de Uso"
     **Conceito:** A interface deve acolher usuários iniciantes com facilidade de navegação, mas também disponibilizar aceleradores e atalhos para que usuários experientes executem tarefas recorrentes de forma ágil.
     
     * **Aplicação e Exemplos:** Atalhos de teclado, filtros avançados em consultas extensas, preenchimento automático de dados frequentes e personalização de painéis.
+
+<div id="h8-minimalismo"></div>
 
 ???+ note "8. Estética e Design Minimalista"
     **Conceito:** Os diálogos e telas não devem conter informações irrelevantes ou raramente necessárias. Cada unidade extra de informação compete com as informações essenciais e diminui sua visibilidade relativa (*menos é mais*).
@@ -64,10 +80,14 @@ As heurísticas são princípios gerais para o design de interface de usuário q
 
 ### Diagnóstico de Erros e Suporte
 
+<div id="h9-recuperacao-erros"></div>
+
 ???+ note "9. Recuperação diante de Erros"
     **Conceito:** As mensagens de erro devem ser expressas em linguagem clara (sem códigos numéricos ou jargões técnicos de banco de dados), apontar com precisão onde o problema ocorreu e sugerir construtivamente uma ação para resolução.
     
     * **Aplicação e Exemplos:** Em vez de *"Erro 404"* ou *"Invalid parameter"*, exibir *"O CPF informado possui dígitos incompletos. Por favor, verifique os 11 números digitados."*
+
+<div id="h10-ajuda-documentacao"></div>
 
 ???+ note "10. Ajuda e Documentação"
     **Conceito:** Embora o ideal seja um sistema tão intuitivo que dispense explicações adicionais, pode ser necessário fornecer auxílio e documentação. Qualquer ajuda deve ser de fácil localização, focada na tarefa do usuário, listar passos concretos e não ser prolixa.

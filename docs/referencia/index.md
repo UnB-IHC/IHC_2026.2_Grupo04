@@ -41,7 +41,16 @@
 
 **Mão na massa**
 
-[Auditoria: Site dos Correios](auditoria-site-dos-correios.md)
+[Auditoria: Site dos Correios](auditoria-site-dos-correios.md) · [Checklist Unificado](checklist-unificado.md)
+
+</aside>
+
+<aside markdown="1">
+5️⃣
+
+**Inspeção Heurística (Nielsen)**
+
+[Heurísticas de Nielsen](../guia/heuristicas-nielsen.md) · [Checklist de Nielsen](../avaliacao-site/checklist-nielsen.md)
 
 </aside>
 
