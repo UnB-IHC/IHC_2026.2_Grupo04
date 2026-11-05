@@ -3,7 +3,7 @@
 Esta seção reúne o material do guia exportado do Notion. Os textos e as indicações de autoria foram mantidos; os links e a formatação foram adaptados para leitura no site.
 
 - [Abrir o Guia de Acessibilidade](index.md).
-- [Consultar os 32 critérios do checklist](checklist-unificado.md).
+- [Consultar os 32 critérios do checklist](../avaliacao-site/checklist-correios.md).
 
 As páginas que já existiam no repositório continuam nas demais seções do menu. Esta cópia não unifica nem revisa as afirmações dos dois materiais.
 

@@ -167,6 +167,18 @@ a { text-underline-offset: .2em; }
 .filter-reset:disabled { color: var(--portal-muted); opacity: .7; cursor: default; }
 .md-typeset .checklist-count { margin: .65rem 0 0; color: var(--portal-muted); font-size: .65rem; font-variant-numeric: tabular-nums; }
 .checklist-empty { padding: 1rem; background: var(--portal-soft); border-radius: 8px; }
+.checklist-answers { display: grid; gap: .8rem; background: var(--portal-soft); padding: 1rem; border-radius: var(--portal-radius); margin: 1.5rem 0 0; }
+.checklist-answers label { display: grid; gap: .4rem; color: var(--portal-ink); font-size: .65rem; font-weight: 700; }
+.checklist-answers input, #checklist-table select, #checklist-table textarea { width: 100%; min-height: 2.4rem; padding: .5rem .6rem; border: 1px solid var(--portal-muted); border-radius: 6px; background: var(--portal-paper); color: var(--portal-ink); font: inherit; font-size: .72rem; }
+.checklist-answers__actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+.checklist-export { min-height: 2.4rem; padding: .5rem 1rem; border-radius: 6px; background: var(--portal-accent); color: var(--portal-paper); font-weight: 700; font-size: .72rem; cursor: pointer; }
+.checklist-export:hover { background: var(--portal-accent-hover); }
+.md-typeset .checklist-answers .checklist-count { margin: 0; }
+.md-typeset .checklist-blank #checklist-table td:nth-child(4) { min-width: 18rem; }
+.md-typeset .checklist-blank #checklist-table td:nth-child(5) { min-width: 10rem; }
+.md-typeset .checklist-blank #checklist-table td:last-child { min-width: 14rem; white-space: normal; }
+#checklist-table textarea { resize: vertical; }
+.md-typeset .checklist-filled #checklist-table td:nth-child(7) { min-width: 14rem; }
 .md-typeset .chapter-index { display: grid; gap: 1.5rem; }
 .chapter-index h2 { margin-top: 1.5rem; }
 .md-typeset .chapter-index ul { margin: .5rem 0 0; list-style: none; padding: 0; }
@@ -329,7 +341,7 @@ body:has(.portal-home) .md-footer__inner { display: none; }
 }
 
 @media print {
-  .md-header, .md-tabs, .md-sidebar, .portal-footer, .md-footer, .checklist-tools, .portal-actions { display: none !important; }
+  .md-header, .md-tabs, .md-sidebar, .portal-footer, .md-footer, .checklist-tools, .checklist-answers__actions, .portal-actions { display: none !important; }
   .md-content__inner { margin: 0; }
   .portal-hero { grid-template-columns: 1fr; }
   .guide-preview { display: none; }

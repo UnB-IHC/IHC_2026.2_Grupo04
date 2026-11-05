@@ -2,7 +2,7 @@
 
 Tabela exportada do Notion, apresentada como cópia estática. Os valores abaixo são os da exportação; alterações no Notion não atualizam esta página automaticamente.
 
-[Baixar CSV original](../dados/visualizacao-02.csv) · [Abrir checklist unificado](../checklist-unificado.md)
+[Baixar CSV original](../dados/visualizacao-02.csv) · [Abrir checklist unificado](../../avaliacao-site/checklist-correios.md)
 
 | Critério |
 | --- |

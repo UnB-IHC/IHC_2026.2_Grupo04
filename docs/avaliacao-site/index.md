@@ -13,7 +13,7 @@ Aplicação do guia de acessibilidade ao site dos Correios. O roteiro contempla 
 
 Consulte os **32 critérios** com referências NBR/WCAG. Abra o nome de um critério para ver como testar, quais fluxos observar e quais informações registrar.
 
-[Abrir o checklist](../referencia/checklist-unificado.md){ .portal-button }
+[Abrir o checklist](checklist-correios.md){ .portal-button }
 
 </div>
 

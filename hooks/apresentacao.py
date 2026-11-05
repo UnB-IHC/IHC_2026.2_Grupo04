@@ -33,13 +33,13 @@ def _page_context(page):
         ("normas", "Normas e contexto", ["nbr-abnt", "wcag", "introducao", "nbr-17225"]),
         ("interface", "Interface e implementação", ["semantica-html", "nome-acessivel", "arvore-de-acessibilidade", "aria", "landmarks", "foco-do-teclado", "contraste-de-cores", "texto-alternativo", "refluxo-e-zoom", "linguagem-simples", "captcha"]),
         ("experiencia", "Experiência do usuário", ["ux-design-empatico", "personas-jornadas", "blueprint-canvas", "heuristicas-nielsen"]),
-        ("consulta", "Ferramentas e consulta", ["kit-de-ferramentas", "ferramentas", "glossario-az"]),
+        ("consulta", "Ferramentas e consulta", ["kit-de-ferramentas", "ferramentas", "glossario-az", "checklist-modelo"]),
     ]
     trail = []
     if source.startswith("referencia/criterios/"):
-        trail = [("Correios", "avaliacao-site/"), ("Checklist", "referencia/checklist-unificado/")]
+        trail = [("Correios", "avaliacao-site/"), ("Checklist", "avaliacao-site/checklist-correios/")]
     elif source.startswith("avaliacao-site/") or source in [
-        "referencia/auditoria-site-dos-correios.md", "referencia/checklist-unificado.md",
+        "referencia/auditoria-site-dos-correios.md",
         "referencia/human-in-the-loop.md", "referencia/auditoria-assistida.md",
         "referencia/procedimento-de-auditoria.md", "guia/checklist.md",
     ]:
@@ -91,8 +91,6 @@ def on_page_markdown(markdown, page, config, files):
         page.meta["portal_home"] = True
         page.meta["hide"] = ["toc"]
         return re.sub(r"^# ", "## ", markdown, count=1)
-    if source == "referencia/checklist-unificado.md":
-        page.meta["hide"] = ["toc"]
     if source.startswith("referencia/"):
         fenced = False
         first_title = True
@@ -123,49 +121,114 @@ def _criterion_details(content):
     return content[:blocks[0].start()] + details + content[blocks[-1].end():]
 
 
-def _checklist(content, config):
-    file = Path(config["docs_dir"]) / "referencia/dados/checklist-unificado.csv"
+CHECKLIST_SLOT = '<div data-checklist-slot></div>'
+CHECKLISTS = {
+    "guia/checklist-modelo.md": {"csv": "checklist-modelo.csv", "filled": False},
+    "avaliacao-site/checklist-correios.md": {"csv": "checklist-unificado.csv", "filled": True},
+}
+ANSWERS = ["Conforme", "Parcialmente conforme", "Não conforme", "Não se aplica"]
+
+
+def _esc(value):
+    return html.escape(value or "", quote=True)
+
+
+def _criterion_links(page, files):
+    """Associa o título de cada ficha de critério ao link relativo à página atual."""
+    links = {}
+    for file in files.documentation_pages():
+        if not file.src_uri.startswith("referencia/criterios/"):
+            continue
+        text = Path(file.abs_src_path).read_text(encoding="utf-8")
+        title = re.search(r"^# (.+)$", text, re.M)
+        if title:
+            links[html.unescape(title[1].strip())] = file.url_relative_to(page.file)
+    return links
+
+
+def _filter_select(key, label, values, everything):
+    options = f'<option value="">{everything}</option>' + "".join(
+        f'<option value="{_esc(v)}">{html.escape(v)}</option>' for v in values
+    )
+    return f'''<label for="criterion-{key}">{label}
+          <select id="criterion-{key}" data-filter="{key}" aria-controls="checklist-table">{options}</select>
+        </label>'''
+
+
+def _checklist(page, config, files):
+    settings = CHECKLISTS[page.file.src_uri]
+    filled = settings["filled"]
+    file = Path(config["docs_dir"]) / "referencia/dados" / settings["csv"]
     with file.open(encoding="utf-8-sig", newline="") as stream:
         rows = [r for r in csv.DictReader(stream) if r["Cód. NBR"]]
-    principles = sorted({r["Princípio WCAG"] for r in rows})
-    options = '<option value="">Todos os princípios</option>' + "".join(
-        f'<option value="{html.escape(p, quote=True)}">{html.escape(p)}</option>'
-        for p in principles
-    )
-    controls = f'''<div class="checklist-tools" data-checklist-tools hidden>
+    links = _criterion_links(page, files)
+    missing = [r["Critério"] for r in rows if r["Critério"] not in links]
+    assert not missing, f"Critérios sem ficha correspondente: {missing}"
+
+    filters = _filter_select("principle", "Princípio WCAG", sorted({r["Princípio WCAG"] for r in rows}), "Todos os princípios")
+    if filled:
+        filters += _filter_select("result", "Resultado", sorted({r["Resultado"] or "Sem registro" for r in rows}), "Todos os resultados")
+    tools = f'''<div class="checklist-tools" data-checklist-tools hidden>
       <div class="checklist-tools__fields">
         <label for="criterion-query">Buscar no checklist
           <input type="search" id="criterion-query" placeholder="Critério, código ou palavra-chave" autocomplete="off" aria-controls="checklist-table">
         </label>
-        <label for="criterion-principle">Princípio WCAG
-          <select id="criterion-principle" aria-controls="checklist-table">{options}</select>
-        </label>
+        {filters}
         <button type="button" class="filter-reset" data-filter-reset>Limpar filtros</button>
       </div>
       <p class="checklist-count" role="status" aria-live="polite" aria-atomic="true" data-checklist-count>{len(rows)} critérios</p>
     </div>'''
-    row_index = 0
 
-    def tag_row(match):
-        nonlocal row_index
-        record = rows[row_index]
-        row_index += 1
+    if filled:
+        headers = ["Critério", "Cód. NBR", "Cód. WCAG", "Camada de teste", "Resultado", "Severidade", "Observações / Evidências", "Verificado por"]
+    else:
+        headers = ["Critério", "Cód. NBR", "Cód. WCAG", "Como testar", "Resultado", "Observações"]
+        tools = '''<div class="checklist-answers" data-checklist-answers hidden>
+      <label for="checklist-site">Site ou página avaliada
+        <input type="url" id="checklist-site" data-answer="site" placeholder="https://" autocomplete="url">
+      </label>
+      <div class="checklist-answers__actions">
+        <button type="button" class="checklist-export" data-checklist-export>Exportar respostas (CSV)</button>
+        <button type="button" class="filter-reset" data-checklist-clear>Apagar respostas</button>
+      </div>
+      <p class="checklist-count" role="status" aria-live="polite" aria-atomic="true" data-checklist-progress>0 de ''' + str(len(rows)) + ''' critérios avaliados</p>
+    </div>''' + tools
+
+    body = []
+    for record in rows:
+        name = record["Critério"]
+        slug = Path(links[name].rstrip("/")).name
+        cells = [
+            f'<td><a href="{_esc(links[name])}">{html.escape(name)}</a></td>',
+            f'<td>{html.escape(record["Cód. NBR"])}</td>',
+            f'<td>{html.escape(record["Cód. WCAG"])}</td>',
+        ]
+        if filled:
+            result = record["Resultado"] or "Sem registro"
+            cells += [f'<td>{html.escape(record[c] or "—")}</td>' for c in ("Camada de Teste", "Resultado", "Severidade da Falha", "Observações / Evidências", "Verificado por")]
+            data = f' data-result="{_esc(result)}"'
+        else:
+            options = '<option value="">Não avaliado</option>' + "".join(f'<option>{a}</option>' for a in ANSWERS)
+            cells += [
+                f'<td>{html.escape(record["Como Testar"])}</td>',
+                f'<td><select data-answer="{slug}:resultado" aria-label="Resultado: {_esc(name)}">{options}</select></td>',
+                f'<td><textarea data-answer="{slug}:observacoes" rows="2" aria-label="Observações: {_esc(name)}"></textarea></td>',
+            ]
+            data = f' data-criterion="{_esc(slug)}" data-name="{_esc(name)}" data-nbr="{_esc(record["Cód. NBR"])}" data-wcag="{_esc(record["Cód. WCAG"])}"'
         search = " ".join(record.values())
-        return (
-            '<tr data-criterion-row data-principle="'
-            + html.escape(record["Princípio WCAG"], quote=True)
-            + '" data-search="' + html.escape(search, quote=True) + '">'
-            + match[1] + "</tr>"
+        body.append(
+            f'<tr data-criterion-row data-principle="{_esc(record["Princípio WCAG"])}"{data} data-search="{_esc(search)}">'
+            + "".join(cells) + "</tr>"
         )
-
-    body = re.search(r"<tbody>(.*?)</tbody>", content, re.S)
-    if body:
-        tagged = re.sub(r"<tr>(.*?)</tr>", tag_row, body[1], flags=re.S)
-        assert row_index == len(rows), "O checklist deve corresponder às linhas do CSV."
-        content = content[:body.start(1)] + tagged + content[body.end(1):]
-    content = content.replace("<table>", controls + '<div class="table-scroll" role="region" aria-label="Checklist de acessibilidade" tabindex="0"><table id="checklist-table">', 1)
-    content = content.replace("</table>", '</table></div><p class="checklist-empty" data-checklist-empty hidden>Nenhum critério encontrado. Tente outra palavra ou limpe os filtros.</p>', 1)
-    return content
+    head = "".join(f'<th scope="col">{h}</th>' for h in headers)
+    label = "Checklist preenchido dos Correios" if filled else "Checklist para preencher"
+    return (
+        tools
+        + f'<div class="table-scroll {"checklist-filled" if filled else "checklist-blank"}" role="region" aria-label="{label}" tabindex="0">'
+        + '<table id="checklist-table">'
+        + f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table></div>"
+        + '<p class="checklist-empty" data-checklist-empty hidden>Nenhum critério encontrado. Tente outra palavra ou limpe os filtros.</p>'
+    )
 
 
 def on_page_content(content, page, config, files):
@@ -188,8 +251,9 @@ def on_page_content(content, page, config, files):
     content = re.sub(r"<p>(Owner: [^<]+)</p>", r'<p class="source-byline">\1</p>', content)
     if source.startswith("referencia/criterios/"):
         content = _criterion_details(content)
-    if source == "referencia/checklist-unificado.md":
-        content = _checklist(content, config)
+    if source in CHECKLISTS:
+        assert CHECKLIST_SLOT in content, f"{source} precisa do marcador {CHECKLIST_SLOT}"
+        content = content.replace(CHECKLIST_SLOT, _checklist(page, config, files), 1)
     if source == "devWeb/non_text_content.md":
         heading = '<h2 id="dispositivo-movel-e-tocavel">'
         content = content.replace(heading, '<span id="TEC14"></span>' + heading, 1)
