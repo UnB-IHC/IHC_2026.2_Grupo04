@@ -1,0 +1,895 @@
+{
+  "_leia": "Evidências da auditoria dos Correios (07/11/2026), uma entrada por critério do checklist-unificado.csv. 'como' lista o que cada participante fez (auto = script no navegador; agente = agente de IA operando o navegador; humano = integrante do grupo). 'imagens' são caminhos relativos a docs/avaliacao-site/evidencias/.",
+  "Uso semântico de listas": {
+    "como": [
+      [
+        "auto",
+        "Contou as listas da página e quantos links do cabeçalho e do rodapé estão dentro delas."
+      ],
+      [
+        "agente",
+        "No Rastreamento, conferiu no código se a linha do tempo é marcada como lista."
+      ]
+    ],
+    "codigo": [
+      [
+        "Home — varredura",
+        "[listas] ul=78 ol=1 li=206\n  HEADER links=8 emLi=7\n  FOOTER links=32 emLi=30"
+      ],
+      [
+        "Rastreamento — linha do tempo",
+        "P.text.text-head\n  < DIV.step-content\n  < LI.step\n  < UL.ship-steps\n  < DIV#ver-mais"
+      ]
+    ],
+    "imagens": [
+      [
+        "rastreamento/06-linha-do-tempo-mascarada.jpg",
+        "Linha do tempo do Rastreamento (código mascarado): cada etapa é um item de lista."
+      ]
+    ]
+  },
+  "Legendas e Audiodescrição em vídeos": {
+    "como": [
+      [
+        "auto",
+        "Procurou na Home vídeos, áudios e players incorporados."
+      ]
+    ],
+    "codigo": [
+      [
+        "Home — mídia",
+        "[mídia] video=0 audio=0 iframesVídeo=0 track=0"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/01-estado-inicial-cookies-carol.jpg",
+        "Home sem vídeos: só banners em imagem."
+      ]
+    ]
+  },
+  "Linguagem simples e clareza textual": {
+    "como": [
+      [
+        "agente",
+        "Reuniu os textos de status do rastreamento, as mensagens de erro e os alertas do Preços e Prazos."
+      ],
+      [
+        "humano",
+        "Leu os textos como um cidadão comum e deu o veredito: Parcial, severidade Média."
+      ]
+    ],
+    "codigo": [
+      [
+        "Resposta do servidor para código inexistente",
+        "fetch resultado.php\n  resp 200 {\"erro\": true, \"mensagem\": \"Período inválido\"}"
+      ],
+      [
+        "Textos que confundem",
+        "\"Informações prestadas pelo cliente em análise.\"\n\"Previsão de Entrega:\"   (sem valor)\n\"PRIME EXPRÈS\"\n\"Your account is not recognized and cannot login at this time.\"\n\"(Caixa) Por definição, para o cálculo de preço desse serviço deverão ser informados, também, o comprimento, a largura e altura do objeto em centímetros).\""
+      ]
+    ],
+    "imagens": [
+      [
+        "rastreamento/05-codigo-ficticio-periodo-invalido.jpg",
+        "Código fictício gera \"Período inválido\", mensagem que não fala de código."
+      ],
+      [
+        "rastreamento/07-linha-do-tempo-expandida-mouse.jpg",
+        "Eventos do objeto; \"Informações prestadas pelo cliente em análise\" não diz o que fazer."
+      ]
+    ]
+  },
+  "Tamanho mínimo da área de clique/toque (24x24px)": {
+    "como": [
+      [
+        "auto",
+        "Mediu o tamanho de todos os elementos clicáveis e, nos menores que 24 px, verificou se há espaço livre suficiente em volta."
+      ],
+      [
+        "agente",
+        "Mediu também a paginação do Busca CEP e os indicadores do carrossel da Home."
+      ]
+    ],
+    "codigo": [
+      [
+        "Busca CEP — alvos pequenos, mas espaçados",
+        "63x23 \"Anterior\" | 61x23 \"Próximo\"  (centros a 72 px)\n20x23 áudio do CAPTCHA | 27x19 nova imagem (centros a 32 px)"
+      ],
+      [
+        "Home — indicadores do carrossel (falha)",
+        "<div class=\"circulo\"> 10x10 @656,394\n<div class=\"circulo\"> 10x10 @676,394\n<div class=\"circulo\"> 10x10 @696,394\ncentros a 20 px (< 24 px), tabIndex=-1, sem nome"
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/06-resultado-paginado.jpg",
+        "Paginação Anterior/Próximo do Busca CEP: menor que 24 px de altura, mas espaçada."
+      ],
+      [
+        "home-global/06-foco-banner.jpg",
+        "Indicadores do carrossel da Home (três pontos sob o banner)."
+      ]
+    ]
+  },
+  "Identificação e sugestão em erros de formulário": {
+    "como": [
+      [
+        "agente",
+        "Enviou formulários vazios, digitou um CEP público com CAPTCHA propositalmente errado, um código de rastreio fictício e escolheu serviços incompletos no Preços e Prazos."
+      ],
+      [
+        "auto",
+        "Depois de cada erro, verificou se a mensagem está ligada ao campo com problema e se é anunciada pelo leitor de tela."
+      ],
+      [
+        "humano",
+        "Errou a senha de propósito no login e relatou a mensagem exibida."
+      ]
+    ],
+    "codigo": [
+      [
+        "Busca CEP — mensagem não vinculada",
+        "DIV#alerta role=null aria-live=null  \"Captcha Inválido!\"\n#captcha  aria-invalid=null aria-describedby=null\nRegiões live na página: 0"
+      ],
+      [
+        "Rastreamento — campo vazio",
+        "msg \"Informe um CPF, um CNPJ ou um código de rastreamento\"\n  DIV.mensagem role=null aria-live=null\n#objeto aria-invalid=null aria-describedby=null"
+      ],
+      [
+        "Preços e Prazos — alert() nativo",
+        "alert: \"Selecione o tipo de serviço desejado.\"  → foco no campo\nalert: \"Informe o peso para o cálculo de preços da sua encomenda.\""
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/03-envio-vazio-alerta.jpg",
+        "Busca CEP: faixa \"Informe o Endereço com no mínimo 2 caracteres\", longe do campo e sem anúncio."
+      ],
+      [
+        "busca-cep/04-captcha-invalido.jpg",
+        "\"Captcha Inválido!\" não diz o que fazer."
+      ],
+      [
+        "rastreamento/04-envio-vazio.jpg",
+        "Rastreamento: mensagem clara abaixo do campo, mas não associada a ele."
+      ]
+    ]
+  },
+  "Propósito claro de links": {
+    "como": [
+      [
+        "auto",
+        "Verificou, nas três páginas, se algum link tem texto vago, que não diz para onde leva, ou não tem nome."
+      ],
+      [
+        "agente",
+        "Leu a frase em volta do único link genérico para ver se o contexto explica o destino."
+      ]
+    ],
+    "codigo": [
+      [
+        "Home — varredura",
+        "[links] visíveis=87 genéricos=1 semNome=0\n  genérico: \"aqui\" — contexto \"Simule aqui outros serviços.\""
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/17-espacamento-texto-formulario.jpg",
+        "\"Simule aqui outros serviços\": o propósito do link se entende pela frase."
+      ]
+    ]
+  },
+  "Características sensoriais nas instruções": {
+    "como": [
+      [
+        "auto",
+        "Leu o texto das três páginas procurando instruções que dependam de posição, cor ou forma."
+      ]
+    ],
+    "codigo": [
+      [
+        "Resultado da busca",
+        "CEP: nenhuma\nRastreamento: nenhuma\nHome: nenhuma"
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/01-estado-inicial.jpg",
+        "Instruções textuais: \"Digite um CEP ou um Endereço\", \"Esse CEP é de\"."
+      ]
+    ]
+  },
+  "Controle de carrosséis/animações e Limite de tempo": {
+    "como": [
+      [
+        "auto",
+        "Registrou qual slide estava ativo a cada 3–4 segundos para comprovar a rotação automática e procurou um controle de pausar ou parar."
+      ],
+      [
+        "agente",
+        "Conferiu visualmente os controles existentes e se havia sessão com tempo limite nos fluxos sem login."
+      ]
+    ],
+    "codigo": [
+      [
+        "Rastreamento",
+        "div#carouselExampleControls data-ride=\"carousel\" data-interval=\"10000\"\nslide ativo a cada 4 s: 2 → 2 → 0 → 0 → 1\nbotão de pausar: não existe"
+      ],
+      [
+        "Home",
+        "slide visível a cada 3 s: Papai Noel → Papai Noel → Mais Correios → …\nbotão de pausar: não existe"
+      ]
+    ],
+    "imagens": [
+      [
+        "rastreamento/08-carrossel.jpg",
+        "Carrossel do Rastreamento: só \"anterior\" e \"próximo\", sem pausa."
+      ],
+      [
+        "home-global/06-foco-banner.jpg",
+        "Carrossel da Home girando sozinho."
+      ]
+    ]
+  },
+  "Ausência de imagens de texto": {
+    "como": [
+      [
+        "auto",
+        "Listou as imagens grandes da Home com o texto alternativo de cada uma."
+      ],
+      [
+        "agente",
+        "Comparou o texto que aparece dentro de cada banner com o texto alternativo."
+      ],
+      [
+        "humano",
+        "Julgou se o texto em imagem é aceitável e deu o veredito: Não conforme, Média."
+      ]
+    ],
+    "codigo": [
+      [
+        "Banners e alt",
+        "1351x312 alt=\"Mais Correios\"   (imagem diz: \"O mês virou e os preços caíram! Vem pro Novembro de Ofertas…\")\n 473x420 alt=\"Correios Celular no prêmio Reclame Aqui\"   (imagem continua: \"Estamos concorrendo… Vote…\")"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/01-estado-inicial-cookies-carol.jpg",
+        "Banner de ofertas: todo o texto está dentro da imagem."
+      ],
+      [
+        "home-global/17-espacamento-texto-formulario.jpg",
+        "Card \"Correios Celular no prêmio Reclame Aqui\": texto em imagem."
+      ],
+      [
+        "home-global/18-espacamento-texto-correios-aqui.jpg",
+        "\"Seja um ponto de coleta dos Correios\": texto em imagem."
+      ]
+    ]
+  },
+  "Título descritivo da página (<title>) e Idioma (<html lang>)": {
+    "como": [
+      [
+        "auto",
+        "Leu o título e o idioma declarado de cada página visitada."
+      ],
+      [
+        "agente",
+        "Comparou o idioma declarado com o idioma em que a página apareceu na tela."
+      ]
+    ],
+    "codigo": [
+      [
+        "title e lang por página",
+        "Home             title=\"Correios\"       lang=\"pt-br\"\nBusca CEP        title=\"Busca CEP\"      lang=\"pt-br\"\nRastreamento     title=\"Rastreamento\"   lang=\"\"        ← vazio\nPreços e Prazos  title=\"home\"           lang=\"pt-br\"   ← título genérico\nLogin CAS        title=\"Login - CAS…\"   lang=\"\"        ← vazio\nMeu Correios     title=\"Meu Correios\"   lang=\"pt-BR\"   (texto exibido em inglês)"
+      ]
+    ],
+    "imagens": [
+      [
+        "precos-login/05-meucorreios-ingles.jpg",
+        "Meu Correios exibido em inglês com lang=\"pt-BR\"."
+      ]
+    ]
+  },
+  "Ordem lógica de foco": {
+    "como": [
+      [
+        "agente",
+        "Percorreu a Home com Tab, uma tecla por vez, do topo ao rodapé, e repetiu nas páginas de resultado."
+      ],
+      [
+        "auto",
+        "A cada Tab, registrou o elemento focado, sua posição e se estava fora da tela."
+      ]
+    ],
+    "codigo": [
+      [
+        "Trechos do percurso",
+        "1. Acessibilidade → 2. logo → 3–8. menu → 9. Login → 10. Busca → 11–12. banners → 13. campo de rastreio …\n25. \"Central de Atendimento\" @1648,319 FORA_DA_TELA (slide oculto)\nBusca CEP e Rastreamento: após a busca, foco em BODY"
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/05-resultado-cep-unico.jpg",
+        "Resultado do Busca CEP: o foco volta para o início da página (BODY)."
+      ]
+    ]
+  },
+  "Autenticação acessível (Sem teste cognitivo)": {
+    "como": [
+      [
+        "auto",
+        "Testou se os campos de usuário e senha aceitam colar texto e se a página carrega algum CAPTCHA."
+      ],
+      [
+        "humano",
+        "Digitou as próprias credenciais, errou a senha uma vez de propósito e depois entrou usando o gerenciador de senhas. Não houve desafio."
+      ]
+    ],
+    "codigo": [
+      [
+        "Login CAS",
+        "username: paste defaultPrevented=false  autocomplete=off\npassword: paste defaultPrevented=false  autocomplete=off\nrecaptchaEnabled value=\"\" | scripts de CAPTCHA: 0"
+      ]
+    ],
+    "imagens": [
+      [
+        "precos-login/06-cas-login.jpg",
+        "Login só com usuário e senha, sem desafio cognitivo."
+      ]
+    ]
+  },
+  "Conteúdo adicional em hover ou foco": {
+    "como": [
+      [
+        "agente",
+        "Abriu o menu Enviar com o mouse, tentou fechá-lo com Esc e depois tentou abri-lo só pelo teclado."
+      ],
+      [
+        "auto",
+        "Conferiu se os links do submenu apareciam e recebiam foco depois do Enter."
+      ]
+    ],
+    "codigo": [
+      [
+        "Teclado no menu principal",
+        "ativo: A \"Enviar\" href=\"#\" aria-expanded=null aria-haspopup=null\nlink \"Nacional\" visível=false\npróximo Tab: \"Receber\""
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/12-megamenu-hover.jpg",
+        "Mega menu aberto pelo mouse."
+      ],
+      [
+        "home-global/13-megamenu-apos-esc.jpg",
+        "Depois do Esc o menu continua aberto."
+      ],
+      [
+        "home-global/15-enter-em-enviar-nao-abre.jpg",
+        "Enter em \"Enviar\" não abre o menu."
+      ]
+    ]
+  },
+  "Rótulos (labels) visíveis e associados aos campos": {
+    "como": [
+      [
+        "auto",
+        "Verificou se cada campo visível tem um rótulo ligado a ele."
+      ],
+      [
+        "agente",
+        "Percorreu o formulário do Preços e Prazos com Tab e anotou onde o foco caía."
+      ]
+    ],
+    "codigo": [
+      [
+        "Busca CEP e Rastreamento — rotulados",
+        "INPUT#endereco label=\"Digite um CEP ou um Endereço:\"\nSELECT#tipoCEP label=\"Esse CEP é de:\"\nINPUT#objeto   label=\"Deseja acompanhar seu objeto? …\""
+      ],
+      [
+        "Preços e Prazos — campos sem rótulo que recebem foco",
+        "campos visíveis=16, sem rótulo=6\ntext tabIndex=0 @x=-9564 (fora da tela)\nTab: \"Comparar…\" → INPUT \"\" FORA_DA_TELA → \"Embalagem\" → INPUT \"\" FORA_DA_TELA"
+      ]
+    ],
+    "imagens": [
+      [
+        "precos-login/03-precos-formulario-expandido-sedex.jpg",
+        "Formulário do Preços e Prazos após escolher SEDEX."
+      ],
+      [
+        "busca-cep/01-estado-inicial.jpg",
+        "Busca CEP: rótulos visíveis acima dos campos."
+      ]
+    ]
+  },
+  "Elemento em foco não obscurecido": {
+    "como": [
+      [
+        "agente",
+        "Navegou com Tab com o aviso de cookies e a assistente Carol abertos, como numa primeira visita."
+      ],
+      [
+        "auto",
+        "A cada foco, conferiu se havia outro elemento por cima do elemento focado."
+      ]
+    ],
+    "codigo": [
+      [
+        "Elementos encobertos",
+        "19. \"Correios Empresas\"   COBERTO(3/3) POR IMG#carol-corpo-img\n29. \"Soluções para o seu negócio\" COBERTO(3/3) POR aviso de cookies\n31. \"Ouvidoria\"           COBERTO(3/3)\n32. \"Denúncia\"            COBERTO(3/3)\n33. \"Segurança\"           COBERTO(3/3)"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/09-foco-correios-empresas-coberto-carol.png",
+        "\"Correios Empresas\" com foco, escondido atrás da Carol."
+      ],
+      [
+        "home-global/10-foco-rodape-coberto-cookies.jpg",
+        "Links do rodapé com foco escondidos pelo aviso de cookies."
+      ]
+    ]
+  },
+  "Semântica de tabelas de dados": {
+    "como": [
+      [
+        "auto",
+        "Conferiu no código se as tabelas de resultado têm título e cabeçalhos de coluna e de linha marcados."
+      ],
+      [
+        "humano",
+        "Fez as buscas que exigem CAPTCHA no Busca CEP e confirmou o veredito Parcial, Baixa."
+      ]
+    ],
+    "codigo": [
+      [
+        "Busca CEP",
+        "<table id=\"resultado-DNEC\" summary=\"Resultado DNEC\">\n  <caption hidden=\"true\">Resultado da Busca…</caption>\n  <thead><tr><th>Logradouro/Nome</th>… (sem scope)"
+      ],
+      [
+        "Preços e Prazos",
+        "linha 0: <td> \"\" | <td> [img alt=\"\"]   ← logo SEDEX\nlinha 1: <th> \"Prazo de entrega\" | <td> \"Dia da Postagem + 1 dia útil\"\nlinha 3: <th> \"Preço do serviço:\" | <td> \"R$ 65,00\""
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/05-resultado-cep-unico.jpg",
+        "Tabela de resultado do Busca CEP."
+      ],
+      [
+        "precos-login/04-precos-resultado.jpg",
+        "Resultado do Preços e Prazos: serviço identificado só pelo logo."
+      ]
+    ]
+  },
+  "Demarcação semântica de regiões (Landmarks)": {
+    "como": [
+      [
+        "auto",
+        "Verificou em cada página se cabeçalho, menu, conteúdo principal e rodapé estão marcados como regiões e se os menus têm nome."
+      ]
+    ],
+    "codigo": [
+      [
+        "Landmarks por página",
+        "Home         header=2 nav=5 (4 ocultas, nenhuma rotulada) main=1 footer=2\nRastreamento header=3 nav=1 (\"breadcrumb\") main=1 footer=1\nBusca CEP    header=4 nav=1 (sem rótulo) main=1 footer=1"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/03-foco-menu-enviar.png",
+        "O menu principal visível não está dentro de nav."
+      ]
+    ]
+  },
+  "Espaçamento de texto adaptável": {
+    "como": [
+      [
+        "auto",
+        "Aumentou o espaçamento entre linhas, letras e palavras na medida da WCAG e contou os textos que passaram a ser cortados."
+      ],
+      [
+        "agente",
+        "Rolou a página e conferiu visualmente cards, formulário e blocos de texto."
+      ]
+    ],
+    "codigo": [
+      [
+        "CSS aplicado e resultado",
+        "*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}\np{margin-bottom:2em!important}\ncortados antes=3  novos após ajuste=0"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/16-espacamento-texto-topo.jpg",
+        "Topo com espaçamento ampliado."
+      ],
+      [
+        "home-global/17-espacamento-texto-formulario.jpg",
+        "Formulário de frete com espaçamento ampliado."
+      ]
+    ]
+  },
+  "Imagens decorativas ocultas": {
+    "como": [
+      [
+        "auto",
+        "Contou as imagens sem texto alternativo e comparou o texto alternativo dos ícones com o texto ao lado."
+      ],
+      [
+        "agente",
+        "Identificou quais imagens são só decoração, como ícones ao lado de um texto."
+      ]
+    ],
+    "codigo": [
+      [
+        "Varredura",
+        "Home: imagens visíveis=83 semAtributoAlt=0 altVazio=0\n  \"Preços e Prazos\" (alt) + \"Preços e Prazos\" (texto) → lido duas vezes\nRastreamento: IMG.circle-img sem alt (caminhao-correndo-stroke.svg …)"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/04-foco-login.png",
+        "\"Faça Login\" com ícone cujo alt é \"Imagem de uma porta para indicar o acesso…\"."
+      ]
+    ]
+  },
+  "Contraste mínimo para texto (4,5:1 / 3:1)": {
+    "como": [
+      [
+        "auto",
+        "Calculou o contraste entre a cor de cada texto e a do fundo e comparou com o mínimo de 4,5:1 (3:1 para texto grande)."
+      ]
+    ],
+    "codigo": [
+      [
+        "Combinações abaixo do mínimo (Home)",
+        "4.27:1 rgb(0,123,179) sobre rgb(243,245,240) \"Enviar\" (menu)\n4.01:1 rgb(0,123,179) sobre rgb(239,237,234) \"aqui\"\n4.49:1 rgb(0,123,179) sobre rgb(250,250,250) título de notícia\n3.70:1 rgb(0,113,173) sobre rgb(255,212,0) \"Confira os eletrônicos\""
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/03-foco-menu-enviar.png",
+        "Menu principal em azul sobre fundo claro (4,27:1)."
+      ]
+    ]
+  },
+  "Indicador de foco visível": {
+    "como": [
+      [
+        "agente",
+        "Navegou com Tab e capturou o elemento focado em zoom, comparando com e sem foco."
+      ],
+      [
+        "auto",
+        "Conferiu no estilo da página se o elemento focado ganha contorno ou sombra."
+      ]
+    ],
+    "codigo": [
+      [
+        "Rastreamento — foco invisível",
+        "A.logo   focusVisible=true outline=none box-shadow=rgba(0,0,0,0)\nA.entrar focusVisible=true outline=none box-shadow=rgba(0,0,0,0)"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/23-rastreamento-foco-logo-invisivel.png",
+        "Logo do Rastreamento com foco: nada muda."
+      ],
+      [
+        "home-global/22-rastreamento-foco-entrar-invisivel.png",
+        "\"Entrar\" com foco: nada muda."
+      ],
+      [
+        "home-global/05a-foco-botao-busca.png",
+        "Home, botão Busca com foco: só o fundo muda (fraco)."
+      ],
+      [
+        "home-global/11-foco-rodape-visivel.png",
+        "Contraexemplo: rodapé da Home com borda de foco visível."
+      ]
+    ]
+  },
+  "Operação plena por teclado e sem armadilhas": {
+    "como": [
+      [
+        "agente",
+        "Tentou usar cada controle só pelo teclado. Quando não conseguiu, repetiu com o mouse para mostrar o que ficou inacessível."
+      ],
+      [
+        "auto",
+        "Registrou a ordem em que o foco passa pelos controles e quais deles ficam de fora."
+      ]
+    ],
+    "codigo": [
+      [
+        "Rastreamento — controles fora do Tab",
+        "a#a-ver-mais (\"+\", Mais informações)  sem href\na.btn[title=Compartilhar]             sem href\nTab: Consultar → \"Ver cupons\" (pula a linha do tempo)"
+      ]
+    ],
+    "imagens": [
+      [
+        "rastreamento/06-linha-do-tempo-mascarada.jpg",
+        "Linha do tempo recolhida: o \"+\" não recebe foco."
+      ],
+      [
+        "rastreamento/07-linha-do-tempo-expandida-mouse.jpg",
+        "Com o mouse aparecem 3 eventos escondidos."
+      ],
+      [
+        "home-global/15-enter-em-enviar-nao-abre.jpg",
+        "Home: o mega menu não abre pelo teclado."
+      ]
+    ]
+  },
+  "Texto alternativo em imagens de conteúdo": {
+    "como": [
+      [
+        "auto",
+        "Listou as imagens de conteúdo com o texto alternativo de cada uma."
+      ],
+      [
+        "agente",
+        "Comparou o texto alternativo de cada imagem com o que ela mostra."
+      ],
+      [
+        "humano",
+        "Julgou se os textos alternativos descrevem as imagens e deu o veredito: Não conforme, Média."
+      ]
+    ],
+    "codigo": [
+      [
+        "Alts problemáticos",
+        "alt=\"Mais Correios\"                      → banner de ofertas inteiro\nalt=\"Indexes all content in the site\"    → texto-padrão do Plone, em inglês\nRastreamento: alts \"Sua entrega está a caminho!\", \"Mês do cliente\"… ≠ banner exibido\nPreços: logo SEDEX do resultado com alt=\"\""
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/01-estado-inicial-cookies-carol.jpg",
+        "Banner com alt \"Mais Correios\"."
+      ],
+      [
+        "rastreamento/08-carrossel.jpg",
+        "Banner \"A Black com os Correios é mais\" com alt de outra campanha."
+      ]
+    ]
+  },
+  "CAPTCHA Acessível (Item Crítico NBR)": {
+    "como": [
+      [
+        "auto",
+        "Conferiu no código do CAPTCHA a imagem, o áudio e os botões."
+      ],
+      [
+        "agente",
+        "Registrou a sequência de Tab e digitou um texto errado de propósito para ver a mensagem de erro."
+      ],
+      [
+        "humano",
+        "Tentou chegar ao áudio só pelo teclado e não conseguiu. Ouviu o áudio com o mouse: está em português, mas com muito ruído. Resolveu o CAPTCHA para fazer as buscas."
+      ]
+    ],
+    "codigo": [
+      [
+        "Botões do CAPTCHA",
+        "<a tabindex=\"-1\" class=\"captcha_play_button\">\n  <i class=\"fa fa-volume-up\" aria-hidden=\"true\"></i>   ← sem nome\n</a>\n<a tabindex=\"-1\" title=\"Refresh Image\" id=\"captcha_refresh_btn\">\n<img id=\"captcha_image\" alt=\"CAPTCHA Image\">"
+      ],
+      [
+        "Sequência de Tab",
+        "INPUT#endereco → SELECT#tipoCEP → INPUT#captcha → BUTTON \"Buscar\"\n(áudio e nova imagem nunca recebem foco)"
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/01-estado-inicial.jpg",
+        "CAPTCHA de imagem com ícones de áudio e de nova imagem."
+      ],
+      [
+        "busca-cep/04-captcha-invalido.jpg",
+        "Erro do CAPTCHA."
+      ]
+    ]
+  },
+  "Texto alternativo em imagens funcionais": {
+    "como": [
+      [
+        "auto",
+        "Verificou se cada link ou botão feito de imagem ou ícone tem um nome que diga o que ele faz."
+      ],
+      [
+        "humano",
+        "Julgou se os textos alternativos dizem o que cada link faz e deu o veredito: Não conforme, Média."
+      ]
+    ],
+    "codigo": [
+      [
+        "Links funcionais",
+        "Rastreamento: a.logo, a.entrar, a.hamburger → sem texto, aria-label ou title\nBusca CEP: link do logo sem nome\nHome: logo alt=\"Imagem com o logo dos Correios\" (descreve a imagem, não o destino)"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/23-rastreamento-foco-logo-invisivel.png",
+        "Menu e logo do Rastreamento: links sem nome."
+      ],
+      [
+        "home-global/04-foco-login.png",
+        "Home: alt do ícone de login descreve uma porta."
+      ]
+    ]
+  },
+  "Independência de cor para transmitir informação": {
+    "como": [
+      [
+        "agente",
+        "Verificou se as etapas do rastreio, os erros e os links no meio do texto são indicados por algo além da cor."
+      ]
+    ],
+    "codigo": [
+      [
+        "Observado",
+        "Etapas do rastreio: texto + ícone + data\nErros: borda vermelha + mensagem em texto\nLink \"aqui\": negrito; link do aviso de cookies: sublinhado"
+      ]
+    ],
+    "imagens": [
+      [
+        "rastreamento/04-envio-vazio.jpg",
+        "Erro com borda vermelha e texto."
+      ]
+    ]
+  },
+  "Refluxo e Zoom de até 400% sem perda de conteúdo": {
+    "como": [
+      [
+        "auto",
+        "Abriu a Home com 320 px de largura, o equivalente a 400% de zoom, e mediu a rolagem lateral e quanto da tela os elementos fixos ocupam."
+      ],
+      [
+        "agente",
+        "Rolou a página em 320 px procurando conteúdo coberto."
+      ],
+      [
+        "humano",
+        "Deu o veredito: Parcial, Média."
+      ]
+    ],
+    "codigo": [
+      [
+        "Medições em 320 px",
+        "iframe viewport=316 scrollWidth=316 rolagemHorizontal=false\nfixos: chat Carol 164x405 = 30% da tela\n       aviso de cookies 301x341 = 47% da tela"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/19-refluxo-320px-topo.jpg",
+        "Home em 320 px (moldura vermelha)."
+      ],
+      [
+        "home-global/20-refluxo-320px-carol-cobre-calcular.png",
+        "O balão da Carol cobre o botão \"Calcular Frete\"."
+      ]
+    ]
+  },
+  "Link de salto (\"Pular para o conteúdo principal\")": {
+    "como": [
+      [
+        "agente",
+        "Recarregou cada página, pressionou Tab a partir do topo e acionou o primeiro link."
+      ],
+      [
+        "auto",
+        "Procurou o link para pular direto ao conteúdo e verificou se ele aparece e funciona pelo teclado."
+      ]
+    ],
+    "codigo": [
+      [
+        "Por página",
+        "Home: nenhum link de salto; menu Acessibilidade só tem \"Alto Contraste\" e \"Saiba mais\"\nRastreamento: \"Ir para o conteúdo\" largura=0, não recebe foco no Tab real\nBusca CEP: \"Ir para o conteúdo (alt+1)\" largura=0; a página foca o campo direto"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/14-menu-acessibilidade-sem-salto.jpg",
+        "Menu Acessibilidade da Home sem opção de salto."
+      ]
+    ]
+  },
+  "Semântica e hierarquia de cabeçalhos (H1-H6)": {
+    "como": [
+      [
+        "auto",
+        "Listou os cabeçalhos visíveis de cada página e apontou saltos de nível e ausência de H1."
+      ]
+    ],
+    "codigo": [
+      [
+        "Estrutura",
+        "Home: H1 = só o logo (img) → H3 \"Correios Aqui\" (salto)\nRastreamento: sem H1; título \"Rastreamento\" é H3\nBusca CEP: sem H1; título H2, resultado H5\nPreços: H1 vazio | CAS: nenhum h1–h3"
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/05-resultado-cep-unico.jpg",
+        "\"Resultado da Busca\" visualmente é título, mas está em H5."
+      ]
+    ]
+  },
+  "Semântica e Nome Acessível em botões": {
+    "como": [
+      [
+        "auto",
+        "Listou botões e links de ícone sem nome."
+      ],
+      [
+        "agente",
+        "Confirmou na ordem de Tab que esses controles recebem foco sem anunciar nada."
+      ]
+    ],
+    "codigo": [
+      [
+        "Controles sem nome",
+        "Rastreamento: A#print > i.fa-print[aria-hidden]  → foco com nome \"\"\nHome: BUTTON.bt-link-ic > I.ic-busca-out (lupa do rastreio)\nBusca CEP: botão de áudio do CAPTCHA"
+      ]
+    ],
+    "imagens": [
+      [
+        "home-global/08-foco-botao-lupa-sem-nome.png",
+        "Lupa do campo de rastreio: botão sem nome."
+      ]
+    ]
+  },
+  "Contraste não textual (3:1 em bordas e ícones)": {
+    "como": [
+      [
+        "auto",
+        "Calculou o contraste das bordas dos campos, dos ícones e do contorno de foco contra o fundo."
+      ],
+      [
+        "agente",
+        "Navegou com Tab e capturou de perto o foco no campo e no botão."
+      ]
+    ],
+    "codigo": [
+      [
+        "Medições",
+        "Busca CEP: borda 4.50:1 | foco 5.30:1 | ícones 5.30:1 → OK\nRastreamento: anel de foco do \"Consultar\" rgba(0,123,255,.5)\n  = 1.84:1 contra o fundo e 2.43:1 contra o botão  (mínimo 3:1)"
+      ]
+    ],
+    "imagens": [
+      [
+        "rastreamento/03-foco-botao-consultar.png",
+        "Foco no \"Consultar\": anel claro, quase invisível."
+      ],
+      [
+        "rastreamento/02-foco-campo.png",
+        "Contraexemplo: foco do campo com contraste suficiente."
+      ]
+    ]
+  },
+  "Anúncio automático de mensagens de status": {
+    "como": [
+      [
+        "agente",
+        "Fez as buscas e passou as páginas de resultado pelo teclado."
+      ],
+      [
+        "auto",
+        "Registrou o que a página insere depois de cada busca e se isso fica numa região anunciada ao leitor de tela."
+      ]
+    ],
+    "codigo": [
+      [
+        "Busca CEP — observador de mutações",
+        "+H5 em DIV#mensagem-resultado live=false\n+TR em TBODY live=false (x50 por página)\nRegiões live na página: 0 | foco após resultado: BODY"
+      ]
+    ],
+    "imagens": [
+      [
+        "busca-cep/07-paginacao-proximo-teclado.jpg",
+        "\"Próximo\" pelo teclado: 50 linhas trocadas sem anúncio."
+      ]
+    ]
+  }
+}

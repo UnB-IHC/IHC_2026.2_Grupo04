@@ -162,6 +162,20 @@
     update();
   }
 
+  // Modais de evidência: <button commandfor> e <dialog closedby="any"> já funcionam sem JS nos navegadores atuais.
+  // Este trecho só cobre navegadores sem esses recursos.
+  if (!("commandForElement" in HTMLButtonElement.prototype)) {
+    document.addEventListener("click", (event) => {
+      const opener = event.target.closest("button[commandfor][command=show-modal]");
+      document.getElementById(opener?.getAttribute("commandfor"))?.showModal();
+    });
+  }
+  if (!("closedBy" in HTMLDialogElement.prototype)) {
+    document.addEventListener("click", (event) => {
+      if (event.target.matches?.("dialog.evidence-dialog[open]")) event.target.close();
+    });
+  }
+
   if (typeof document$ !== "undefined") document$.subscribe(preparePage);
   else if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", preparePage, { once: true });
   else preparePage();

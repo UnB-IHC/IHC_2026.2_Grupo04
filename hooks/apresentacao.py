@@ -2,9 +2,12 @@
 
 import csv
 import html
+import json
 import re
+import unicodedata
 from pathlib import Path
 from mkdocs.structure.toc import AnchorLink
+from mkdocs.utils import get_relative_url
 
 ARROW = '<svg class="portal-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'
 
@@ -155,6 +158,104 @@ def _filter_select(key, label, values, everything):
         </label>'''
 
 
+EVIDENCE_DIR = "avaliacao-site/evidencias/"
+ACTORS = {
+    "auto": ("🤖", "Script automático", "Código JavaScript executado na própria página. Mede, conta e lê atributos do HTML, sem interpretar o resultado."),
+    "agente": ("🧠", "Agente de IA", "Opera o navegador como uma pessoa faria (Tab, Enter, mouse, zoom), captura telas e interpreta o que vê. Nunca resolve CAPTCHA nem digita senhas."),
+    "humano": ("🙋", "Pessoa do grupo", "Faz o que exige julgamento ou identidade: resolve CAPTCHA, digita credenciais, ouve áudio, avalia linguagem e qualidade de textos alternativos e confirma vereditos duvidosos."),
+}
+VERIFIED = [
+    ("🤖 Agente", "Veredito tirado só das medições e da interação do agente."),
+    ("🤝 Agente + Humano", "O agente coletou a evidência e uma pessoa do grupo testou junto ou decidiu o veredito."),
+]
+RESULT_TONE = {"❌": "fail", "⚠️": "partial", "✅": "pass", "⚪": "na"}
+
+
+def _slug(text):
+    plain = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", plain.lower()).strip("-")
+
+
+def _evidence_legend():
+    actors = "".join(
+        f'<li class="evidence-actor-card evidence-actor-card--{key}"><span class="evidence-actor" aria-hidden="true">{icon}</span>'
+        f"<strong>{label}</strong><span>{text}</span></li>"
+        for key, (icon, label, text) in ACTORS.items()
+    )
+    verified = "".join(f"<li><strong>{html.escape(label)}</strong>: {text}</li>" for label, text in VERIFIED)
+    return (
+        '<section class="evidence-legend" aria-labelledby="como-testamos">'
+        '<h2 id="como-testamos">Como os testes foram feitos</h2>'
+        "<p>Cada critério foi testado no navegador por até três participantes. Em <strong>Ver evidências</strong> você encontra o passo a passo de cada um, as capturas de tela e as medições que sustentam o resultado.</p>"
+        f'<ul class="evidence-actors">{actors}</ul>'
+        f'<p class="evidence-legend__label">A coluna <strong>Verificado por</strong> resume quem decidiu o resultado:</p><ul class="evidence-verified">{verified}</ul>'
+        "</section>"
+    )
+
+
+def _evidence_dialog(record, evidence, page):
+    name = record["Critério"]
+    dialog_id = "ev-" + _slug(name)
+    tone = next((v for k, v in RESULT_TONE.items() if record["Resultado"].startswith(k)), "na")
+    summary = "".join(
+        f'<div><dt>{label}</dt><dd{extra}>{html.escape(value or "—")}</dd></div>'
+        for label, value, extra in [
+            ("Resultado", record["Resultado"], f' class="evidence-result evidence-result--{tone}"'),
+            ("Severidade", record["Severidade da Falha"], ""),
+            ("Verificado por", record["Verificado por"], ""),
+            ("Camada prevista", record["Camada de Teste"], ""),
+        ]
+    )
+    steps = "".join(
+        f'<li class="evidence-step evidence-step--{actor}"><span class="evidence-step__who">'
+        f'<span class="evidence-actor" aria-hidden="true">{ACTORS[actor][0]}</span>{ACTORS[actor][1]}</span>'
+        f"<p>{html.escape(text)}</p></li>"
+        for actor, text in evidence["como"]
+    )
+    findings = []
+    for segment in record["Observações / Evidências"].split(" || "):
+        match = re.match(r"\[([^\]]+)\]\s*(.*)", segment, re.S)
+        where, text = match.groups() if match else ("", segment)
+        parts = [p.strip() for p in text.split(" · ") if p.strip()]
+        rest = "".join(
+            f"<li><strong>{html.escape(label)}:</strong> {html.escape(value)}</li>" if label else f"<li>{html.escape(p)}</li>"
+            for p in parts[1:]
+            for label, value in [re.match(r"(?:(Onde|Regra|Correção|Sugestão):\s*)?(.*)", p, re.S).groups()]
+        )
+        findings.append(
+            '<article class="evidence-finding">'
+            + (f'<p class="evidence-finding__where">{html.escape(where)}</p>' if where else "")
+            + f"<p>{html.escape(parts[0] if parts else text)}</p>"
+            + (f"<ul>{rest}</ul>" if rest else "")
+            + "</article>"
+        )
+    images = "".join(
+        f'<figure class="evidence-shot"><a href="{_esc(get_relative_url(EVIDENCE_DIR + src, page.url))}" target="_blank" rel="noopener">'
+        f'<img src="{_esc(get_relative_url(EVIDENCE_DIR + src, page.url))}" alt="" loading="lazy">'
+        f'<span class="visually-hidden">Ampliar captura (abre em nova aba)</span></a>'
+        f"<figcaption>{html.escape(caption)}</figcaption></figure>"
+        for src, caption in evidence.get("imagens", [])
+    )
+    code = "".join(
+        f'<figure class="evidence-code"><figcaption>{html.escape(title)}</figcaption><pre><code>{html.escape(text)}</code></pre></figure>'
+        for title, text in evidence.get("codigo", [])
+    )
+    meta = " · ".join(filter(None, [f'NBR {record["Cód. NBR"]}', f'WCAG {record["Cód. WCAG"]}', record["Fluxo Correios (Foco)"]]))
+    return f'''<dialog id="{dialog_id}" class="evidence-dialog" aria-labelledby="{dialog_id}-title" closedby="any">
+  <div class="evidence-dialog__head">
+    <div><p class="evidence-dialog__meta">{html.escape(meta)}</p><h2 id="{dialog_id}-title">{html.escape(name)}</h2></div>
+    <form method="dialog"><button class="evidence-close">Fechar<span class="visually-hidden"> evidências</span></button></form>
+  </div>
+  <div class="evidence-dialog__body">
+    <dl class="evidence-summary">{summary}</dl>
+    <section><h3>Como foi testado</h3><ol class="evidence-steps">{steps}</ol></section>
+    <section><h3>Resultado</h3>{"".join(findings)}</section>
+    {f'<section><h3>Capturas de tela</h3><div class="evidence-gallery">{images}</div></section>' if images else ""}
+    {f'<section><h3>Código e medições</h3>{code}</section>' if code else ""}
+  </div>
+</dialog>'''
+
+
 def _checklist(page, config, files):
     settings = CHECKLISTS[page.file.src_uri]
     filled = settings["filled"]
@@ -179,8 +280,15 @@ def _checklist(page, config, files):
       <p class="checklist-count" role="status" aria-live="polite" aria-atomic="true" data-checklist-count>{len(rows)} critérios</p>
     </div>'''
 
+    dialogs = []
     if filled:
-        headers = ["Critério", "Cód. NBR", "Cód. WCAG", "Camada de teste", "Resultado", "Severidade", "Observações / Evidências", "Verificado por"]
+        evidences = json.loads((file.parent / "evidencias-correios.json").read_text(encoding="utf-8"))
+        missing = [r["Critério"] for r in rows if r["Critério"] not in evidences]
+        assert not missing, f"Critérios sem evidência: {missing}"
+        shots = [src for e in evidences.values() if isinstance(e, dict) for src, _ in e.get("imagens", [])]
+        absent = [s for s in shots if not (Path(config["docs_dir"]) / EVIDENCE_DIR / s).is_file()]
+        assert not absent, f"Capturas inexistentes: {absent}"
+        headers = ["Critério", "Cód. NBR", "Cód. WCAG", "Camada de teste", "Resultado", "Severidade", "Evidências", "Verificado por"]
     else:
         headers = ["Critério", "Cód. NBR", "Cód. WCAG", "Como testar", "Resultado", "Observações"]
         tools = '''<div class="checklist-answers" data-checklist-answers hidden>
@@ -205,7 +313,14 @@ def _checklist(page, config, files):
         ]
         if filled:
             result = record["Resultado"] or "Sem registro"
-            cells += [f'<td>{html.escape(record[c] or "—")}</td>' for c in ("Camada de Teste", "Resultado", "Severidade da Falha", "Observações / Evidências", "Verificado por")]
+            cells += [f'<td>{html.escape(record[c] or "—")}</td>' for c in ("Camada de Teste", "Resultado", "Severidade da Falha")]
+            dialog_id = "ev-" + _slug(name)
+            cells += [
+                f'<td><button type="button" class="evidence-open" commandfor="{dialog_id}" command="show-modal" aria-haspopup="dialog">'
+                f'Ver evidências<span class="visually-hidden">: {html.escape(name)}</span></button></td>',
+                f'<td>{html.escape(record["Verificado por"] or "—")}</td>',
+            ]
+            dialogs.append(_evidence_dialog(record, evidences[name], page))
             data = f' data-result="{_esc(result)}"'
         else:
             options = '<option value="">Não avaliado</option>' + "".join(f'<option>{a}</option>' for a in ANSWERS)
@@ -223,11 +338,13 @@ def _checklist(page, config, files):
     head = "".join(f'<th scope="col">{h}</th>' for h in headers)
     label = "Checklist preenchido dos Correios" if filled else "Checklist para preencher"
     return (
-        tools
+        (_evidence_legend() if filled else "")
+        + tools
         + f'<div class="table-scroll {"checklist-filled" if filled else "checklist-blank"}" role="region" aria-label="{label}" tabindex="0">'
         + '<table id="checklist-table">'
         + f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table></div>"
         + '<p class="checklist-empty" data-checklist-empty hidden>Nenhum critério encontrado. Tente outra palavra ou limpe os filtros.</p>'
+        + "".join(dialogs)
     )
 
 
