@@ -19,7 +19,7 @@ Consulte os **32 critérios** com referências NBR/WCAG. Abra o nome de um crit�
 
 ## Situação dos registros
 
-O roteiro e os critérios estão disponíveis. Os 32 critérios NBR/WCAG permanecem **pendentes**. Há uma [inspeção heurística inicial da busca de CEP](inspecao-busca-cep.md), com dois achados individuais e revisão do grupo pendente. O relatório consolidado e as recomendações gerais continuam em preparação.
+O roteiro e os critérios estão disponíveis. Os quatro fluxos (**Home/Global**, **Rastreamento**, **Busca CEP** e **Preços/Login**) foram auditados em 07/11/2026 com apoio de IA e validação humana. Dos 32 critérios, 20 são não conformes, 5 parciais, 6 conformes e 1 não se aplica (a Home não tem vídeos). O CAPTCHA do Busca CEP é a única falha bloqueante. O passo a passo, as capturas e as medições de cada critério estão no [checklist preenchido](checklist-correios.md), em **Ver evidências**. Há uma [inspeção heurística inicial da busca de CEP](inspecao-busca-cep.md), com dois achados individuais e revisão do grupo pendente. O relatório consolidado e as recomendações gerais continuam em preparação.
 
 <div class="reading-directory" markdown="1">
 
