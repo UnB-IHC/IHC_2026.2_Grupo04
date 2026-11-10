@@ -1,39 +1,50 @@
 ---
-title: Teste de usabilidade
+title: Teste de usabilidade (Tg-03)
 hide: [toc]
 portal_landing: true
 ---
-# Teste de usabilidade
+# Avaliação com Usuário: Teste de Usabilidade (Tg-03)
 
-Planejamento da avaliação com participantes e organização dos registros de sessão, análise e propostas de melhoria.
+Documentação completa da avaliação empírica do sítio eletrônico dos **Correios**, realizada com a participação de usuário real (**P1**) conforme o método de **Rubin e Chisnell (2008)**, em conformidade com as exigências da disciplina de Interação Humano-Computador.
 
-<div class="work-notice" markdown="1">
+<div class="topic-directory" markdown="1">
 
-**Em preparação.** O material disponível apresenta a estrutura do teste. As tarefas ainda têm campos a definir e não há sessões ou escores SUS registrados nestes documentos.
+## [Planejamento & Roteiro](roteiro.md)
 
-</div>
+Definição dos 4 cenários práticos (Cálculo de Preço/Prazo, Busca de CEP, Agências e Rastreamento), critérios de sucesso, tempos de referência e protocolo *Think-Aloud*.
 
-<div class="reading-directory" markdown="1">
+## [Participante & LGPD](participante-termo.md)
 
-## Preparar o teste
+Perfil demográfico e de navegação de P1, anonimização estrita conforme a Lei Geral de Proteção de Dados e registro do Termo de Consentimento (TCLE).
 
-Definir as tarefas, os participantes e as condições de realização.
+## [Sessão & Gravação](sessao-gravacao.md)
 
-- [Planejamento e roteiro](roteiro.md)
-- [Participante e termo LGPD](participante-termo.md)
+Relato da condução no Teams, registro de incidentes técnicos superados, síntese da entrevista inicial e da entrevista qualitativa final.
 
-## Registrar a sessão
+## [Resultados & Escore SUS](resultados-sus.md)
 
-Organizar observações e gravação durante a aplicação do teste.
+Taxas de sucesso por tarefa (50% sem ajuda / 50% com ajuda), análise de erros e cálculo detalhado do escore SUS (**35,0** - Usabilidade Marginal/Baixa).
 
-- [Sessão e gravação](sessao-gravacao.md)
+## [Cruzamento com o Pocket](relacao-pocket.md)
 
-## Analisar e propor melhorias
+Matriz de triangulação correlacionando os problemas observados com os itens da NBR 17225, WCAG 2.2 e Heurísticas de Nielsen, além das 5 recomendações priorizadas.
 
-Documentos de trabalho para preencher após a execução.
+## [Protótipo da Solução](prototipo.md)
 
-- [Resultados e escore SUS](resultados-sus.md)
-- [Relação com o guia](relacao-pocket.md)
-- [Protótipo de melhoria](prototipo.md)
+Proposta de redesenho da recomendação de maior severidade (substituição do CAPTCHA visual distorcido por validação acessível).
 
 </div>
+
+---
+
+## Síntese Executiva da Avaliação
+
+```mermaid
+flowchart LR
+    A["4 Cenários Práticos"] --> B["Taxa de Sucesso: 50% sem ajuda"]
+    B --> C["Escore SUS: 35,0 (Marginal)"]
+    C --> D["5 Recomendações Priorizadas"]
+```
+
+* **Data da Sessão:** 10 de novembro de 2026, às 19:00.
+* **Diagnóstico Geral:** A interface foi percebida pelo participante como **contraintuitiva** e sobrecarregada de estímulos visuais, com destaque negativo para as barreiras impostas pelo CAPTCHA na simulação de frete e pela desorientação na busca de agências.
