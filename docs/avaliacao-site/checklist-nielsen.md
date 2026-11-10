@@ -18,6 +18,8 @@ Use os seguintes estados no registro de cada rodada:
 
 A [inspeção inicial da busca de CEP](inspecao-busca-cep.md) exemplifica o preenchimento. Os resultados dessa rodada ficam separados do roteiro reutilizável.
 
+Exemplos no CEP: [H3, botões do CAPTCHA fora da sequência de Tab](inspecao-busca-cep.md#cep-h03-02-alternativas-do-captcha-fora-da-sequencia-de-tab) e [H6, instrução que some ao digitar](inspecao-busca-cep.md#cep-h06-01-orientacao-disponivel-apenas-no-campo-vazio).
+
 ## Perguntas de inspeção
 
 | ID | Heurística | O que observar nos Correios | Como verificar |

@@ -11,15 +11,17 @@ Aplicação do guia de acessibilidade ao site dos Correios. O roteiro contempla 
 
 ## Checklist de avaliação
 
-Consulte os **32 critérios** com referências NBR/WCAG. Abra o nome de um critério para ver como testar, quais fluxos observar e quais informações registrar.
+Consulte os resultados da auditoria e abra as evidências de cada critério NBR/WCAG.
 
-[Abrir o checklist](checklist-correios.md){ .portal-button }
+<div data-audit-summary=""></div>
+
+[Abrir checklist preenchido](checklist-correios.md){ .portal-button }
 
 </div>
 
-## Situação dos registros
+## O que foi avaliado
 
-O roteiro e os critérios estão disponíveis. Os quatro fluxos (**Home/Global**, **Rastreamento**, **Busca CEP** e **Preços/Login**) foram auditados em 07/11/2026 com apoio de IA e validação humana. Dos 32 critérios, 20 são não conformes, 5 parciais, 6 conformes e 1 não se aplica (a Home não tem vídeos). O CAPTCHA do Busca CEP é a única falha bloqueante. O passo a passo, as capturas e as medições de cada critério estão no [checklist preenchido](checklist-correios.md), em **Ver evidências**. Há uma [inspeção heurística inicial da busca de CEP](inspecao-busca-cep.md), com dois achados individuais e revisão do grupo pendente. O relatório consolidado e as recomendações gerais continuam em preparação.
+Os quatro fluxos (**Home/Global**, **Rastreamento**, **Busca CEP** e **Preços/Login**) foram auditados em 07/11/2026 com apoio de IA e validação humana. A Home não tem vídeos. O CAPTCHA do Busca CEP é a única falha bloqueante. O passo a passo, as capturas e as medições de cada critério estão no [checklist preenchido](checklist-correios.md), em **Ver evidências**. Há uma [inspeção heurística inicial da busca de CEP](inspecao-busca-cep.md), com dois achados individuais e revisão do grupo pendente.
 
 <div class="reading-directory" markdown="1">
 
@@ -41,7 +43,9 @@ Campos e modelo para documentar problemas reproduzíveis nas próximas rodadas.
 
 ## [Relatório e recomendações](resultados.md)
 
-Documentos em preparação para reunir os achados e priorizar melhorias.
+Síntese da auditoria e materiais para consultar os achados.
+
+<div data-audit-report=""></div>
 
 ## [Métodos complementares](metodos.md)
 

@@ -70,6 +70,7 @@
     const filters = [...tools.querySelectorAll("select[data-filter]")];
     const reset = tools.querySelector("[data-filter-reset]");
     const count = tools.querySelector("[data-checklist-count]");
+    const view = tools.querySelector("[data-checklist-view]");
     const empty = document.querySelector("[data-checklist-empty]");
     const rows = [...document.querySelectorAll("[data-criterion-row]")];
     const searchable = rows.map((row) => normalize(row.dataset.search));
@@ -96,6 +97,15 @@
       filter();
       query.focus();
     });
+    if (view) {
+      const region = document.querySelector(".checklist-filled");
+      view.addEventListener("click", () => {
+        const expanded = view.getAttribute("aria-pressed") !== "true";
+        view.setAttribute("aria-pressed", String(expanded));
+        region.dataset.compact = String(!expanded);
+        region.scrollLeft = 0;
+      });
+    }
     tools.dataset.ready = "true";
     tools.hidden = false;
     filter();

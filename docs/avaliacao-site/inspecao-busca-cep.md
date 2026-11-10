@@ -9,6 +9,14 @@ title: Inspeção inicial da busca de CEP
 
 </div>
 
+<nav class="cep-overview" aria-labelledby="cep-overview-title">
+  <h2 id="cep-overview-title">Achados desta inspeção</h2>
+  <ul>
+    <li><a href="#cep-h06-01-orientacao-disponivel-apenas-no-campo-vazio"><strong>A instrução some ao digitar</strong><span>H6 · Reconhecimento em vez de memorização</span></a></li>
+    <li><a href="#cep-h03-02-alternativas-do-captcha-fora-da-sequencia-de-tab"><strong>O Tab pula os botões do CAPTCHA</strong><span>H3 · Controle e liberdade do usuário</span></a></li>
+  </ul>
+</nav>
+
 ## Contexto e alcance
 
 | Item | Registro |
@@ -59,7 +67,7 @@ O retorno da etapa 6 descreve o resultado desta tentativa. Não comprova que o C
 ### CEP-H06-01 - Orientação disponível apenas no campo vazio
 
 - **Estado:** observado individualmente; revisão pendente.
-- **Heurística principal:** H6, reconhecimento em vez de memorização. Relação complementar com H10, ajuda e documentação.
+- **Heurística principal:** [H6, reconhecimento em vez de memorização](../guia/heuristicas-nielsen.md#heuristica-6). Relação complementar com H10, ajuda e documentação.
 - **Passos:** abrir a página, ler a orientação do campo e digitar `70040900`.
 - **Observação:** a instrução “Não utilize nº de casa/apto/lote/prédio ou abreviação.” está no `placeholder`. Ao digitar, ela desaparece da tela. O rótulo permanece, mas não repete essa regra.
 - **Comportamento esperado:** manter a regra perto do campo durante o preenchimento, com um exemplo que diferencie a busca por CEP da busca por endereço.
@@ -71,7 +79,7 @@ O retorno da etapa 6 descreve o resultado desta tentativa. Não comprova que o C
 ### CEP-H03-02 - Alternativas do CAPTCHA fora da sequência de Tab
 
 - **Estado:** observado individualmente; revisão pendente.
-- **Heurística principal:** H3, controle e liberdade do usuário. Relação complementar com H7, flexibilidade de uso.
+- **Heurística principal:** [H3, controle e liberdade do usuário](../guia/heuristicas-nielsen.md#heuristica-3). Relação complementar com H7, flexibilidade de uso.
 - **Passos:** posicionar o foco no campo de endereço, pressionar Tab até o filtro “Esse CEP é de:” e pressionar Tab novamente. A partir do campo do CAPTCHA, retornar com Shift+Tab.
 - **Observação:** o foco vai do filtro para o campo do CAPTCHA e volta ao filtro. Os controles visíveis de áudio e renovação da imagem não entram nesse percurso. Ambos têm `tabindex="-1"` na estrutura inspecionada.
 - **Comportamento esperado:** permitir o alcance das alternativas de áudio e renovação por navegação sequencial com teclado.
@@ -79,7 +87,7 @@ O retorno da etapa 6 descreve o resultado desta tentativa. Não comprova que o C
 - **Severidade proposta:** **3 - grande**. O percurso sequencial observado não oferece acesso a duas alternativas do desafio, o que pode dificultar a consulta de quem depende do teclado. A nota precisa de revisão e de teste com tecnologia assistiva; não foi demonstrado bloqueio de toda forma de acesso.
 - **Recomendação:** usar controles nativos alcançáveis por Tab, com nomes em português, como “Ouvir desafio” e “Gerar nova imagem”, e foco visível. Verificar o acionamento por teclado e o retorno do foco após a ação.
 - **Limite:** o áudio e a renovação não foram acionados nesta rodada. Não foi testado um leitor de tela ou um possível atalho alternativo.
-- **Relação para investigação:** [operação por teclado](../referencia/criterios/operacao-plena-por-teclado-e-sem-armadilhas.md) e [CAPTCHA acessível](../referencia/criterios/captcha-acessivel-item-critico-nbr.md). Os resultados desses critérios NBR/WCAG permanecem como estavam, pendentes de avaliação própria.
+- **Relação com a auditoria do grupo:** consulte as fichas de [operação por teclado](../referencia/criterios/operacao-plena-por-teclado-e-sem-armadilhas.md) e [CAPTCHA acessível](../referencia/criterios/captcha-acessivel-item-critico-nbr.md) para ver os resultados NBR/WCAG registrados separadamente.
 
 ## Cobertura das dez heurísticas nesta rodada
 
@@ -100,7 +108,7 @@ O retorno da etapa 6 descreve o resultado desta tentativa. Não comprova que o C
 
 Uma próxima rodada deve executar uma consulta que retorne endereços, verificar filtros e resultados, repetir o percurso em dispositivo móvel e conferir o CAPTCHA com teclado e leitor de tela. O grupo ainda precisa revisar as notas propostas e consolidar suas inspeções individuais.
 
-Os dois achados deste registro não alteram os **32 resultados do checklist NBR/WCAG**. O [relatório consolidado](resultados.md) e o teste com participantes continuam em preparação.
+Os dois achados deste registro não alteram os resultados da auditoria NBR/WCAG. Consulte a [síntese da avaliação](resultados.md) e o [registro do teste com participantes](../teste-usabilidade/index.md) para acompanhar as outras etapas.
 
 ## Referências
 
