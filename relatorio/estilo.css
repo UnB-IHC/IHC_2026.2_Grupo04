@@ -20,7 +20,6 @@
   size: A4;
   margin: 24mm 18mm 20mm 18mm;
   @top-left { content: "{{cabecalho}}"; font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: bottom; padding-bottom: 5mm; }
-  @top-right { content: "{{versao}}"; font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: bottom; padding-bottom: 5mm; }
   @bottom-left { content: "{{rodape}}"; font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: top; padding-top: 5mm; }
   @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: top; padding-top: 5mm; }
 }
