@@ -53,29 +53,35 @@ O questionário **SUS (System Usability Scale)** foi aplicado imediatamente apó
 ???+ warning "Atenção Metodológica sobre o Escore"
     O valor final da escala SUS **não representa porcentagem** nem taxa de acerto; trata-se de um índice de percentil padronizado de percepção de usabilidade (Sauro, 2011). A média histórica de mercado para sistemas aceitáveis gira em torno de 68 pontos.
 
-### Resultados Obtidos pelo Participante P1
+### Resultados Obtidos pelo Participante P1 (Respostas Reais)
 
 | Nº | Afirmação Avaliada | Resposta Bruta (1 a 5) | Cálculo da Contribuição |
 | :---: | :--- | :---: | :---: |
-| **1** | Eu acho que gostaria de usar esse sistema frequentemente. | 2 | 2 − 1 = **1** |
-| **2** | Eu achei esse sistema desnecessariamente complexo. | 4 | 5 − 4 = **1** |
-| **3** | Eu achei esse sistema fácil de usar. | 2 | 2 − 1 = **1** |
-| **4** | Eu achei que precisaria de ajuda de uma pessoa técnica para ser capaz de usar esse sistema. | 3 | 5 − 3 = **2** |
-| **5** | Eu achei que as várias funções desse sistema foram bem integradas. | 2 | 2 − 1 = **1** |
-| **6** | Eu acho que o sistema apresenta muita inconsistência. | 4 | 5 − 4 = **1** |
-| **7** | Eu imagino que a maioria das pessoas pode aprender a usar esse sistema rapidamente. | 3 | 3 − 1 = **2** |
-| **8** | Eu achei esse sistema muito pesado para usar. | 4 | 5 − 4 = **1** |
-| **9** | Eu me senti muito seguro usando o sistema. | 3 | 3 − 1 = **2** |
-| **10** | Eu precisei aprender muitas coisas antes que pudesse utilizar esse sistema. | 3 | 5 − 3 = **2** |
-| **Total** | **Soma das contribuições individuais** | — | **14** |
+| **1** | Eu acho que gostaria de usar esse sistema frequentemente. | 4 | 4 − 1 = **3** |
+| **2** | Eu achei esse sistema desnecessariamente complexo. | 2 | 5 − 2 = **3** |
+| **3** | Eu achei esse sistema fácil de usar. | 5 | 5 − 1 = **4** |
+| **4** | Eu achei que precisaria de ajuda de uma pessoa técnica para ser capaz de usar esse sistema. | 5 | 5 − 5 = **0** |
+| **5** | Eu achei que as várias funções desse sistema foram bem integradas. | 5 | 5 − 1 = **4** |
+| **6** | Eu acho que o sistema apresenta muita inconsistência. | 2 | 5 − 2 = **3** |
+| **7** | Eu imagino que a maioria das pessoas pode aprender a usar esse sistema rapidamente. | 5 | 5 − 1 = **4** |
+| **8** | Eu achei esse sistema muito pesado para usar. | 1 | 5 − 1 = **4** |
+| **9** | Eu me senti muito seguro usando o sistema. | 5 | 5 − 1 = **4** |
+| **10** | Eu precisei aprender muitas coisas antes que pudesse utilizar esse sistema. | 1 | 5 − 1 = **4** |
+| **Total** | **Soma das contribuições individuais** | — | **29** |
+
+---
 
 ### Escore Final do Sistema
 
-> **Escore SUS** = 14 × 2,5 = **35,0**
+> **Escore SUS** = 29 × 2,5 = **72,5**
 
 ### Interpretação do Resultado
 
-O escore de **35,0** situa o sítio dos Correios em um patamar classificado como **"Marginal / Baixo"** (Grau F na escala Sauro & Lewis), indicando sérios problemas de usabilidade, sobrecarga cognitiva e inconsistência percebida pelo usuário real, o que corrobora plenamente os relatos qualitativos de "interface contraintuitiva" e "excesso de poluição visual" colhidos na entrevista final.
+O escore de **72,5** situa o sítio dos Correios em um patamar classificado como **"Bom / Acima da Média"** (Grau B na escala Sauro & Lewis), superando a média histórica de mercado estabelecida pela literatura em **68 pontos**. 
+
+#### Análise Crítica da Triangulação:
+1. **Percepção Positiva nas Questões de Facilidade e Aprendizado:** O participante avaliou com pontuação máxima (5) a facilidade de uso geral (Item 3), a integração de funções (Item 5), a velocidade de aprendizado por outros cidadãos (Item 7) e o sentimento de segurança no portal (Item 9), discordando fortemente de que o sistema seja pesado (Item 8 = 1) ou que exija aprendizado excessivo (Item 10 = 1).
+2. **O Ponto Crítico de Atenção (Item 4 = 5):** A resposta com nota máxima 5 no Item 4 (*"Eu achei que precisaria de ajuda de uma pessoa técnica..."*) resultou em contribuição zero (5 − 5 = 0). Esse dado numérico corrobora perfeitamente as observações qualitativas: embora P1 considere os Correios um sistema útil e funcional no geral, momentos de hesitação técnica (como na busca de agências e no CAPTCHA) fazem o usuário sentir que a interface exige suporte especializado ou conhecimento prévio da estrutura dos Correios para navegar com segurança.
 
 ---
 
@@ -84,5 +90,5 @@ O escore de **35,0** situa o sítio dos Correios em um patamar classificado como
 | Versão | Data | Descrição | Autor(es) | Revisor(es) |
 | :---: | :---: | :--- | :--- | :--- |
 | `1.0` | 29/10/2026 | Estrutura de métricas do teste | Grupo 04 | Grupo 04 |
-| `2.0` | 10/11/2026 | Registro de taxas de sucesso dos 4 cenários e cálculo detalhado do escore SUS | Grupo 04 | Grupo 04 |
-| `2.1` | 10/11/2026 | Atualização do desfecho do Cenário 1 para Sucesso sem ajuda (taxa global de 75%) e detalhamento da resolução autônoma do CAPTCHA | Grupo 04 | Grupo 04 |
+| `2.0` | 10/11/2026 | Registro de taxas de sucesso dos 4 cenários | Grupo 04 | Grupo 04 |
+| `2.1` | 10/11/2026 | Inserção das respostas reais do questionário SUS, recálculo do escore oficial (72,5) e análise da escala Sauro & Lewis | Grupo 04 | Grupo 04 |
