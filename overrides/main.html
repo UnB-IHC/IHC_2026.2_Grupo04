@@ -9,32 +9,35 @@
   <div class="portal-home">
     <section class="portal-hero" aria-labelledby="portal-title">
       <div class="portal-hero__text">
-        <h1 id="portal-title" tabindex="-1">Guia de<br> acessibilidade.</h1>
-        <p>Conceitos e orientações para projetar interfaces mais acessíveis. Um projeto do Grupo 04 de Interação Humano-Computador da UnB.</p>
+        <h1 id="portal-title" tabindex="-1">Guia de acessibilidade</h1>
+        <p>Orientações para criar interfaces mais acessíveis, da teoria à avaliação do site dos Correios.</p>
         <div class="portal-actions">
           <a class="portal-button" href="{{ 'guia/' | url }}">Acessar o guia {{ arrow() }}</a>
-          <a class="portal-text-link" href="{{ 'avaliacao-site/' | url }}">Avaliar os Correios {{ arrow() }}</a>
+          <a class="portal-text-link" href="{{ 'avaliacao-site/' | url }}">Ver avaliação dos Correios {{ arrow() }}</a>
         </div>
-        <p class="portal-affiliation">Universidade de Brasília <span aria-hidden="true">·</span> 2026.2</p>
+        <p class="portal-affiliation">Interação Humano-Computador <span aria-hidden="true">·</span> UnB <span aria-hidden="true">·</span> 2026.2</p>
       </div>
-      <div class="guide-preview">
-        <div class="guide-preview__heading"><span>IHC</span><span class="guide-preview__group">04</span></div>
-        <h2>Site dos Correios</h2>
-        <p class="guide-preview__intro">O guia aplicado a serviços do cotidiano.</p>
+      <section class="guide-preview" aria-labelledby="guide-preview-title">
+        <h2 id="guide-preview-title">Site dos Correios</h2>
+        <p class="guide-preview__intro">Veja o que foi verificado em quatro serviços do site.</p>
         <ul class="guide-preview__flows"><li>Página inicial</li><li>Rastreamento</li><li>Busca de CEP</li><li>Preços e login</li></ul>
-        <a class="guide-preview__route" href="{{ 'referencia/auditoria-site-dos-correios/' | url }}">Conhecer o roteiro {{ arrow() }}</a>
-        <p>32 critérios no checklist <span aria-hidden="true">·</span> avaliação pendente</p>
-      </div>
+        {% set audit = config.extra.correios_audit %}
+        <div class="guide-preview__footer">
+          <p><strong>{{ audit.recorded }}</strong> {% if audit.recorded == audit.total %}critérios com resultado{% else %}de {{ audit.total }} critérios com resultado{% endif %}</p>
+          <a class="guide-preview__route" href="{{ 'avaliacao-site/checklist-correios/' | url }}">Abrir checklist preenchido {{ arrow() }}</a>
+        </div>
+      </section>
     </section>
-    <section class="project-paths" aria-labelledby="paths-title">
-      <div class="section-intro"><h2 id="paths-title">Encontre seu caminho</h2><p>Consulte um conceito, prepare uma avaliação ou conheça o trabalho.</p></div>
+    <nav class="project-paths" aria-labelledby="paths-title">
+      <div class="section-intro"><h2 id="paths-title">Explore o projeto</h2><p>Consulte o guia, veja os achados ou use o checklist em outro site.</p></div>
       <div class="project-paths__list">
         <a href="{{ 'guia/' | url }}"><span class="project-paths__label">Guia de acessibilidade</span><span>Conceitos, normas, UX e ferramentas</span>{{ arrow() }}</a>
-        <a href="{{ 'avaliacao-site/' | url }}"><span class="project-paths__label">Avaliação dos Correios</span><span>Escopo, roteiro e checklist de inspeção</span>{{ arrow() }}</a>
+        <a href="{{ 'avaliacao-site/' | url }}"><span class="project-paths__label">Avaliação dos Correios</span><span>Resultados, evidências e roteiro da auditoria</span>{{ arrow() }}</a>
+        <a href="{{ 'guia/checklist-modelo/' | url }}"><span class="project-paths__label">Checklist em branco</span><span>Modelo para avaliar outro site e exportar o registro</span>{{ arrow() }}</a>
         <a href="{{ 'teste-usabilidade/' | url }}"><span class="project-paths__label">Teste de usabilidade</span><span>Documentos para preparar e registrar o teste</span>{{ arrow() }}</a>
         <a href="{{ 'gestao/' | url }}"><span class="project-paths__label">Sobre o projeto</span><span>Equipe, acompanhamento e acervo</span>{{ arrow() }}</a>
       </div>
-    </section>
+    </nav>
     {% if page.meta.portal_team %}
     <section class="project-document home-team" id="membros-da-equipe" aria-labelledby="home-team-title">
       <h2 id="home-team-title">Equipe do projeto</h2>

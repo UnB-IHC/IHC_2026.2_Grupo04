@@ -4,9 +4,9 @@ hide: [toc]
 ---
 # Checklist preenchido dos Correios
 
-Registro do Grupo 04 para os 32 critérios NBR 17225 / WCAG 2.2 aplicados ao site dos Correios. Os resultados vêm do [CSV do checklist](../referencia/dados/checklist-unificado.csv); um critério só deixa de estar pendente quando o teste é registrado nesse arquivo.
+Resultados dos Correios em 32 critérios NBR 17225 / WCAG 2.2. Use **Ver evidências** para consultar como o grupo avaliou cada critério.
 
-Para avaliar outro site, use o [checklist em branco](../guia/checklist-modelo.md).
+[Consultar os dados em CSV](../referencia/dados/checklist-unificado.csv) · [Usar o checklist em branco](../guia/checklist-modelo.md)
 
 <div data-checklist-slot></div>
 

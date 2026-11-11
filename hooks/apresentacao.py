@@ -5,6 +5,7 @@ import html
 import json
 import re
 import unicodedata
+from collections import Counter
 from pathlib import Path
 from mkdocs.structure.toc import AnchorLink
 from mkdocs.utils import get_relative_url
@@ -90,6 +91,13 @@ def on_page_markdown(markdown, page, config, files):
         return (Path(config["docs_dir"]) / "index.md").read_text(encoding="utf-8")
     if source == "design/design.md":
         markdown = re.sub(r'(<a\s+id="[^"]+")(?=href=)', r'\1 ', markdown)
+    if source == "guia/heuristicas-nielsen.md":
+        markdown = re.sub(
+            r'^(\?\?\?\+ note "(10|[1-9])\..*)$',
+            r'<span class="heuristic-anchor" id="heuristica-\2"></span>\n\n\1',
+            markdown,
+            flags=re.M,
+        )
     if source == "index.md":
         page.meta["portal_home"] = True
         page.meta["hide"] = ["toc"]
@@ -111,7 +119,7 @@ def on_page_markdown(markdown, page, config, files):
     return markdown
 
 
-def _criterion_details(content):
+def _criterion_details(content, result, checklist_url):
     blocks = list(re.finditer(r"<p>([^<\n]+?): (.*?)</p>", content, re.S))
     if not blocks:
         return content
@@ -119,21 +127,67 @@ def _criterion_details(content):
     for block in blocks:
         label, value = block.groups()
         wide = ' class="criterion-details__wide"' if label == "Como Testar" else ""
+        if label == "Resultado" and result:
+            value = _esc(result["Resultado"] or "Sem registro")
+            severity = result["Severidade da Falha"]
+            if severity:
+                value += f' <span class="audit-severity">{_esc(severity)}</span>'
+            value += f'<br><a href="{_esc(checklist_url)}">Ver critério no checklist dos Correios</a>'
         fields.append(f"<div{wide}><dt>{label}:</dt><dd>{value}</dd></div>")
     details = '<dl class="criterion-details">' + "".join(fields) + "</dl>"
     return content[:blocks[0].start()] + details + content[blocks[-1].end():]
 
 
 CHECKLIST_SLOT = '<div data-checklist-slot></div>'
+AUDIT_SUMMARY_SLOT = '<div data-audit-summary=""></div>'
+AUDIT_REPORT_SLOT = '<div data-audit-report=""></div>'
+CORREIOS_CHECKLIST = "avaliacao-site/checklist-correios.md"
+REPORT_FILE = "assets/relatorios/relatorio-acessibilidade-correios-2026-11.pdf"
 CHECKLISTS = {
     "guia/checklist-modelo.md": {"csv": "checklist-modelo.csv", "filled": False},
-    "avaliacao-site/checklist-correios.md": {"csv": "checklist-unificado.csv", "filled": True},
+    CORREIOS_CHECKLIST: {"csv": "checklist-unificado.csv", "filled": True},
 }
 ANSWERS = ["Conforme", "Parcialmente conforme", "Não conforme", "Não se aplica"]
 
 
 def _esc(value):
     return html.escape(value or "", quote=True)
+
+
+def _checklist_rows(file):
+    with file.open(encoding="utf-8-sig", newline="") as stream:
+        return [row for row in csv.DictReader(stream) if row["Cód. NBR"]]
+
+
+def on_files(files, config):
+    checklist = Path(config["docs_dir"]) / "referencia/dados" / CHECKLISTS[CORREIOS_CHECKLIST]["csv"]
+    rows = _checklist_rows(checklist)
+    counts = Counter(_result_tone(row["Resultado"]) for row in rows)
+    config.extra["correios_audit"] = {
+        "rows": {row["Critério"]: row for row in rows},
+        "total": len(rows),
+        "recorded": sum(counts[tone] for tone in RESULT_TONE.values()),
+        "counts": counts,
+    }
+
+
+def _audit_summary(audit):
+    labels = [("fail", "Não conformes"), ("partial", "Parciais"), ("pass", "Conformes"), ("na", "Não se aplica")]
+    counts = audit["counts"]
+    if counts["pending"]:
+        labels.append(("pending", "Sem resultado"))
+    entries = "".join(
+        f'<div><dt>{label}</dt><dd>{counts[key]}</dd></div>' for key, label in labels
+    )
+    return f'<dl class="audit-summary">{entries}</dl>'
+
+
+def _audit_report(page, files):
+    report = files.get_file_from_path(REPORT_FILE)
+    if not report:
+        return '<p class="audit-report-note">O relatório consolidado está em revisão. As evidências já estão disponíveis no checklist.</p>'
+    url = _esc(report.url_relative_to(page.file))
+    return f'<p><a class="portal-text-link" href="{url}" download>Baixar relatório técnico (PDF) {ARROW}</a></p>'
 
 
 def _criterion_links(page, files):
@@ -169,6 +223,10 @@ VERIFIED = [
     ("🤝 Agente + Humano", "O agente coletou a evidência e uma pessoa do grupo testou junto ou decidiu o veredito."),
 ]
 RESULT_TONE = {"❌": "fail", "⚠️": "partial", "✅": "pass", "⚪": "na"}
+
+
+def _result_tone(result):
+    return RESULT_TONE.get(result.split(maxsplit=1)[0], "pending") if result.strip() else "pending"
 
 
 def _slug(text):
@@ -232,7 +290,7 @@ def _evidence_dialog(record, evidence, page):
     images = "".join(
         f'<figure class="evidence-shot"><a href="{_esc(get_relative_url(EVIDENCE_DIR + src, page.url))}" target="_blank" rel="noopener">'
         f'<img src="{_esc(get_relative_url(EVIDENCE_DIR + src, page.url))}" alt="" loading="lazy">'
-        f'<span class="visually-hidden">Ampliar captura (abre em nova aba)</span></a>'
+        f'<span class="visually-hidden">Ampliar captura: {html.escape(caption)} (abre em nova aba)</span></a>'
         f"<figcaption>{html.escape(caption)}</figcaption></figure>"
         for src, caption in evidence.get("imagens", [])
     )
@@ -260,15 +318,19 @@ def _checklist(page, config, files):
     settings = CHECKLISTS[page.file.src_uri]
     filled = settings["filled"]
     file = Path(config["docs_dir"]) / "referencia/dados" / settings["csv"]
-    with file.open(encoding="utf-8-sig", newline="") as stream:
-        rows = [r for r in csv.DictReader(stream) if r["Cód. NBR"]]
+    rows = _checklist_rows(file)
     links = _criterion_links(page, files)
     missing = [r["Critério"] for r in rows if r["Critério"] not in links]
     assert not missing, f"Critérios sem ficha correspondente: {missing}"
 
-    filters = _filter_select("principle", "Princípio WCAG", sorted({r["Princípio WCAG"] for r in rows}), "Todos os princípios")
+    filters = _filter_select("principle", "Princípio WCAG", sorted({r["Princípio WCAG"] for r in rows}), "Todos" if filled else "Todos os princípios")
     if filled:
-        filters += _filter_select("result", "Resultado", sorted({r["Resultado"] or "Sem registro" for r in rows}), "Todos os resultados")
+        filters += _filter_select("result", "Resultado", sorted({r["Resultado"] or "Sem registro" for r in rows}), "Todos")
+    display_toggle = (
+        '<button type="button" class="checklist-view" data-checklist-view aria-pressed="false" '
+        'aria-controls="checklist-table">Mostrar colunas técnicas</button>'
+        if filled else ""
+    )
     tools = f'''<div class="checklist-tools" data-checklist-tools hidden>
       <div class="checklist-tools__fields">
         <label for="criterion-query">Buscar no checklist
@@ -277,7 +339,10 @@ def _checklist(page, config, files):
         {filters}
         <button type="button" class="filter-reset" data-filter-reset>Limpar filtros</button>
       </div>
-      <p class="checklist-count" role="status" aria-live="polite" aria-atomic="true" data-checklist-count>{len(rows)} critérios</p>
+      <div class="checklist-tools__footer">
+        <p class="checklist-count" role="status" aria-live="polite" aria-atomic="true" data-checklist-count>{len(rows)} critérios</p>
+        {display_toggle}
+      </div>
     </div>'''
 
     dialogs = []
@@ -288,7 +353,7 @@ def _checklist(page, config, files):
         shots = [src for e in evidences.values() if isinstance(e, dict) for src, _ in e.get("imagens", [])]
         absent = [s for s in shots if not (Path(config["docs_dir"]) / EVIDENCE_DIR / s).is_file()]
         assert not absent, f"Capturas inexistentes: {absent}"
-        headers = ["Critério", "Cód. NBR", "Cód. WCAG", "Camada de teste", "Resultado", "Severidade", "Evidências", "Verificado por"]
+        headers = ["Critério", "Resultado", "Evidências", "Cód. NBR", "Cód. WCAG", "Camada de teste", "Severidade", "Verificado por"]
     else:
         headers = ["Critério", "Cód. NBR", "Cód. WCAG", "Como testar", "Resultado", "Observações"]
         tools = '''<div class="checklist-answers" data-checklist-answers hidden>
@@ -305,24 +370,32 @@ def _checklist(page, config, files):
     body = []
     for record in rows:
         name = record["Critério"]
-        slug = Path(links[name].rstrip("/")).name
-        cells = [
+        cells = [f'<th scope="row"><a href="{_esc(links[name])}">{html.escape(name)}</a></th>'] if filled else [
             f'<td><a href="{_esc(links[name])}">{html.escape(name)}</a></td>',
             f'<td>{html.escape(record["Cód. NBR"])}</td>',
             f'<td>{html.escape(record["Cód. WCAG"])}</td>',
         ]
         if filled:
             result = record["Resultado"] or "Sem registro"
-            cells += [f'<td>{html.escape(record[c] or "—")}</td>' for c in ("Camada de Teste", "Resultado", "Severidade da Falha")]
-            dialog_id = "ev-" + _slug(name)
+            slug = _slug(name)
+            dialog_id = "ev-" + slug
+            tone = _result_tone(result)
+            severity = record["Severidade da Falha"]
+            compact_severity = f'<span class="checklist-compact-severity">{_esc(severity)}</span>' if severity else ""
+            label = result.split(maxsplit=1)[-1] if tone != "pending" else result
             cells += [
+                f'<td class="checklist-verdict"><span class="checklist-result" data-tone="{tone}">{_esc(label)}</span>{compact_severity}</td>',
                 f'<td><button type="button" class="evidence-open" commandfor="{dialog_id}" command="show-modal" aria-haspopup="dialog">'
                 f'Ver evidências<span class="visually-hidden">: {html.escape(name)}</span></button></td>',
-                f'<td>{html.escape(record["Verificado por"] or "—")}</td>',
+            ]
+            cells += [
+                f'<td class="checklist-technical">{_esc(record[key] or "—")}</td>'
+                for key in ("Cód. NBR", "Cód. WCAG", "Camada de Teste", "Severidade da Falha", "Verificado por")
             ]
             dialogs.append(_evidence_dialog(record, evidences[name], page))
-            data = f' data-result="{_esc(result)}"'
+            data = f' id="criterio-{slug}" data-result="{_esc(result)}"'
         else:
+            slug = Path(links[name].rstrip("/")).name
             options = '<option value="">Não avaliado</option>' + "".join(f'<option>{a}</option>' for a in ANSWERS)
             cells += [
                 f'<td>{html.escape(record["Como Testar"])}</td>',
@@ -335,16 +408,21 @@ def _checklist(page, config, files):
             f'<tr data-criterion-row data-principle="{_esc(record["Princípio WCAG"])}"{data} data-search="{_esc(search)}">'
             + "".join(cells) + "</tr>"
         )
-    head = "".join(f'<th scope="col">{h}</th>' for h in headers)
+    head = "".join(
+        f'<th scope="col" class="checklist-technical">{header}</th>'
+        if filled and index >= 3 else f'<th scope="col">{header}</th>'
+        for index, header in enumerate(headers)
+    )
     label = "Checklist preenchido dos Correios" if filled else "Checklist para preencher"
+    compact = ' data-compact="true"' if filled else ""
     return (
-        (_evidence_legend() if filled else "")
-        + tools
-        + f'<div class="table-scroll {"checklist-filled" if filled else "checklist-blank"}" role="region" aria-label="{label}" tabindex="0">'
+        tools
+        + f'<div class="table-scroll {"checklist-filled" if filled else "checklist-blank"}"{compact} role="region" aria-label="{label}" tabindex="0">'
         + '<table id="checklist-table">'
         + f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table></div>"
         + '<p class="checklist-empty" data-checklist-empty hidden>Nenhum critério encontrado. Tente outra palavra ou limpe os filtros.</p>'
         + "".join(dialogs)
+        + (_evidence_legend() if filled else "")
     )
 
 
@@ -366,8 +444,15 @@ def on_page_content(content, page, config, files):
     if source.startswith("referencia/"):
         content = re.sub(r"<p>(📖 .*?)</p>", r'<p class="source-navigation" hidden>\1</p>', content, count=1, flags=re.S)
     content = re.sub(r"<p>(Owner: [^<]+)</p>", r'<p class="source-byline">\1</p>', content)
+    audit = config.extra["correios_audit"]
+    if AUDIT_SUMMARY_SLOT in content:
+        content = content.replace(AUDIT_SUMMARY_SLOT, _audit_summary(audit), 1)
+    if AUDIT_REPORT_SLOT in content:
+        content = content.replace(AUDIT_REPORT_SLOT, _audit_report(page, files), 1)
     if source.startswith("referencia/criterios/"):
-        content = _criterion_details(content)
+        title = html.unescape(page.title)
+        checklist = files.get_file_from_path(CORREIOS_CHECKLIST).url_relative_to(page.file)
+        content = _criterion_details(content, audit["rows"].get(title), f"{checklist}#criterio-{_slug(title)}")
     if source in CHECKLISTS:
         assert CHECKLIST_SLOT in content, f"{source} precisa do marcador {CHECKLIST_SLOT}"
         content = content.replace(CHECKLIST_SLOT, _checklist(page, config, files), 1)
