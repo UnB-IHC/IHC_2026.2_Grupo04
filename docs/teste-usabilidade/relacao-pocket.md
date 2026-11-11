@@ -23,25 +23,25 @@ A severidade dos problemas observados no teste empírico foi graduada conforme a
 
 ```mermaid
 flowchart TD
-    subgraph Inspeção Teórica (Pocket)
+    subgraph Pocket["Inspeção Teórica (Pocket)"]
         A["CAPTCHA visual como barreira crítica (NBR Anexo A)"]
         B["Sobrecarga de landmarks e hierarquia visual na Home"]
         C["Contraste insuficiente em placeholders e botões de busca"]
     end
-    subgraph Teste Empírico com Usuário (P1)
+    subgraph Teste["Teste Empírico com Usuário (P1)"]
         D["Hesitação real e necessidade de auxílio no cálculo (Cenário 1)"]
         E["Sensação de frustração e navegação perdida nas agências (Cenário 3)"]
         F["Auto-culpabilização do usuário por falhas de legibilidade"]
     end
-    A -.->|Comprovado na prática| D
-    B -.->|Confirmado pelo usuário| E
-    C -.->|Impacto psicológico real| F
+    A -->|Comprovado na prática| D
+    B -->|Confirmado pelo usuário| E
+    C -->|Impacto psicológico real| F
 ```
 
 1. **Problemas Antecipados pela Inspeção:** A barreira imposta pelo CAPTCHA tradicional e a sobrecarga de elementos na página inicial já constavam como riscos graves na auditoria técnica de acessibilidade. O teste empírico comprovou que até mesmo usuários jovens e sem deficiência encontram atrito substancial nesses pontos.
 2. **Problemas Revelados Exclusivamente pelo Teste Real:**
-   * A dificuldade no fluxo de agências (Cenário 3), em que a pessoa explorou caminhos lógicos conceituais (como *"Logística"* e *"Atendimento"*) que não correspondiam ao modelo mental adotado pela arquitetura de informação dos Correios.
-   * O fenômeno de **auto-culpabilização**: o participante P1 declarou na entrevista final que sua lentidão decorria de *"suas próprias limitações visuais"*, quando a evidência técnica demonstra que os campos sofrem de contraste deficiente e falta de destaque ergonômico.
+    * A dificuldade no fluxo de agências (Cenário 3), em que a pessoa explorou caminhos lógicos conceituais (como *"Logística"* e *"Atendimento"*) que não correspondiam ao modelo mental adotado pela arquitetura de informação dos Correios.
+    * O fenômeno de **auto-culpabilização**: o participante P1 declarou na entrevista final que sua lentidão decorria de *"suas próprias limitações visuais"*, quando a evidência técnica demonstra que os campos sofrem de contraste deficiente e falta de destaque ergonômico.
 
 ---
 
@@ -49,16 +49,16 @@ flowchart TD
 
 Com base na severidade e na frequência dos obstáculos enfrentados pelo participante, o grupo elenca as 5 intervenções prioritárias:
 
-1. **Recomendação 1 (Prioridade Máxima — PB-01): Substituição do CAPTCHA por Validação Invisível ou Desafio Não-Cognitivo.**
-   * *Ação:* Adotar mecanismos modernos de segurança de backend (ex: reCAPTCHA v3 invisível, honeypot de formulário ou autenticação sem distorção gráfica), garantindo conformidade com o critério crítico da NBR 17225 e WCAG 3.3.8.
-2. **Recomendação 2 (Prioridade Alta — PB-02): Reformulação da Ferramenta de Busca de Agências.**
-   * *Ação:* Posicionar um atalho direto e unificado na página inicial para "Encontrar Agências", com busca direta por CEP/bairro e visualização clara dos horários em texto puro no primeiro nível de visualização.
-3. **Recomendação 3 (Prioridade Alta — PB-04): Aumento do Contraste e Destaque do Rastreamento.**
-   * *Ação:* Aumentar a área física de toque/clique e o contraste da caixa de rastreio na Home, acompanhada de botão com rótulo textual explícito ("Rastrear Objeto"), mitigando a dúvida sobre a funcionalidade do ícone de lupa.
-4. **Recomendação 4 (Prioridade Média — PB-03): Limpeza Visual da Página Inicial (*Shift to Minimal*).**
-   * *Ação:* Aplicar a Heurística 8 de Nielsen, agrupando links secundários em menus colapsáveis e priorizando visualmente os 3 serviços mais utilizados (Rastrear, Calcular Frete e Buscar CEP).
-5. **Recomendação 5 (Prioridade Média — PB-05): Unificação da Jornada de Busca de CEP.**
-   * *Ação:* Unificar o mecanismo de busca de CEP, permitindo que um único campo inteligente aceite tanto o código numérico quanto o endereço textual com autopreenchimento preditivo.
+1. **Recomendação 1 (Prioridade Máxima — PB-01): Substituição do CAPTCHA por Validação Invisível ou Desafio Não-Cognitivo.**  
+   *Ação:* Adotar mecanismos modernos de segurança de backend (ex: reCAPTCHA v3 invisível, honeypot de formulário ou autenticação sem distorção gráfica), garantindo conformidade com o critério crítico da NBR 17225 e WCAG 3.3.8.
+2. **Recomendação 2 (Prioridade Alta — PB-02): Reformulação da Ferramenta de Busca de Agências.**  
+   *Ação:* Posicionar um atalho direto e unificado na página inicial para "Encontrar Agências", com busca direta por CEP/bairro e visualização clara dos horários em texto puro no primeiro nível de visualização.
+3. **Recomendação 3 (Prioridade Alta — PB-04): Aumento do Contraste e Destaque do Rastreamento.**  
+   *Ação:* Aumentar a área física de toque/clique e o contraste da caixa de rastreio na Home, acompanhada de botão com rótulo textual explícito ("Rastrear Objeto"), mitigando a dúvida sobre a funcionalidade do ícone de lupa.
+4. **Recomendação 4 (Prioridade Média — PB-03): Limpeza Visual da Página Inicial (*Shift to Minimal*).**  
+   *Ação:* Aplicar a Heurística 8 de Nielsen, agrupando links secundários em menus colapsáveis e priorizando visualmente os 3 serviços mais utilizados (Rastrear, Calcular Frete e Buscar CEP).
+5. **Recomendação 5 (Prioridade Média — PB-05): Unificação da Jornada de Busca de CEP.**  
+   *Ação:* Unificar o mecanismo de busca de CEP, permitindo que um único campo inteligente aceite tanto o código numérico quanto o endereço textual com autopreenchimento preditivo.
 
 ---
 
