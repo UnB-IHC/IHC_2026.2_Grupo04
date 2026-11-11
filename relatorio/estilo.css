@@ -1,0 +1,171 @@
+/* Estilo de impressão do relatório. gerar.py substitui os {{marcadores}}. */
+@font-face { font-family: "Manrope"; font-weight: 400 500; src: url(data:font/ttf;base64,{{fonte_regular}}) format("truetype"); }
+@font-face { font-family: "Manrope"; font-weight: 600 800; src: url(data:font/ttf;base64,{{fonte_bold}}) format("truetype"); }
+
+:root {
+  --azul: #12374d;
+  --azul-claro: #1f5f80;
+  --tinta: #1d2a33;
+  --suave: #56656f;
+  --linha: #d3dbe0;
+  --fundo: #f3f6f8;
+  --bloqueante: #7f1d1d;
+  --alta: #b42318;
+  --media: #8f5200;
+  --baixa: #475467;
+  --conforme: #1f6f43;
+}
+
+@page {
+  size: A4;
+  margin: 24mm 18mm 20mm 18mm;
+  @top-left { content: "{{cabecalho}}"; font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: bottom; padding-bottom: 5mm; }
+  @top-right { content: "{{versao}}"; font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: bottom; padding-bottom: 5mm; }
+  @bottom-left { content: "{{rodape}}"; font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: top; padding-top: 5mm; }
+  @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 7.5pt "Manrope", sans-serif; color: #56656f; vertical-align: top; padding-top: 5mm; }
+}
+@page capa {
+  margin: 0;
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font: 9.2pt/1.5 "Manrope", sans-serif; color: var(--tinta); background: #fff; }
+p { margin: 0 0 2.6mm; orphans: 3; widows: 3; }
+a { color: var(--azul-claro); overflow-wrap: anywhere; }
+strong { font-weight: 700; }
+ul, ol { margin: 0 0 3mm; padding-left: 5mm; }
+li { margin-bottom: 1mm; }
+code { font: .9em Menlo, Consolas, monospace; background: #eaf0f3; padding: 0 .7mm; border-radius: .6mm; }
+pre { margin: 0 0 3mm; padding: 2.6mm 3.2mm; background: var(--fundo); border-left: 2pt solid var(--azul); white-space: pre-wrap; break-inside: avoid; }
+pre code { font: 7.4pt/1.5 Menlo, Consolas, monospace; background: none; padding: 0; }
+h1, h2, h3 { color: var(--azul); line-height: 1.25; break-after: avoid; }
+h2 { font-size: 12.5pt; margin: 7mm 0 2.5mm; }
+
+/* Capa */
+.capa { page: capa; height: 297mm; padding: 0 22mm 18mm; display: flex; flex-direction: column; break-after: page; position: relative; }
+.capa::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5mm; background: linear-gradient(90deg, #003d73 0 62%, #00843d 62% 100%); }
+.capa-topo { display: flex; align-items: center; justify-content: space-between; padding: 22mm 0 7mm; border-bottom: .6pt solid var(--linha); }
+.capa-topo svg { height: 15mm; width: auto; }
+.capa-topo p { margin: 0; text-align: right; font-size: 8.5pt; line-height: 1.45; color: var(--suave); }
+.capa-titulo { margin-top: 42mm; padding-left: 7mm; border-left: 3pt solid var(--azul); }
+.capa-titulo .sobre { margin: 0 0 4mm; font-size: 9pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--azul-claro); }
+.capa-titulo .titulo-doc { margin: 0 0 6mm; font-size: 36pt; font-weight: 800; letter-spacing: -.01em; color: var(--azul); }
+.capa-titulo .subtitulo { margin: 0; max-width: 140mm; font-size: 12pt; line-height: 1.5; color: var(--tinta); }
+.capa-meta { margin: auto 0 12mm; display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 10mm; padding-top: 7mm; border-top: .6pt solid var(--linha); }
+.capa-meta dt, .ficha-tecnica dt, .achado dl dt { font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--suave); }
+.capa-meta dd { margin: 1mm 0 0; font-size: 9.5pt; }
+.capa-rodape { font-size: 9pt; color: var(--suave); }
+
+/* Identificação e sumário */
+.sem-numero { font-size: 18pt; margin: 0 0 6mm; padding-bottom: 3mm; border-bottom: 1pt solid var(--azul); }
+.identificacao { break-after: page; }
+.ficha-tecnica { margin: 0; }
+.ficha-tecnica > div { display: grid; grid-template-columns: 34mm 1fr; gap: 4mm; padding: 2.6mm 0; border-bottom: .4pt solid var(--linha); }
+.ficha-tecnica dt { padding-top: .6mm; }
+.ficha-tecnica dd { margin: 0; }
+.equipe { columns: 2; list-style: none; padding: 0; margin: 1.5mm 0 0; }
+.nota { margin-top: 8mm; font-size: 8.3pt; color: var(--suave); }
+.sumario ol { list-style: none; padding: 0; margin: 0; }
+.sumario li { margin: 0; }
+.sumario a { display: flex; align-items: baseline; gap: 2mm; color: var(--tinta); text-decoration: none; }
+.sumario .n1 { margin-top: 2.6mm; font-weight: 700; }
+.sumario .n1 a { color: var(--azul); }
+.sumario .n2 { padding-left: 12mm; font-size: 8.5pt; line-height: 1.75; }
+.sumario .num { min-width: 12mm; }
+.sumario .n2 .num { min-width: 13mm; color: var(--suave); }
+.sumario .tit { flex: 1; display: flex; align-items: baseline; }
+.sumario .tit::after { content: ""; flex: 1; margin: 0 1.5mm; border-bottom: .6pt dotted #9aa8b1; }
+.sumario .pag { min-width: 6mm; text-align: right; }
+
+/* Capítulos */
+.capitulo { break-before: page; }
+.capitulo h1 { font-size: 20pt; margin: 0 0 6mm; padding-bottom: 3mm; border-bottom: 1pt solid var(--azul); }
+.capitulo h1 .num { color: var(--azul-claro); margin-right: 2mm; }
+
+table { width: 100%; border-collapse: collapse; margin: 1mm 0 4mm; font-size: 8.4pt; line-height: 1.4; }
+thead { display: table-header-group; }
+th { text-align: left; font-size: 6.8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--suave); padding: 1.8mm 2mm; border-bottom: 1pt solid var(--azul); vertical-align: bottom; }
+td { padding: 1.8mm 2mm; border-bottom: .4pt solid var(--linha); vertical-align: top; }
+td.n { text-align: center; white-space: nowrap; }
+tr { break-inside: avoid; }
+table.inventario { font-size: 7.4pt; table-layout: fixed; }
+table.inventario th, table.inventario td { padding: 1.4mm 1.2mm; }
+table.inventario th:nth-child(1) { width: 25%; }
+table.inventario th:nth-child(2) { width: 10%; }
+table.inventario th:nth-child(3) { width: 9%; }
+table.inventario th:nth-child(4) { width: 11%; }
+table.inventario th:nth-child(5) { width: 14%; }
+table.inventario th:nth-child(6) { width: 12%; }
+table.inventario th:nth-child(7) { width: 11%; }
+table.inventario th:nth-child(8) { width: 8%; }
+table.plano td:first-child, table.plano td:nth-child(2) { white-space: nowrap; }
+table.indice { font-size: 7.3pt; line-height: 1.25; }
+table.indice td { padding: .6mm 1.4mm; }
+table.indice td:nth-child(2) { width: 46%; }
+table.indice td:nth-child(3) { width: 30%; color: var(--suave); }
+table.plano ul { list-style: none; padding: 0; margin: 0; }
+table.plano li { margin: 0 0 .8mm; }
+.cod { font-weight: 800; color: var(--azul-claro); white-space: nowrap; }
+
+.selo { display: inline-block; padding: .3mm 1.8mm; border-radius: .8mm; font-size: 6.6pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; line-height: 1.6; }
+.selo.nc { background: #fbe9e7; color: #9b1c1c; }
+.selo.parcial { background: #fdf1dc; color: #7a4500; }
+.selo.conforme { background: #e3f2e8; color: var(--conforme); }
+.selo.na { background: #eceff1; color: var(--baixa); }
+.selo.bloqueante { background: var(--bloqueante); color: #fff; }
+.selo.alta { background: var(--alta); color: #fff; }
+.selo.media { background: var(--media); color: #fff; }
+.selo.baixa { background: var(--baixa); color: #fff; }
+
+.painel { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; margin: 5mm 0 6mm; }
+.kpi { border-top: 2.5pt solid var(--azul); padding-top: 2mm; }
+.kpi strong { display: block; font-size: 22pt; line-height: 1.1; color: var(--azul); }
+.kpi span { font-size: 7.8pt; color: var(--suave); }
+.kpi.nc { border-color: var(--alta); } .kpi.nc strong { color: var(--alta); }
+.kpi.parcial { border-color: var(--media); } .kpi.parcial strong { color: var(--media); }
+.kpi.conforme { border-color: var(--conforme); } .kpi.conforme strong { color: var(--conforme); }
+.kpi.bloqueante { border-color: var(--bloqueante); } .kpi.bloqueante strong { color: var(--bloqueante); }
+
+.grafico { margin: 3mm 0 5mm; }
+.barra { display: flex; height: 9mm; border-radius: 1mm; overflow: hidden; }
+.barra span { display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 8.5pt; }
+.barra .conforme, .grafico i.conforme { background: var(--conforme); }
+.barra .parcial, .grafico i.parcial { background: #c27a12; }
+.barra .nc, .grafico i.nc { background: var(--alta); }
+.barra .na, .grafico i.na { background: #8a979f; }
+.grafico ul { list-style: none; padding: 0; margin: 2mm 0 0; display: flex; gap: 6mm; font-size: 8pt; color: var(--suave); }
+.grafico i { display: inline-block; width: 2.6mm; height: 2.6mm; border-radius: .5mm; margin-right: 1.4mm; vertical-align: -.2mm; }
+
+/* Fichas de achado */
+.achado { break-before: page; --sev: var(--azul); }
+.achado.bloqueante { --sev: var(--bloqueante); }
+.achado.alta { --sev: var(--alta); }
+.achado.media { --sev: var(--media); }
+.achado.baixa { --sev: var(--baixa); }
+.achado header { border-top: 3pt solid var(--sev); padding-top: 3mm; }
+.achado-selos { margin: 0 0 2mm; }
+.achado h2 { margin: 0 0 1.5mm; font-size: 14pt; }
+.achado h2 .cod { margin-right: 1.5mm; }
+.achado-ref { font-size: 8.2pt; color: var(--suave); margin-bottom: 3mm; }
+.achado dl { display: grid; grid-template-columns: 1.6fr 1.6fr 1fr; gap: 4mm; margin: 0; padding: 2.4mm 0; border-top: .4pt solid var(--linha); border-bottom: .4pt solid var(--linha); }
+.achado dl dd { margin: .6mm 0 0; font-size: 8.3pt; line-height: 1.4; }
+figure { margin: 4mm 0; break-inside: avoid; text-align: center; }
+figure img { display: block; max-width: 100%; max-height: 88mm; margin: 0 auto; border: .5pt solid var(--linha); }
+.achado figure { margin: 3mm 0 1mm; }
+.achado figure img { max-height: 62mm; }
+figcaption { margin-top: 1.6mm; font-size: 7.8pt; color: var(--suave); }
+.fig-cod { font-weight: 800; color: var(--azul-claro); }
+.rotulo { margin: 0 0 .8mm; font-size: 7pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--sev); break-after: avoid; }
+.campo { margin-top: 3mm; }
+.campo p:not(.rotulo) { margin-bottom: 1.4mm; }
+.campo pre { margin-bottom: 0; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; margin-top: 1.5mm; padding-top: .5mm; border-top: .4pt solid var(--linha); break-inside: avoid; }
+.trio .campo { font-size: 8.4pt; line-height: 1.5; }
+table.curta { break-inside: avoid; }
+
+.galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; }
+.galeria figure { margin: 0 0 3mm; }
+.galeria img { max-height: 78mm; }

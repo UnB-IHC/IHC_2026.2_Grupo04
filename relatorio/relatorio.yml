@@ -1,0 +1,33 @@
+# Dados de capa e identificação do relatório. Os números vêm do checklist (CSV);
+# aqui ficam só os dados que não estão nele.
+titulo: Relatório de avaliação de acessibilidade digital
+objeto: Portal dos Correios
+subtitulo: >-
+  Página inicial, rastreamento de objetos, busca de CEP e cálculo de preços e
+  prazos com login, avaliados contra a ABNT NBR 17225:2025 e a WCAG 2.2.
+versao: "1.0"
+data: 10/11/2026
+data_extenso: 10 de novembro de 2026
+data_coleta: 7 de novembro de 2026
+local: Brasília
+destinatario: Empresa Brasileira de Correios e Telégrafos (Correios)
+destinatario_area: Área responsável pelos canais digitais
+instituicao: Universidade de Brasília
+campus: Campus UnB Gama
+disciplina: Interação Humano-Computador
+codigo_disciplina: FGA0173
+semestre: "2026.2"
+docente: Profa. Rejane Maria da Costa Figueiredo
+grupo: Grupo 04
+equipe:
+  - Bruna Liberal
+  - Daniel Ribeiro
+  - João Pedro
+  - Luiz Henrique
+  - Marcella Anderle
+  - Marcus Sousa
+  - Paulo Lucca
+  - Pedro Antunes
+repositorio: https://github.com/UnB-IHC/IHC_2026.2_Grupo04
+checklist: https://unb-ihc.github.io/IHC_2026.2_Grupo04/avaliacao-site/checklist-correios/
+saida: docs/assets/relatorios/relatorio-acessibilidade-correios-2026-11.pdf
