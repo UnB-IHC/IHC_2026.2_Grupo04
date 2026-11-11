@@ -67,7 +67,6 @@ h2 { font-size: 12.5pt; margin: 7mm 0 2.5mm; }
 .ficha-tecnica dt { padding-top: .6mm; }
 .ficha-tecnica dd { margin: 0; }
 .equipe { columns: 2; list-style: none; padding: 0; margin: 1.5mm 0 0; }
-.nota { margin-top: 8mm; font-size: 8.3pt; color: var(--suave); }
 .sumario ol { list-style: none; padding: 0; margin: 0; }
 .sumario li { margin: 0; }
 .sumario a { display: flex; align-items: baseline; gap: 2mm; color: var(--tinta); text-decoration: none; }

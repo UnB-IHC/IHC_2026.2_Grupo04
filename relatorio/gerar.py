@@ -282,7 +282,7 @@ def capa(d):
 <section class="capa">
   <header class="capa-topo">{logo}<p>{e(d["instituicao"])}<br>{e(d["campus"])}</p></header>
   <div class="capa-titulo">
-    <p class="sobre">{e(d["titulo"])}</p>
+    <p class="sobre">Relatório técnico</p>
     <h1 class="titulo-doc">{e(d["objeto"])}</h1>
     <p class="subtitulo">{e(d["subtitulo"])}</p>
   </div>
@@ -296,18 +296,15 @@ def capa(d):
 <section class="identificacao">
   <h2 class="sem-numero">Identificação</h2>
   <dl class="ficha-tecnica">
-    <div><dt>Instituição</dt><dd>{e(d["instituicao"])} — {e(d["campus"])}</dd></div>
-    <div><dt>Disciplina</dt><dd>{e(d["disciplina"])} ({e(d["codigo_disciplina"])}) — semestre {e(d["semestre"])}</dd></div>
+    <div><dt>Instituição</dt><dd>{e(d["instituicao"])} - {e(d["campus"])}</dd></div>
+    <div><dt>Disciplina</dt><dd>{e(d["disciplina"])} ({e(d["codigo_disciplina"])}) - semestre {e(d["semestre"])}</dd></div>
     <div><dt>Docente</dt><dd>{e(d["docente"])}</dd></div>
     <div><dt>Equipe</dt><dd>{e(d["grupo"])}<ul class="equipe">{equipe}</ul></dd></div>
-    <div><dt>Objeto</dt><dd>{e(d["objeto"])} — página inicial, rastreamento, busca de CEP e preços e prazos com login</dd></div>
-    <div><dt>Referências</dt><dd>ABNT NBR 17225:2025 · WCAG 2.2 (W3C) · Lei nº 13.146/2015, art. 63</dd></div>
+    <div><dt>Objeto</dt><dd>{e(d["objeto"])}</dd></div>
+    <div><dt>Referências</dt><dd>ABNT NBR 17225:2025<br>WCAG 2.2 (W3C)<br>Lei nº 13.146/2015, art. 63</dd></div>
     <div><dt>Coleta</dt><dd>{e(d["data_coleta"])}</dd></div>
     <div><dt>Evidências</dt><dd>Checklist público com medições, capturas e passo a passo de cada teste:<br><a href="{e(d["checklist"])}">{e(d["checklist"])}</a></dd></div>
-    <div><dt>Versão</dt><dd>{e(d["versao"])}, emitida em {e(d["data_extenso"])}</dd></div>
   </dl>
-  <p class="nota">Este documento foi elaborado como atividade acadêmica da disciplina e é encaminhado à entidade
-  avaliada como contribuição técnica. Não constitui certificação de conformidade.</p>
 </section>"""
 
 
@@ -323,11 +320,11 @@ def documento(d, miolo, itens, paginas):
     fontes = {n: base64.b64encode((FONTES / f"manrope-{n}.ttf").read_bytes()).decode() for n in ("regular", "bold")}
     css = (AQUI / "estilo.css").read_text(encoding="utf-8")
     css = css.replace("{{fonte_regular}}", fontes["regular"]).replace("{{fonte_bold}}", fontes["bold"])
-    css = css.replace("{{cabecalho}}", f'{d["titulo"]} — {d["objeto"]}')
+    css = css.replace("{{cabecalho}}", f'{d["titulo"]} - {d["objeto"]}')
     css = css.replace("{{rodape}}", f'{d["instituicao"]} · {d["disciplina"]} {d["semestre"]} · {d["grupo"]}')
     css = css.replace("{{versao}}", f'Versão {d["versao"]} · {d["data"]}')
     return (f'<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
-            f'<title>{e(d["titulo"])} — {e(d["objeto"])}</title><style>{css}</style></head>'
+            f'<title>{e(d["titulo"])} - {e(d["objeto"])}</title><style>{css}</style></head>'
             f"<body>{capa(d)}{sumario_html(itens, paginas)}{miolo}</body></html>")
 
 

@@ -37,10 +37,3 @@ Cada critério tem ao menos uma medição e uma captura de tela registradas no c
 **Resultado.** *Conforme*: atende em toda a amostra. *Parcial*: atende em parte da amostra ou com ressalva. *Não conforme*: há barreira em ao menos um fluxo. *N/A*: o elemento não existe na amostra, como ocorreu com vídeos.
 
 **Severidade**, atribuída aos itens não conformes e parciais. *Bloqueante*: impede concluir a tarefa. *Alta*: a tarefa só é concluída com muito esforço ou ajuda. *Média*: causa confusão ou atraso, mas há contorno. *Baixa*: incômodo pontual.
-
-## Limitações
-
-- A amostra é intencional, com quatro fluxos e seis endereços, e não representa o portal inteiro. Ficaram fora o aplicativo, os documentos PDF, a área autenticada do Meu Correios (além da tela de login) e os conteúdos de terceiros.
-- A avaliação não contou com participantes com deficiência.
-- Não foi usado leitor de tela. Os efeitos para quem usa leitor de tela foram deduzidos da árvore de acessibilidade e do código (nome acessível, vínculo das mensagens, regiões de anúncio), e não observados com NVDA ou VoiceOver. Recomenda-se confirmar os achados com essas tecnologias.
-- Os resultados valem para a data da coleta e devem ser revalidados após cada correção.

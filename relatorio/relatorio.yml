@@ -2,9 +2,7 @@
 # aqui ficam só os dados que não estão nele.
 titulo: Relatório de avaliação de acessibilidade digital
 objeto: Portal dos Correios
-subtitulo: >-
-  Página inicial, rastreamento de objetos, busca de CEP e cálculo de preços e
-  prazos com login, avaliados contra a ABNT NBR 17225:2025 e a WCAG 2.2.
+subtitulo: Avaliação de acessibilidade
 versao: "1.0"
 data: 10/11/2026
 data_extenso: 10 de novembro de 2026
