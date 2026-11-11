@@ -11,7 +11,7 @@ A severidade dos problemas observados no teste empírico foi graduada conforme a
 
 | ID | Problema Observado no Teste com Usuário | Evidência na Sessão (Fala / Comportamento) | Severidade (Nielsen) | Relação com Item do Pocket / Norma | Relação com Heurística de Nielsen |
 | :---: | :--- | :--- | :---: | :--- | :--- |
-| **PB-01** | **Barreira por CAPTCHA visual** no fluxo de cálculo de preços e prazos. | P1 deparou-se com caracteres distorcidos de difícil leitura visual e exigiu auxílio da moderação para prosseguir. | **3 (Grave)** | Critério [CAPTCHA Acessível](../referencia/criterios/captcha-acessivel-item-critico-nbr.md) (Anexo NBR / WCAG 3.3.8 / 1.1.1). | **H5** (Prevenção de Erros) / **H9** (Recuperação). |
+| **PB-01** | **Dificuldade de identificação visual do CAPTCHA** no fluxo de cálculo de preços e prazos. | P1 deparou-se com caracteres distorcidos de difícil leitura e relatou esforço visual para identificar o código, conseguindo contornar a barreira sozinho ao focar a visão. | **2 (Menor)** | Critério [CAPTCHA Acessível](../referencia/criterios/captcha-acessivel-item-critico-nbr.md) (Anexo NBR / WCAG 3.3.8 / 1.1.1). | **H5** (Prevenção de Erros) / **H9** (Recuperação). |
 | **PB-02** | **Desorientação na busca de agências e horários** (Cenário 3). | P1 navegou erraticamente entre menus de atendimento e logística; relatou ter sido o momento de maior frustração da sessão. | **3 (Grave)** | Critério [Demarcação de Regiões / Landmarks](../referencia/criterios/demarcacao-semantica-de-regioes-landmarks.md) e [Propósito de Links](../referencia/criterios/proposito-claro-de-links.md). | **H6** (Reconhecimento em vez de memorização) / **H8** (Minimalismo). |
 | **PB-03** | **Poluição visual e sobrecarga de informações na Home**. | Na entrevista final, P1 destacou a interface como contraintuitiva devido ao excesso de banners e chamadas comerciais competindo entre si. | **2 (Menor)** | Critério [Espaçamento de Texto Adaptável](../referencia/criterios/espacamento-de-texto-adaptavel.md) e boas práticas de design limpo. | **H8** (Estética e Design Minimalista). |
 | **PB-04** | **Dificuldade na localização visual do campo de rastreamento**. | P1 relatou hesitação inicial ao procurar onde inserir o código de objeto, atribuindo incorretamente a dificuldade a limitações visuais próprias. | **2 (Menor)** | Critérios [Contraste Mínimo](../referencia/criterios/contraste-minimo-para-texto-4-5-1-3-1.md) e [Rótulos Visíveis](../referencia/criterios/rotulos-labels-visiveis-e-associados-aos-campos.md). | **H1** (Visibilidade do Status) / **H2** (Correspondência com o Mundo Real). |
@@ -29,7 +29,7 @@ flowchart TD
         C["Contraste insuficiente em placeholders e botões de busca"]
     end
     subgraph Teste["Teste Empírico com Usuário (P1)"]
-        D["Hesitação real e necessidade de auxílio no cálculo (Cenário 1)"]
+        D["Dificuldade de leitura e esforço visual no CAPTCHA (Cenário 1)"]
         E["Sensação de frustração e navegação perdida nas agências (Cenário 3)"]
         F["Auto-culpabilização do usuário por falhas de legibilidade"]
     end
@@ -38,10 +38,10 @@ flowchart TD
     C -->|Impacto psicológico real| F
 ```
 
-1. **Problemas Antecipados pela Inspeção:** A barreira imposta pelo CAPTCHA tradicional e a sobrecarga de elementos na página inicial já constavam como riscos graves na auditoria técnica de acessibilidade. O teste empírico comprovou que até mesmo usuários jovens e sem deficiência encontram atrito substancial nesses pontos.
+1. **Problemas Antecipados pela Inspeção:** A barreira imposta pelo CAPTCHA tradicional e a sobrecarga de elementos na página inicial já constavam como riscos graves na auditoria técnica de acessibilidade. O teste empírico comprovou que até mesmo usuários jovens e sem deficiência encontram esforço visual excessivo para decifrar os caracteres distorcidos.
 2. **Problemas Revelados Exclusivamente pelo Teste Real:**
     * A dificuldade no fluxo de agências (Cenário 3), em que a pessoa explorou caminhos lógicos conceituais (como *"Logística"* e *"Atendimento"*) que não correspondiam ao modelo mental adotado pela arquitetura de informação dos Correios.
-    * O fenômeno de **auto-culpabilização**: o participante P1 declarou na entrevista final que sua lentidão decorria de *"suas próprias limitações visuais"*, quando a evidência técnica demonstra que os campos sofrem de contraste deficiente e falta de destaque ergonômico.
+    * O fenômeno de **auto-culpabilização**: o participante P1 declarou na entrevista final que sua hesitação decorria de *"suas próprias limitações visuais"*, quando a evidência técnica demonstra que os campos sofrem de contraste deficiente e falta de destaque ergonômico.
 
 ---
 
@@ -68,3 +68,4 @@ Com base na severidade e na frequência dos obstáculos enfrentados pelo partici
 | :---: | :---: | :--- | :--- | :--- |
 | `1.0` | 29/10/2026 | Estrutura preliminar de triangulação | Grupo 04 | Grupo 04 |
 | `2.0` | 10/11/2026 | Matriz de problemas e evidências reais, triangulação com o Pocket e 5 recomendações priorizadas | Grupo 04 | Grupo 04 |
+| `2.1` | 10/11/2026 | Ajuste da evidência do CAPTCHA (resolução autônoma com esforço visual) e reclassificação de severidade | Grupo 04 | Grupo 04 |

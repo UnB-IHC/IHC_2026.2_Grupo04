@@ -19,7 +19,7 @@ A classificação dos desfechos adotou estritamente as categorias metodológicas
 
 | Tarefa / Cenário | Desfecho Observado | Tempo Estimado | Erros / Desvios | Dicas da Moderação |
 | :--- | :---: | :---: | :---: | :---: |
-| **Cenário 1:** Cálculo de Preço e Prazo | **Sucesso com ajuda** | ~2 min 40 s | Dificuldade com opções de caixa postal e validação por captcha visual. | 1 intervenção orientadora para prosseguir o fluxo. |
+| **Cenário 1:** Cálculo de Preço e Prazo | **Sucesso sem ajuda** | ~2 min 20 s | Dificuldade momentânea de leitura visual do CAPTCHA, contornada pelo próprio participante ao focar a visão. | Nenhuma. |
 | **Cenário 2:** Busca de CEP por Endereço | **Sucesso com ajuda** | ~2 min 10 s | Navegação confusa entre ferramentas de endereço e menus redundantes. | 1 orientação inicial de direcionamento. |
 | **Cenário 3:** Localização de Agência e Horário | **Sucesso sem ajuda** | ~3 min 15 s | Exploração errática de menus de atendimento/logística e ajuste de raio de 5 km. | Nenhuma (concluída autonomamente após longo percurso). |
 | **Cenário 4:** Rastreamento de Encomenda | **Sucesso sem ajuda** | ~1 min 20 s | Leve hesitação visual inicial na localização do campo de busca. | Nenhuma. |
@@ -30,10 +30,10 @@ A classificação dos desfechos adotou estritamente as categorias metodológicas
 
 Conforme a fórmula padrão de Nielsen e Budiu (2001), calcula-se o percentual de tarefas completadas de forma totalmente autônoma:
 
-> **Taxa de Sucesso sem ajuda** = (Tarefas com sucesso sem ajuda ÷ Total de tarefas) = **2 ÷ 4 = 50%**
+> **Taxa de Sucesso sem ajuda** = (Tarefas com sucesso sem ajuda ÷ Total de tarefas) = **3 ÷ 4 = 75%**
 
-* **Sucesso sem ajuda:** 50% (2 tarefas)
-* **Sucesso com ajuda:** 50% (2 tarefas)
+* **Sucesso sem ajuda:** 75% (3 tarefas)
+* **Sucesso com ajuda:** 25% (1 tarefa — Cenário 2)
 * **Falhas / Desistências:** 0% (0 tarefas)
 
 ---
@@ -85,3 +85,4 @@ O escore de **35,0** situa o sítio dos Correios em um patamar classificado como
 | :---: | :---: | :--- | :--- | :--- |
 | `1.0` | 29/10/2026 | Estrutura de métricas do teste | Grupo 04 | Grupo 04 |
 | `2.0` | 10/11/2026 | Registro de taxas de sucesso dos 4 cenários e cálculo detalhado do escore SUS | Grupo 04 | Grupo 04 |
+| `2.1` | 10/11/2026 | Atualização do desfecho do Cenário 1 para Sucesso sem ajuda (taxa global de 75%) e detalhamento da resolução autônoma do CAPTCHA | Grupo 04 | Grupo 04 |
