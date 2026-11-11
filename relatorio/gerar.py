@@ -322,7 +322,6 @@ def documento(d, miolo, itens, paginas):
     css = css.replace("{{fonte_regular}}", fontes["regular"]).replace("{{fonte_bold}}", fontes["bold"])
     css = css.replace("{{cabecalho}}", f'{d["titulo"]} - {d["objeto"]}')
     css = css.replace("{{rodape}}", f'{d["instituicao"]} · {d["disciplina"]} {d["semestre"]} · {d["grupo"]}')
-    css = css.replace("{{versao}}", f'Versão {d["versao"]} · {d["data"]}')
     return (f'<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
             f'<title>{e(d["titulo"])} - {e(d["objeto"])}</title><style>{css}</style></head>'
             f"<body>{capa(d)}{sumario_html(itens, paginas)}{miolo}</body></html>")
