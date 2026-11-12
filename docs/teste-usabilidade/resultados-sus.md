@@ -20,8 +20,8 @@ A classificação dos desfechos adotou estritamente as categorias metodológicas
 | Tarefa / Cenário | Desfecho Observado | Tempo Estimado | Erros / Desvios | Dicas da Moderação |
 | :--- | :---: | :---: | :---: | :---: |
 | **Cenário 1:** Cálculo de Preço e Prazo | **Sucesso sem ajuda** | ~2 min 20 s | Dificuldade momentânea de leitura visual do CAPTCHA, contornada pelo próprio participante ao focar a visão. | Nenhuma. |
-| **Cenário 2:** Busca de CEP por Endereço | **Sucesso com ajuda** | ~2 min 10 s | Navegação confusa entre ferramentas de endereço e menus redundantes. | 1 orientação inicial de direcionamento. |
-| **Cenário 3:** Localização de Agência e Horário | **Sucesso sem ajuda** | ~3 min 15 s | Exploração errática de menus de atendimento/logística e ajuste de raio de 5 km. | Nenhuma (concluída autonomamente após longo percurso). |
+| **Cenário 2:** Busca de CEP por Endereço | **Sucesso sem ajuda** | ~2 min 10 s | Navegação confusa entre ferramentas de endereço e menus redundantes. | Nenhuma. |
+| **Cenário 3:** Localização de Agência e Horário | **Sucesso com ajuda** | ~3 min 15 s | Exploração errática de menus de atendimento/logística e ajuste de raio de 5 km. | Pequena ajuda com pergunta sobre a barra de pesquisa. |
 | **Cenário 4:** Rastreamento de Encomenda | **Sucesso sem ajuda** | ~1 min 20 s | Leve hesitação visual inicial na localização do campo de busca. | Nenhuma. |
 
 ---
