@@ -67,17 +67,17 @@ O questionário **SUS (System Usability Scale)** foi aplicado imediatamente apó
 | **8** | Eu achei esse sistema muito pesado para usar. | 1 | 5 − 1 = **4** |
 | **9** | Eu me senti muito seguro usando o sistema. | 5 | 5 − 1 = **4** |
 | **10** | Eu precisei aprender muitas coisas antes que pudesse utilizar esse sistema. | 1 | 5 − 1 = **4** |
-| **Total** | **Soma das contribuições individuais** | — | **29** |
+| **Total** | **Soma das contribuições individuais** | — | **33** |
 
 ---
 
 ### Escore Final do Sistema
 
-> **Escore SUS** = 29 × 2,5 = **72,5**
+> **Escore SUS** = 33 × 2,5 = **82,5**
 
 ### Interpretação do Resultado
 
-O escore de **72,5** situa o sítio dos Correios em um patamar classificado como **"Bom / Acima da Média"** (Grau B na escala Sauro & Lewis), superando a média histórica de mercado estabelecida pela literatura em **68 pontos**. 
+O escore de **82,5** situa o sítio dos Correios em um patamar classificado como **"Excelente / Acima da Média"** (Grau A na escala Sauro & Lewis), superando amplamente a média histórica de mercado estabelecida pela literatura em **68 pontos**.
 
 #### Análise Crítica da Triangulação:
 1. **Percepção Positiva nas Questões de Facilidade e Aprendizado:** O participante avaliou com pontuação máxima (5) a facilidade de uso geral (Item 3), a integração de funções (Item 5), a velocidade de aprendizado por outros cidadãos (Item 7) e o sentimento de segurança no portal (Item 9), discordando fortemente de que o sistema seja pesado (Item 8 = 1) ou que exija aprendizado excessivo (Item 10 = 1).
@@ -91,4 +91,4 @@ O escore de **72,5** situa o sítio dos Correios em um patamar classificado como
 | :---: | :---: | :--- | :--- | :--- |
 | `1.0` | 29/10/2026 | Estrutura de métricas do teste | Grupo 04 | Grupo 04 |
 | `2.0` | 10/11/2026 | Registro de taxas de sucesso dos 4 cenários | Grupo 04 | Grupo 04 |
-| `2.1` | 10/11/2026 | Inserção das respostas reais do questionário SUS, recálculo do escore oficial (72,5) e análise da escala Sauro & Lewis | Grupo 04 | Grupo 04 |
+| `2.1` | 10/11/2026 | Inserção das respostas reais do questionário SUS, correção da soma (33) e recálculo do escore oficial (82,5) e análise da escala Sauro & Lewis | Grupo 04 | Grupo 04 |
